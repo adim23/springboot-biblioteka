@@ -1,0 +1,4 @@
+module.exports = {
+  RECEIVE_BOOKS: 'RECEIVE_BOOKS',
+  RECEIVE_ERROR: 'RECEIVE_ERROR'
+};
