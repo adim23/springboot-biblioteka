@@ -12,7 +12,7 @@ a {
 	color: $accent;
 	text-decoration: none;
 	&:hover {
-		color: inherit;
+		color: $accent;
 		text-decoration: underline;
 	}
 }
@@ -58,7 +58,7 @@ body {
 }
 
 .panel {
-	padding: 60px;
+	padding: 60px 0;
 	max-width: 100%;
 	width: 100%;
 	display: table;
@@ -85,6 +85,9 @@ nav {
 				letter-spacing: .2rem;
 				font-weight: 600;
 				color: $text-on-primary;
+				&:hover {
+					color: $text-on-primary;
+				}
 			}
 		}
 	}
