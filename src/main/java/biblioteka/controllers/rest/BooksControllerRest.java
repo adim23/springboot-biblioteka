@@ -5,17 +5,30 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import biblioteka.models.Book;
 import biblioteka.repositories.BooksRepository;
 
 @RestController
-public class BooksController {
+public class BooksControllerRest {
 	@Autowired
 	protected BooksRepository booksRepository;
 
 	@RequestMapping(value = "/api/books")
 	public Iterable<Book> books() {
 		return booksRepository.findAll();
+	}
+
+	public Iterable<Book> booksById(@RequestParam("id") long id) {
+		return booksRepository.findById(id);
+	}
+
+	public Iterable<Book> booksByAuthor(@RequestParam("author") String author) {
+		return booksRepository.findByAuthor(author);
+	}
+
+	public Iterable<Book> booksByTitle(@RequestParam("title") String title) {
+		return booksRepository.findByTitle(title);
 	}
 }

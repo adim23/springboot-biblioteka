@@ -1,7 +1,14 @@
 CREATE TABLE books(
 		id serial primary key,
 		title text not null,
-		author text not null
+		author text not null,
+		description text not null
+);
+
+CREATE TABLE authors(
+		id serial primary key,
+		firstname text not null,
+		surname text not null
 );
 
 INSERT INTO books(title, author) VALUES ('W pustyni i w puszczy', 'Bolesław Prus');
