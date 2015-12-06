@@ -6,10 +6,23 @@
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
-		<div class="container">
-			<div class="row">
-				<h3 th:text="${title}"></h3>
-				<p th:text="${author}"></p>
+		<div class="navigation">
+    	<nav>
+				<div class="container">
+			    <ul>
+						<li><a href="/">Szukaj</a></li>
+						<li><a href="/account">Konto</a></li>
+						<li><a href="/contact">Kontakt</a></li>
+		      </ul>
+				</div>
+		  </nav>
+		</div>
+		<div class="panel">
+			<div class="container">
+				<div class="row">
+					<h3 th:text="${title}"></h3>
+					<p th:text="${author}"></p>
+				</div>
 			</div>
 		</div>
 		<script src="/js/react.min.js"></script>

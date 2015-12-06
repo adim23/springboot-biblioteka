@@ -1,0 +1,91 @@
+$primary-text: #212121;
+$secondary-text: #727272;
+$divider: #b6b6b6;
+$accent: #4CAF50;
+$dark-primary: #689F38;
+$primary: #8BC34A;
+$light-primary: #DCEDC8;
+$text-on-primary: #ffffff;
+$body: #fafafa;
+
+a {
+	color: $accent;
+	text-decoration: none;
+	&:hover {
+		color: inherit;
+		text-decoration: underline;
+	}
+}
+
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+	background-color: $primary;
+	border-color: $primary;
+}
+
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+	background-color: $light-primary;
+	border-color: $light-primary;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+	border: 1px solid $primary;
+}
+
+body {
+	background-color: $body;
+	color: $primary-text;
+}
+
+.panel {
+	padding: 60px;
+	max-width: 100%;
+	width: 100%;
+	display: table;
+}
+
+nav {
+	max-width: 100%;
+	width: 100%;
+	display: table;
+	margin: 0 auto;
+	height: 60px;
+	line-height: 60px;
+	background-color: $primary;
+	color: $text-on-primary;
+	ul {
+		margin: 0px auto;
+		li {
+			margin: 0px 20px;
+			display: inline-block;
+			position: relative;
+			a {
+				text-transform: uppercase;
+				font-size: 1.4rem;
+				letter-spacing: .2rem;
+				font-weight: 600;
+				color: $text-on-primary;
+			}
+		}
+	}
+}
