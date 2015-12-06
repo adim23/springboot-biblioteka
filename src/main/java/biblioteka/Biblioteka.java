@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 public class Biblioteka {
-    public static void main(String[] args) {
-        SpringApplication.run(Biblioteka.class, args);
-    }
+		public static void main(String[] args) {
+				SpringApplication.run(Biblioteka.class, args);
+		}
 }

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
-  @RequestMapping(value = "/", method = RequestMethod.GET)
-  public String indexView() {
-    return "index";
-  }
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String indexView() {
+		return "index";
+	}
 }

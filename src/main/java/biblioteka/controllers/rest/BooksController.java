@@ -10,12 +10,11 @@ import biblioteka.models.Book;
 import biblioteka.repositories.BooksRepository;
 
 @RestController
-@RequestMapping(value = "/api/books")
 public class BooksController {
 	@Autowired
 	protected BooksRepository booksRepository;
 
-	@RequestMapping
+	@RequestMapping(value = "/api/books")
 	public Iterable<Book> books() {
 		return booksRepository.findAll();
 	}
