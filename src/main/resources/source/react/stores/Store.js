@@ -30,6 +30,8 @@ Store.dispatchToken = Dispatcher.register(function(payload) {
 		case ActionConstants.RECEIVE_BOOKS:
 			setBooks(action.books);
 			break;
+		case ActionConstants.RECEIVE_ERROR:
+			break;
 		default:
 			return true;
 	}

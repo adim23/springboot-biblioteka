@@ -17,7 +17,9 @@ public class BooksController {
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
 	public String bookView(@PathVariable("id") long id, Model model) {
 		Book book = booksRepository.findOne(id);
+		model.addAttribute("id", book.getId());
 		model.addAttribute("title", book.getTitle());
+		model.addAttribute("id_author", 1337);
 		model.addAttribute("author", book.getAuthor());
 		return "book";
 	}

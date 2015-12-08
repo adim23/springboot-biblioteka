@@ -20,11 +20,10 @@
 		<div class="panel">
 			<div class="container">
 				<div class="row">
-					Książki - <a th:href="@{|/author/${id_author}|}" th:text="${author}"></a> - <a th:href="@{|/book/${id}|}" th:text="${title}"></a>
+					Autorzy - <a th:href="@{|/author/${id}|}" th:text="${author}"></a>
 				</div>
 				<div class="row">
-					<h3 th:text="${title}"></h3>
-					<p th:text="${author}"></p>
+					<h3 th:text="${author}"></h3>
 				</div>
 			</div>
 		</div>

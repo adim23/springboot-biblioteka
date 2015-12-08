@@ -16,8 +16,13 @@ public class BooksControllerRest {
 	protected BooksRepository booksRepository;
 
 	@RequestMapping(value = "/api/books")
-	public Iterable<Book> books() {
-		return booksRepository.findAll();
+	public Iterable<Book> books(@RequestParam(value="title", defaultValue="") String title, @RequestParam(value="author", defaultValue="") String author) {
+		return booksRepository.search(title, author);
+	}
+
+	@RequestMapping(value = "/api/books/{id}")
+	public Book booksId(@PathVariable("id") long id) {
+		return booksRepository.findOne(id);
 	}
 
 	public Iterable<Book> booksById(@RequestParam("id") long id) {

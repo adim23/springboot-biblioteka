@@ -7,8 +7,7 @@ CREATE TABLE books(
 
 CREATE TABLE authors(
 		id serial primary key,
-		firstname text not null,
-		surname text not null
+		author text not null
 );
 
 INSERT INTO books(title, author) VALUES ('Faraon', 'Bolesław Prus');
@@ -20,3 +19,5 @@ INSERT INTO books(title, author) VALUES ('Zew Cthulhu', 'Howard Phillips Lovecra
 INSERT INTO books(title, author) VALUES ('Pan Tadeusz', 'Adam Mickiewicz');
 INSERT INTO books(title, author) VALUES ('Konrad Wallenrod', 'Adam Mickiewicz');
 INSERT INTO books(title, author) VALUES ('Cierpienia młodego Wertera', 'Johann Wolfgang von Goethe');
+INSERT INTO books(title, author) VALUES ('Lalka', 'Bolesław Prus');
+INSERT INTO books(title, author) VALUES ('Kamizelka', 'Bolesław Prus');
