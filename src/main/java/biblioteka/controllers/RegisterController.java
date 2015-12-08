@@ -25,11 +25,15 @@ public class RegisterController {
 		String alphaNumeric = "[a-zA-Z0-9]+";
 		if (!username.matches(alphaNumeric)){
 			model.addAttribute("message", "Nieprawidłowy login.");
-			return "register";
+			return "login";
 		}
 		if (password.length() == 0){
 			model.addAttribute("message", "Nieprawidłowe hasło.");
-			return "register";
+			return "login";
+		}
+		if (firstname.length() == 0 || lastname.length() == 0){
+			model.addAttribute("message", "Nieprawidłowe imię lub nazwisko.");
+			return "login";
 		}
 		Account account = accountsRepository.findByUsername(username);
 		if (account == null){
@@ -39,6 +43,6 @@ public class RegisterController {
 			return "login";
 		}
 		model.addAttribute("message", "Użytkownik już istnieje.");
-		return "register";
+		return "login";
 	}
 }

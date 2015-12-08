@@ -28,13 +28,39 @@
 						Wylogowano pomyślnie.
 				</div>
 				<div class="row">
-					<div class="twelve columns">
+					<div class="six columns">
 						<h3>Logowanie</h3>
-						<form th:action="@{/login}" method="post">
-		            <div><label>Login: <input type="text" name="username"/> </label></div>
-		            <div><label>Hasło: <input type="password" name="password"/> </label></div>
-		            <div><input type="submit" value="Zaloguj"/></div>
+						<form class='u-full-width form' th:action="@{/login}" method="post">
+		            <div class='form-row'>
+									<label>Login: </label><input type="text" name="username"/>
+								</div>
+		            <div class='form-row'>
+									<label>Hasło: </label><input type="password" name="password"/>
+								</div>
+								<div class='form-row'>
+									<input class='button-primary' type="submit" value="Zaloguj"/>
+								</div>
 		        </form>
+					</div>
+					<div class="six columns">
+						<h3>Rejestracja</h3>
+						<form class='u-full-width form'  th:action="@{/register}" method="post">
+								<div class='form-row'>
+									<label>Login: </label><input type="text" name="username"/>
+								</div>
+								<div class='form-row'>
+									<label>Hasło: </label><input type="password" name="password"/>
+								</div>
+								<div class='form-row'>
+									<label>Imię: </label><input type="text" name="firstname"/>
+								</div>
+								<div class='form-row'>
+									<label>Nazwisko: </label><input type="text" name="secondname"/>
+								</div>
+								<div class='form-row'>
+									<input class='button-primary' type="submit" value="Zarejestruj"/>
+								</div>
+						</form>
 					</div>
 				</div>
 			</div>
