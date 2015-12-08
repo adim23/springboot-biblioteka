@@ -24,6 +24,12 @@
 				</div>
 				<div class="row">
 					<h3 th:text="${author}"></h3>
+					<h4>Lista książek:</h4>
+					<ul>
+						<li th:each="book : ${booksByAuthor}">
+							<a th:href="@{|/book/${book.id}|}" th:text="${book.title}"></a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

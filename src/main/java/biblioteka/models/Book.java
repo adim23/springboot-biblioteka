@@ -5,6 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+
+import biblioteka.models.Author;
 
 @Entity
 @Table(name="books")
@@ -14,10 +18,13 @@ public class Book {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String title;
-	private String author;
+
+	@ManyToOne
+	@JoinColumn(name="id_author")
+	private Author author;
 
 	protected Book() {}
-	public Book(String title, String author) {
+	public Book(String title, Author author) {
 		this.title = title;
 		this.author = author;
 	}
@@ -30,7 +37,7 @@ public class Book {
 		return this.title;
 	}
 
-	public String getAuthor(){
+	public Author getAuthor(){
 		return this.author;
 	}
 
@@ -42,7 +49,7 @@ public class Book {
 		this.title = title;
 	}
 
-	public void setAuthor(String author){
+	public void setAuthor(Author author){
 		this.author = author;
 	}
 

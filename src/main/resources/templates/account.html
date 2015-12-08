@@ -20,7 +20,7 @@
 		<div class="panel">
 			<div class="container">
 				<div class="row">
-					<h3>Zalogowany jako: <b th:text="${loggedAs}"></b></h3>
+					<h4>Zalogowany jako: <h3><b th:text="${account.firstname}"></b> <b th:text="${account.secondname}"></b></h3></h4><h5 th:text="${account.username}"></h5>
 					<form th:action="@{/logout}" method="post">
 							<input type="submit" value="Wyloguj"/>
 					</form>

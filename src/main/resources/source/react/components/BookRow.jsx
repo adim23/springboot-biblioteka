@@ -6,7 +6,9 @@ var BookRow = React.createClass({
 				<td>
 					<a href={"/book/" + this.props.id}>{this.props.title}</a>
 				</td>
-				<td>{this.props.author}</td>
+				<td>
+					<a href={"/author/" + this.props.author.id}>{this.props.author.author}</a>
+				</td>
 			</tr>
 		);
 	}

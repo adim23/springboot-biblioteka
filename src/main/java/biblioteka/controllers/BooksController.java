@@ -19,7 +19,6 @@ public class BooksController {
 		Book book = booksRepository.findOne(id);
 		model.addAttribute("id", book.getId());
 		model.addAttribute("title", book.getTitle());
-		model.addAttribute("id_author", 1337);
 		model.addAttribute("author", book.getAuthor());
 		return "book";
 	}

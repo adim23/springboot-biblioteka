@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import biblioteka.models.Book;
+import biblioteka.models.Author;
 import biblioteka.repositories.BooksRepository;
 
 @RestController
 public class BooksControllerRest {
 	@Autowired
 	protected BooksRepository booksRepository;
+
+	@RequestMapping(value = "/api/books/all")
+	public Iterable<Book> booksAll() {
+		return booksRepository.findAll();
+	}
 
 	@RequestMapping(value = "/api/books")
 	public Iterable<Book> books(@RequestParam(value="title", defaultValue="") String title, @RequestParam(value="author", defaultValue="") String author) {
