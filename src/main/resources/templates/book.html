@@ -3,6 +3,7 @@
 		<title>Biblioteka</title>
 		<link rel='stylesheet' type='text/css' href='/css/normalize.css'/>
 		<link rel='stylesheet' type='text/css' href='/css/skeleton.css'/>
+		<link rel='stylesheet' type='text/css' href='/css/font-awesome.min.css'/>
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
@@ -10,9 +11,16 @@
     	<nav>
 				<div class="container">
 			    <ul>
-						<li><a href="/">Szukaj</a></li>
-						<li><a href="/account">Konto</a></li>
-						<li><a href="/contact">Kontakt</a></li>
+						<li><a href="/"><i class="fa fa-search"></i>
+ Szukaj</a></li>
+						<li><a href="/account"><i class="fa fa-book"></i>
+ Konto</a></li>
+ <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-piechart"></i>
+Wypożycz</a></li>
+ <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+Zarządzaj</a></li>
+						<li><a href="/contact"><i class="fa fa-question"></i>
+ Kontakt</a></li>
 		      </ul>
 				</div>
 		  </nav>
@@ -24,6 +32,7 @@
 				</div>
 				<div class="row">
 					<h3 th:text="${title}"></h3>
+					<div class='divider'></div>
 					<p th:text="${author.author}"></p>
 				</div>
 			</div>

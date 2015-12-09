@@ -1,10 +1,10 @@
 $primary-text: #212121;
 $secondary-text: #727272;
 $divider: #b6b6b6;
-$accent: #4CAF50;
-$dark-primary: #689F38;
-$primary: #8BC34A;
-$light-primary: #DCEDC8;
+$accent: #0091ea;
+$dark-primary: #311b92;
+$primary: #673ab7;
+$light-primary: #9575cd;
 $text-on-primary: #ffffff;
 $body: #fafafa;
 
@@ -68,6 +68,12 @@ body {
 	input {
 		width: 100%;
 	}
+}
+
+.divider {
+	border-bottom: 1px solid $divider;
+	margin: 10px auto;
+	width: 100%;
 }
 
 nav {

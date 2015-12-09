@@ -20,11 +20,6 @@ public class AuthorsControllerRest {
 	@Autowired
 	protected BooksRepository booksRepository;
 
-	@RequestMapping(value = "/api/authors/all")
-	public Iterable<Author> authorsAll() {
-		return authorsRepository.findAll();
-	}
-
 	@RequestMapping(value = "/api/authors")
 	public Iterable<Author> authors(@RequestParam(value="author", defaultValue="") String author) {
 		return authorsRepository.findByAuthorContainingIgnoreCase(author);

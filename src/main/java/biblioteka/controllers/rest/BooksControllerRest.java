@@ -16,11 +16,6 @@ public class BooksControllerRest {
 	@Autowired
 	protected BooksRepository booksRepository;
 
-	@RequestMapping(value = "/api/books/all")
-	public Iterable<Book> booksAll() {
-		return booksRepository.findAll();
-	}
-
 	@RequestMapping(value = "/api/books")
 	public Iterable<Book> books(@RequestParam(value="title", defaultValue="") String title, @RequestParam(value="author", defaultValue="") String author) {
 		return booksRepository.search(title, author);

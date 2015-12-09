@@ -1,6 +1,8 @@
 package biblioteka.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import biblioteka.controllers.util.RoleBasedModel;
 import org.springframework.ui.Model;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -20,11 +22,12 @@ public class AuthorsController {
 	private BooksRepository booksRepository;
 
 	@RequestMapping(value = "/author/{id}", method = RequestMethod.GET)
-	public String bookView(@PathVariable("id") long id, Model model) {
+	public String authorView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
 		Author author = authorsRepository.findOne(id);
 		model.addAttribute("id", author.getId());
 		model.addAttribute("author", author.getAuthor());
 		model.addAttribute("booksByAuthor", booksRepository.findByAuthor(author.getAuthor()));
+		RoleBasedModel.parseModel(request, model);
 		return "author";
 	}
 }

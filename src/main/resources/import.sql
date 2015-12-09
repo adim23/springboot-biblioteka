@@ -18,8 +18,9 @@ id serial primary key,
 author text not null
 );
 
-INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('biblioteka', 'biblioteka', 'ADMIN', 'Administrator', 'Bibloteki');
-INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('jankowalski', 'jankowalski', 'USER', 'Jan', 'Kowalski');
+INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('administrator', 'administrator', 'ROLE_ADMIN', 'Administrator', 'Biblioteki');
+INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('biblioteka', 'biblioteka', 'ROLE_WORKER', 'Pracownik', 'Biblioteki');
+INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('jankowalski', 'jankowalski', 'ROLE_USER', 'Jan', 'Kowalski');
 
 INSERT INTO authors(author) VALUES ('Bolesław Prus');
 INSERT INTO authors(author) VALUES ('Henryk Sienkiewicz');

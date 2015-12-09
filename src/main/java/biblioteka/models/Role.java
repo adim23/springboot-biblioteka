@@ -1,5 +1,5 @@
 package biblioteka.models;
 
 public enum Role {
-	USER, ADMIN, WORKER
+	ROLE_USER, ROLE_ADMIN, ROLE_WORKER
 }
