@@ -2,7 +2,12 @@ CREATE TABLE accounts(
 id serial primary key,
 username text not null,
 password text not null,
-role text not null,
+role text not null
+);
+
+CREATE TABLE people(
+id serial primary key,
+id_account integer not null,
 firstname text,
 secondname text
 );
@@ -18,9 +23,14 @@ id serial primary key,
 author text not null
 );
 
-INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('administrator', 'administrator', 'ROLE_ADMIN', 'Administrator', 'Biblioteki');
-INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('biblioteka', 'biblioteka', 'ROLE_WORKER', 'Pracownik', 'Biblioteki');
-INSERT INTO accounts(username, password, role, firstname, secondname) VALUES ('jankowalski', 'jankowalski', 'ROLE_USER', 'Jan', 'Kowalski');
+INSERT INTO accounts(username, password, role) VALUES ('administrator', 'administrator', 'ROLE_ADMIN');
+INSERT INTO accounts(username, password, role) VALUES ('biblioteka', 'biblioteka', 'ROLE_WORKER');
+INSERT INTO accounts(username, password, role) VALUES ('jankowalski', 'jankowalski', 'ROLE_USER');
+
+INSERT INTO people(id_account, firstname, secondname) VALUES (1, 'Administator', 'Biblioteki');
+INSERT INTO people(id_account, firstname, secondname) VALUES (2, 'Pracownik', 'Biblioteki');
+INSERT INTO people(id_account, firstname, secondname) VALUES (3, 'Jan', 'Kowalski');
+
 
 INSERT INTO authors(author) VALUES ('Bolesław Prus');
 INSERT INTO authors(author) VALUES ('Henryk Sienkiewicz');

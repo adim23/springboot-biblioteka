@@ -19,39 +19,19 @@ public class Account {
     private long id;
     private String username;
     private String password;
-		private String firstname;
-		private String secondname;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
 		protected Account(){}
-		public Account(String username, String password, Role role, String firstname, String secondname){
+		public Account(String username, String password, Role role){
 			this.username = username;
 			this.password = password;
 			this.role = role;
-			this.firstname = firstname;
-			this.secondname = secondname;
 		}
 
 		public long getId(){
 			return this.id;
-		}
-
-		public String getFirstname(){
-			return this.firstname;
-		}
-
-		public String getSecondname(){
-			return this.secondname;
-		}
-
-		public void setFirstname(String firstname){
-			this.firstname = firstname;
-		}
-
-		public void setSecondname(String secondname){
-			this.secondname = secondname;
 		}
 
 		public String getPassword(){

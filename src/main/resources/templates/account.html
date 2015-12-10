@@ -32,6 +32,21 @@ Zarządzaj</a></li>
 					<form th:action="@{/logout}" method="post">
 							<input type="submit" value="Wyloguj"/>
 					</form>
+					<div class="divider"></div>
+						<div class="six columns">
+						<h5>Zmiana hasła</h5>
+						<form class='u-full-width form' th:action="@{/changepassword}" method="post">
+								<div class='form-row'>
+									<label>Stare hasło: </label><input type="password" name="username"/>
+								</div>
+								<div class='form-row'>
+									<label>Nowe hasło: </label><input type="password" name="password"/>
+								</div>
+								<div class='form-row'>
+									<input class='button-primary' type="submit" value="Zmień"/>
+								</div>
+						</form>
+				</div>
 				</div>
 			</div>
 		</div>
