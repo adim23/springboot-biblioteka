@@ -41,9 +41,9 @@ id serial primary key,
 author text not null
 );
 
-INSERT INTO accounts(username, password, role) VALUES ('administrator', 'administrator');
-INSERT INTO accounts(username, password, role) VALUES ('biblioteka', 'biblioteka');
-INSERT INTO accounts(username, password, role) VALUES ('jankowalski', 'jankowalski');
+INSERT INTO accounts(username, password) VALUES ('administrator', 'administrator');
+INSERT INTO accounts(username, password) VALUES ('biblioteka', 'biblioteka');
+INSERT INTO accounts(username, password) VALUES ('jankowalski', 'jankowalski');
 
 INSERT INTO people(id_account, firstname, secondname) VALUES (1, 'Administator', 'Biblioteki');
 INSERT INTO people(id_account, firstname, secondname) VALUES (2, 'Pracownik', 'Biblioteki');

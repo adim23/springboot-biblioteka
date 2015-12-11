@@ -3078,11 +3078,11 @@ module.exports = request;
 },{"emitter":1,"reduce":9}],11:[function(require,module,exports){
 var Dispatcher = require('../core/Dispatcher'),
 		ActionConstants = require('../constants/ActionConstants'),
-		Store = require('../stores/Store'),
+		BooksStore = require('../stores/BooksStore'),
 		Promise = require('es6-promise').Promise,
 		API = require('../services/API');
 
-var ActionCreator = {
+var BooksActionCreator = {
 	getBooks: function() {
 		API
 			.get('/api/books')
@@ -3117,13 +3117,13 @@ var ActionCreator = {
 	}
 };
 
-module.exports = ActionCreator;
+module.exports = BooksActionCreator;
 
-},{"../constants/ActionConstants":17,"../core/Dispatcher":18,"../services/API":19,"../stores/Store":20,"es6-promise":2}],12:[function(require,module,exports){
+},{"../constants/ActionConstants":17,"../core/Dispatcher":18,"../services/API":19,"../stores/BooksStore":20,"es6-promise":2}],12:[function(require,module,exports){
 var BooksApp = require('./components/BooksApp.jsx');
 React.render(React.createElement(BooksApp, null), document.getElementById('booksApp'));
 
-},{"./components/BooksApp.jsx":15}],13:[function(require,module,exports){
+},{"./components/BooksApp.jsx":14}],13:[function(require,module,exports){
 var BookRow = React.createClass({displayName: "BookRow",
 	render: function() {
 		return (
@@ -3143,20 +3143,69 @@ var BookRow = React.createClass({displayName: "BookRow",
 module.exports = BookRow;
 
 },{}],14:[function(require,module,exports){
-var ActionCreator = require('../actions/ActionCreator'),
+var BooksTable = require('./BooksTable.jsx'),
+		BooksSearchBar = require('./BooksSearchBar.jsx'),
+		BooksStore = require('../stores/BooksStore'),
+		BooksActionCreator = require('../actions/BooksActionCreator');
+
+var BooksApp = React.createClass({displayName: "BooksApp",
+	getInitialState: function() {
+		return {
+			books: []
+		};
+	},
+	componentWillMount: function() {
+		BooksStore.addChangeListener(this.onChange);
+	},
+	componentDidMount: function() {
+		BooksActionCreator.getBooks();
+	},
+	componentWillUnmount: function() {
+		BooksStore.removeChangeListener(this.onChange);
+	},
+	onChange: function() {
+		this.setState({
+			books: BooksStore.getBooks()
+		});
+	},
+	render: function() {
+		return (
+			React.createElement("div", {className: "u-full-width"}, 
+				React.createElement(BooksSearchBar, null), 
+				React.createElement(BooksTable, {books: this.state.books})
+			)
+		);
+	}
+});
+
+module.exports = BooksApp;
+
+},{"../actions/BooksActionCreator":11,"../stores/BooksStore":20,"./BooksSearchBar.jsx":15,"./BooksTable.jsx":16}],15:[function(require,module,exports){
+var BooksActionCreator = require('../actions/BooksActionCreator'),
 		ActionConstants = require('../constants/ActionConstants');
 
 var SearchBar = React.createClass({displayName: "SearchBar",
 	getInitialState: function() {
-		return {value: ''};
+		return {
+			title: '',
+			author: ''
+		};
 	},
-	handleChange: function(event) {
-		this.setState({value: event.target.value});
+	handleTitleChange: function(event) {
+		this.setState({title: event.target.value});
+	},
+	handleAuthorChange: function(event) {
+		this.setState({author: event.target.value});
+	},
+	handleKeyDown: function(event) {
+		if (event.keyCode == 13){
+			this.handleSearch();
+		}
 	},
 	handleSearch: function() {
-		ActionCreator.getBooksBy({
-			title: this.state.value,
-			author: ''
+		BooksActionCreator.getBooksBy({
+			title: this.state.title,
+			author: this.state.author
 		});
 	},
 	render: function() {
@@ -3164,7 +3213,8 @@ var SearchBar = React.createClass({displayName: "SearchBar",
 		return (
 			React.createElement("div", {className: "u-full-width"}, 
 				React.createElement("div", {className: "row"}, 
-					React.createElement("input", {className: "eight columns", type: "text", value: value, onChange: this.handleChange}), 
+					React.createElement("input", {className: "four columns", onKeyDown: this.handleKeyDown, placeholder: "Tytuł", type: "text", value: value, onChange: this.handleTitleChange}), 
+					React.createElement("input", {className: "four columns", onKeyDown: this.handleKeyDown, placeholder: "Autor", type: "text", value: value, onChange: this.handleAuthorChange}), 
 					React.createElement("button", {className: "four columns", onClick: this.handleSearch}, "Wyszukaj")
 				)
 			)
@@ -3174,45 +3224,7 @@ var SearchBar = React.createClass({displayName: "SearchBar",
 
 module.exports = SearchBar;
 
-},{"../actions/ActionCreator":11,"../constants/ActionConstants":17}],15:[function(require,module,exports){
-var BooksTable = require('./BooksTable.jsx'),
-		BookSearchBar = require('./BookSearchBar.jsx'),
-		Store = require('../stores/Store'),
-		ActionCreator = require('../actions/ActionCreator');
-
-var BooksApp = React.createClass({displayName: "BooksApp",
-	getInitialState: function() {
-		return {
-			books: []
-		};
-	},
-	componentWillMount: function() {
-		Store.addChangeListener(this.onChange);
-	},
-	componentDidMount: function() {
-		ActionCreator.getBooks();
-	},
-	componentWillUnmount: function() {
-		Store.removeChangeListener(this.onChange);
-	},
-	onChange: function() {
-		this.setState({
-			books: Store.getBooks()
-		});
-	},
-	render: function() {
-		return (
-			React.createElement("div", {className: "u-full-width"}, 
-				React.createElement(BookSearchBar, null), 
-				React.createElement(BooksTable, {books: this.state.books})
-			)
-		);
-	}
-});
-
-module.exports = BooksApp;
-
-},{"../actions/ActionCreator":11,"../stores/Store":20,"./BookSearchBar.jsx":14,"./BooksTable.jsx":16}],16:[function(require,module,exports){
+},{"../actions/BooksActionCreator":11,"../constants/ActionConstants":17}],16:[function(require,module,exports){
 var BookRow = require('./BookRow.jsx');
 
 var BooksTable = React.createClass({displayName: "BooksTable",
@@ -3249,6 +3261,7 @@ module.exports = BooksTable;
 },{"./BookRow.jsx":13}],17:[function(require,module,exports){
 module.exports = {
 	RECEIVE_BOOKS: 'RECEIVE_BOOKS',
+	RECEIVE_BOOKS: 'RECEIVE_PEOPLE',
 	RECEIVE_ERROR: 'RECEIVE_ERROR'
 };
 
@@ -3298,7 +3311,7 @@ function setBooks(books) {
 	_books = books;
 };
 
-var Store = assign({}, EventEmitter.prototype, {
+var BooksStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
 		this.emit('change')
 	},
@@ -3313,7 +3326,7 @@ var Store = assign({}, EventEmitter.prototype, {
 	}
 });
 
-Store.dispatchToken = Dispatcher.register(function(payload) {
+BooksStore.dispatchToken = Dispatcher.register(function(payload) {
 	var action = payload.action;
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_BOOKS:
@@ -3324,10 +3337,10 @@ Store.dispatchToken = Dispatcher.register(function(payload) {
 		default:
 			return true;
 	}
-	Store.emitChange();
+	BooksStore.emitChange();
 	return true;
 });
 
-module.exports = Store;
+module.exports = BooksStore;
 
 },{"../constants/ActionConstants":17,"../core/Dispatcher":18,"events":3,"object-assign":7}]},{},[12]);

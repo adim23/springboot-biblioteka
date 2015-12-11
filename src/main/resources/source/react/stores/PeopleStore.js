@@ -3,13 +3,13 @@ var Dispatcher = require('../core/Dispatcher'),
 		EventEmitter = require('events').EventEmitter,
 		assign = require('object-assign');
 
-var _books = [];
+var _people = [];
 
-function setBooks(books) {
-	_books = books;
+function setPeople(people) {
+	_people = people;
 };
 
-var Store = assign({}, EventEmitter.prototype, {
+var PeopleStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
 		this.emit('change')
 	},
@@ -19,24 +19,24 @@ var Store = assign({}, EventEmitter.prototype, {
 	removeChangeListener: function(callback) {
 		this.removeListener('change', callback);
 	},
-	getBooks: function() {
-		return _books;
+	getPeople: function() {
+		return _people;
 	}
 });
 
-Store.dispatchToken = Dispatcher.register(function(payload) {
+PeopleStore.dispatchToken = Dispatcher.register(function(payload) {
 	var action = payload.action;
 	switch (action.actionType) {
-		case ActionConstants.RECEIVE_BOOKS:
-			setBooks(action.books);
+		case ActionConstants.RECEIVE_PEOPLE:
+			setPeople(action.people);
 			break;
 		case ActionConstants.RECEIVE_ERROR:
 			break;
 		default:
 			return true;
 	}
-	Store.emitChange();
+	PeopleStore.emitChange();
 	return true;
 });
 
-module.exports = Store;
+module.exports = PeopleStore;

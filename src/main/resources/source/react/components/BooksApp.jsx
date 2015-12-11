@@ -1,7 +1,7 @@
 var BooksTable = require('./BooksTable.jsx'),
-		BookSearchBar = require('./BookSearchBar.jsx'),
-		Store = require('../stores/Store'),
-		ActionCreator = require('../actions/ActionCreator');
+		BooksSearchBar = require('./BooksSearchBar.jsx'),
+		BooksStore = require('../stores/BooksStore'),
+		BooksActionCreator = require('../actions/BooksActionCreator');
 
 var BooksApp = React.createClass({
 	getInitialState: function() {
@@ -10,23 +10,23 @@ var BooksApp = React.createClass({
 		};
 	},
 	componentWillMount: function() {
-		Store.addChangeListener(this.onChange);
+		BooksStore.addChangeListener(this.onChange);
 	},
 	componentDidMount: function() {
-		ActionCreator.getBooks();
+		BooksActionCreator.getBooks();
 	},
 	componentWillUnmount: function() {
-		Store.removeChangeListener(this.onChange);
+		BooksStore.removeChangeListener(this.onChange);
 	},
 	onChange: function() {
 		this.setState({
-			books: Store.getBooks()
+			books: BooksStore.getBooks()
 		});
 	},
 	render: function() {
 		return (
 			<div className='u-full-width'>
-				<BookSearchBar />
+				<BooksSearchBar />
 				<BooksTable books={this.state.books}/>
 			</div>
 		);

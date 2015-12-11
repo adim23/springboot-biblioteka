@@ -1,17 +1,17 @@
 var Dispatcher = require('../core/Dispatcher'),
 		ActionConstants = require('../constants/ActionConstants'),
-		Store = require('../stores/Store'),
+		PeopleStore = require('../stores/PeopleStore'),
 		Promise = require('es6-promise').Promise,
 		API = require('../services/API');
 
-var ActionCreator = {
-	getBooks: function() {
+var PeopleActionCreator = {
+	getPeople: function() {
 		API
-			.get('/api/books')
-			.then(function(books) {
+			.get('/api/people')
+			.then(function(people) {
 				Dispatcher.handleViewAction({
-					actionType: ActionConstants.RECEIVE_BOOKS,
-					books: books
+					actionType: ActionConstants.RECEIVE_PEOPLE,
+					people: people
 				});
 			})
 			.catch(function() {
@@ -21,13 +21,13 @@ var ActionCreator = {
 				});
 			});
 	},
-	getBooksBy: function(parameters) {
+	getPeopleBy: function(parameters) {
 		API
-			.get('/api/books?title=' + parameters.title + '&author=' + parameters.author)
-			.then(function(books) {
+			.get('/api/people?firstname=' + parameters.firstname + '&secondname=' + parameters.secondname)
+			.then(function(people) {
 				Dispatcher.handleViewAction({
-					actionType: ActionConstants.RECEIVE_BOOKS,
-					books: books
+					actionType: ActionConstants.RECEIVE_PEOPLE,
+					people: people
 				});
 			})
 			.catch(function() {
@@ -39,4 +39,4 @@ var ActionCreator = {
 	}
 };
 
-module.exports = ActionCreator;
+module.exports = PeopleActionCreator;

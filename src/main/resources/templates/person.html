@@ -32,26 +32,18 @@ Zarządzaj</a></li>
 			</div>
 			<div class="container">
 				<div class="row">
-					<h3>Czytelnicy</h3>
-					<p>Wyszukiwanie czytelników</p>
-					<div class="divider"></div>
+					Czytelnicy - <a th:href="@{|/person/${id}|}" th:text="@{|${firstname} ${secondname}|}"></a>
 				</div>
-				<div id="peopleApp">
-				</div>
-			</div>
-			<div class="container">
 				<div class="row">
-					<h3>Wypożyczenia</h3>
-					<p>Wyszukiwanie wypożyczeń</p>
-					<div class="divider"></div>
-				</div>
-				<div id="loansApp">
+					<h3 th:text="@{|${firstname} ${secondname}|}"></h3>
+					<div class='divider'></div>
+					<h5>Lista wypożyczeń:</h5>
+					<ul>
+					</ul>
 				</div>
 			</div>
 		</div>
 		<script src="/js/react.min.js"></script>
 		<script src="/js/react-dom.min.js"></script>
-		<script src="/js/app/people-app.js"></script>
-		<script src="/js/app/loans-app.js"></script>
 	</body>
 </html>
