@@ -27,6 +27,10 @@ Zarządzaj</a></li>
 		</div>
 		<div class="panel">
 			<div class="container">
+				<div th:if="${message}" th:text="${message}">
+				</div>
+			</div>
+			<div class="container">
 				<div class="row">
 					<h5>Zalogowany jako: </h5><h3><b th:text="${person.firstname}"></b> <b th:text="${person.secondname}"></b></h3><h5 th:text="${person.account.username}"></h5>
 					<form th:action="@{/logout}" method="post">

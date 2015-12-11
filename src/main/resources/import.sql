@@ -27,7 +27,8 @@ CREATE TABLE loans(
 id serial primary key,
 id_person integer not null,
 id_copy integer not null,
-loaned boolean not null
+loaned boolean not null,
+date date not null
 );
 
 CREATE TABLE authors(

@@ -27,6 +27,10 @@ Zarządzaj</a></li>
 		</div>
 		<div class="panel">
 			<div class="container">
+				<div th:if="${message}" th:text="${message}">
+				</div>
+			</div>
+			<div class="container">
 				<div class="row">
 					Panel administracyjny
 				</div>
