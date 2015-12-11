@@ -3213,9 +3213,9 @@ var SearchBar = React.createClass({displayName: "SearchBar",
 		return (
 			React.createElement("div", {className: "u-full-width"}, 
 				React.createElement("div", {className: "row"}, 
-					React.createElement("input", {className: "four columns", onKeyDown: this.handleKeyDown, placeholder: "Tytuł", type: "text", value: value, onChange: this.handleTitleChange}), 
+					React.createElement("input", {className: "six columns", onKeyDown: this.handleKeyDown, placeholder: "Tytuł", type: "text", value: value, onChange: this.handleTitleChange}), 
 					React.createElement("input", {className: "four columns", onKeyDown: this.handleKeyDown, placeholder: "Autor", type: "text", value: value, onChange: this.handleAuthorChange}), 
-					React.createElement("button", {className: "four columns", onClick: this.handleSearch}, "Wyszukaj")
+					React.createElement("button", {className: "two columns", onClick: this.handleSearch}, "Wyszukaj")
 				)
 			)
 		);

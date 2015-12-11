@@ -32,8 +32,7 @@ CREATE TABLE loans(
 id serial primary key,
 id_person integer not null,
 id_copy integer not null,
-loaned boolean not null,
-date date not null
+returned boolean not null
 );
 
 CREATE TABLE authors(
@@ -94,3 +93,47 @@ INSERT INTO books(title, id_author) VALUES ('FUTU.RE', 5);
 INSERT INTO books(title, id_author) VALUES ('Zew Cthulhu', 6);
 
 INSERT INTO books(title, id_author) VALUES ('Cierpienia młodego Wertera', 7);
+
+
+
+INSERT INTO copies(id_book) VALUES (1);
+INSERT INTO copies(id_book) VALUES (1);
+INSERT INTO copies(id_book) VALUES (1);
+INSERT INTO copies(id_book) VALUES (1);
+INSERT INTO copies(id_book) VALUES (2);
+INSERT INTO copies(id_book) VALUES (2);
+INSERT INTO copies(id_book) VALUES (2);
+INSERT INTO copies(id_book) VALUES (3);
+INSERT INTO copies(id_book) VALUES (4);
+INSERT INTO copies(id_book) VALUES (5);
+INSERT INTO copies(id_book) VALUES (6);
+INSERT INTO copies(id_book) VALUES (6);
+INSERT INTO copies(id_book) VALUES (6);
+INSERT INTO copies(id_book) VALUES (7);
+INSERT INTO copies(id_book) VALUES (8);
+INSERT INTO copies(id_book) VALUES (9);
+INSERT INTO copies(id_book) VALUES (9);
+INSERT INTO copies(id_book) VALUES (10);
+INSERT INTO copies(id_book) VALUES (10);
+INSERT INTO copies(id_book) VALUES (11);
+INSERT INTO copies(id_book) VALUES (11);
+INSERT INTO copies(id_book) VALUES (12);
+INSERT INTO copies(id_book) VALUES (12);
+INSERT INTO copies(id_book) VALUES (13);
+INSERT INTO copies(id_book) VALUES (14);
+INSERT INTO copies(id_book) VALUES (14);
+INSERT INTO copies(id_book) VALUES (14);
+INSERT INTO copies(id_book) VALUES (14);
+INSERT INTO copies(id_book) VALUES (15);
+INSERT INTO copies(id_book) VALUES (15);
+INSERT INTO copies(id_book) VALUES (16);
+INSERT INTO copies(id_book) VALUES (16);
+INSERT INTO copies(id_book) VALUES (16);
+INSERT INTO copies(id_book) VALUES (17);
+INSERT INTO copies(id_book) VALUES (18);
+INSERT INTO copies(id_book) VALUES (19);
+INSERT INTO copies(id_book) VALUES (20);
+INSERT INTO copies(id_book) VALUES (21);
+INSERT INTO copies(id_book) VALUES (22);
+INSERT INTO copies(id_book) VALUES (23);
+INSERT INTO copies(id_book) VALUES (24);

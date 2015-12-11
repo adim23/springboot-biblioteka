@@ -30,9 +30,9 @@ var SearchBar = React.createClass({
 		return (
 			<div className='u-full-width'>
 				<div className='row'>
-					<input className='four columns' onKeyDown={this.handleKeyDown} placeholder="Imię" type='text' value={value} onChange={this.handleFirstnameChange}/>
-					<input className='four columns' onKeyDown={this.handleKeyDown} placeholder="Nazwisko" type='text' value={value} onChange={this.handleSecondnameChange}/>
-					<button className="four columns" onClick={this.handleSearch}>Wyszukaj</button>
+					<input className='five columns' onKeyDown={this.handleKeyDown} placeholder="Imię" type='text' value={value} onChange={this.handleFirstnameChange}/>
+					<input className='five columns' onKeyDown={this.handleKeyDown} placeholder="Nazwisko" type='text' value={value} onChange={this.handleSecondnameChange}/>
+					<button className="two columns" onClick={this.handleSearch}>Wyszukaj</button>
 				</div>
 			</div>
 		);

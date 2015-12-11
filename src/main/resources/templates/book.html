@@ -37,7 +37,8 @@ Zarządzaj</a></li>
 				<div class="row">
 					<h3 th:text="${title}"></h3>
 					<div class='divider'></div>
-					<p th:text="${author.author}"></p>
+					<label>Autor:</label><p th:text="${author.author}"></p>
+					<label>Liczba egzemplarzy:</label><p th:text="${numberOfCopies}"></p>
 				</div>
 			</div>
 		</div>
