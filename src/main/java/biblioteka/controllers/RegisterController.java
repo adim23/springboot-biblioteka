@@ -22,6 +22,9 @@ public class RegisterController {
 	@Autowired
 	private PeopleRepository peopleRepository;
 
+	@Autowired
+	private RoleBasedModel roleBasedModel;
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPost(@RequestParam(value="username", defaultValue="") String username, @RequestParam(value="password", defaultValue="") String password, @RequestParam(value="firstname", defaultValue="") String firstname, @RequestParam(value="secondname", defaultValue="") String secondname, Model model, HttpServletRequest request) {
 		String alphaNumeric = "[a-zA-Z0-9]+";
@@ -48,7 +51,7 @@ public class RegisterController {
 			return "login";
 		}
 		model.addAttribute("message", "Użytkownik już istnieje.");
-		RoleBasedModel.parseModel(request, model);
+		roleBasedModel.parseModel(request, model);
 		return "login";
 	}
 }

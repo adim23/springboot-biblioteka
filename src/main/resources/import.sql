@@ -18,6 +18,18 @@ title text not null,
 id_author integer not null
 );
 
+CREATE TABLE copies(
+id serial primary key,
+id_book integer not null
+);
+
+CREATE TABLE loans(
+id serial primary key,
+id_person integer not null,
+id_copy integer not null,
+loaned boolean not null
+);
+
 CREATE TABLE authors(
 id serial primary key,
 author text not null

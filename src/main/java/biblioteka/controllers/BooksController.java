@@ -16,13 +16,16 @@ public class BooksController {
 	@Autowired
 	private BooksRepository booksRepository;
 
+	@Autowired
+	private RoleBasedModel roleBasedModel;
+
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
 	public String bookView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
 		Book book = booksRepository.findOne(id);
 		model.addAttribute("id", book.getId());
 		model.addAttribute("title", book.getTitle());
 		model.addAttribute("author", book.getAuthor());
-		RoleBasedModel.parseModel(request, model);
+		roleBasedModel.parseModel(request, model);
 		return "book";
 	}
 }

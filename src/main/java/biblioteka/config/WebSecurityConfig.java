@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						Account account = accountRepository.findByUsername(username);
 						if (account == null) return null;
 						List<GrantedAuthority> auth = AuthorityUtils.createAuthorityList(account.getRole().name());
-						return new User(username, account.getPassword(), auth);
+						return new User(username, account.securityGetPassword(), auth);
 					}
 				});
     }

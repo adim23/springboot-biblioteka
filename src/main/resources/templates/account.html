@@ -13,11 +13,11 @@
 			    <ul>
 						<li><a href="/"><i class="fa fa-search"></i>
  Szukaj</a></li>
-						<li><a href="/account"><i class="fa fa-book"></i>
+						<li><a href="/account"><i class="fa fa-user"></i>
  Konto</a></li>
-						<li th:if="${workerMode}"><a href="/manage"><i class="fa fa-piechart"></i>
+ <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
 Wypożycz</a></li>
-						<li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+ <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
 Zarządzaj</a></li>
 						<li><a href="/contact"><i class="fa fa-question"></i>
  Kontakt</a></li>
@@ -28,7 +28,7 @@ Zarządzaj</a></li>
 		<div class="panel">
 			<div class="container">
 				<div class="row">
-					<h5>Zalogowany jako: </h5><h3><b th:text="${account.firstname}"></b> <b th:text="${account.secondname}"></b></h3><h5 th:text="${account.username}"></h5>
+					<h5>Zalogowany jako: </h5><h3><b th:text="${person.firstname}"></b> <b th:text="${person.secondname}"></b></h3><h5 th:text="${person.account.username}"></h5>
 					<form th:action="@{/logout}" method="post">
 							<input type="submit" value="Wyloguj"/>
 					</form>

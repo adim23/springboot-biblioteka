@@ -17,11 +17,12 @@ public class AccountController {
 	@Autowired
 	private AccountsRepository accountRepository;
 
+	@Autowired
+	private RoleBasedModel roleBasedModel;
+
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String accountView(HttpServletRequest request, Model model) {
-		Account account = accountRepository.findByUsername(request.getRemoteUser());
-		model.addAttribute("account", account);
-		RoleBasedModel.parseModel(request, model);
+		roleBasedModel.parseModel(request, model);
 		return "account";
 	}
 }

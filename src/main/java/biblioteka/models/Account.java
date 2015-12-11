@@ -34,7 +34,7 @@ public class Account {
 			return this.id;
 		}
 
-		public String getPassword(){
+		public String securityGetPassword(){
 			return this.password;
 		}
 

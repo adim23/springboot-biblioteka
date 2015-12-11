@@ -8,26 +8,46 @@
 	</head>
 	<body>
 		<div class="navigation">
-			<nav>
+    	<nav>
 				<div class="container">
-					<ul>
-						<li><a href="/"><i class="fa fa-search"></i>Szukaj</a></li>
-						<li><a href="/account"><i class="fa fa-book"></i>Konto</a></li>
-						<li th:if="${workerMode}"><a href="/manage"><i class="fa fa-piechart"></i>Wypożycz</a></li>
-						<li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>Zarządzaj</a></li>
-						<li><a href="/contact"><i class="fa fa-question"></i>Kontakt</a></li>
-					</ul>
+			    <ul>
+						<li><a href="/"><i class="fa fa-search"></i>
+ Szukaj</a></li>
+						<li><a href="/account"><i class="fa fa-user"></i>
+ Konto</a></li>
+ <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
+Wypożycz</a></li>
+ <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+Zarządzaj</a></li>
+						<li><a href="/contact"><i class="fa fa-question"></i>
+ Kontakt</a></li>
+		      </ul>
 				</div>
-			</nav>
+		  </nav>
 		</div>
 		<div class="panel">
 			<div class="container">
 				<div class="row">
-					Zarządzanie
+					<h3>Czytelnicy</h3>
+					<p>Wyszukiwanie czytelników</p>
+					<div class="divider"></div>
+				</div>
+				<div id="peopleApp">
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<h3>Wypożyczenia</h3>
+					<p>Wyszukiwanie wypożyczeń</p>
+					<div class="divider"></div>
+				</div>
+				<div id="loansApp">
 				</div>
 			</div>
 		</div>
 		<script src="/js/react.min.js"></script>
 		<script src="/js/react-dom.min.js"></script>
+		<script src="/js/people-app.js"></script>
+		<script src="/js/loans-app.js"></script>
 	</body>
 </html>
