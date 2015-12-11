@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
 import biblioteka.models.Role;
 
 @Entity
@@ -20,14 +18,10 @@ public class Account {
     private String username;
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
 		protected Account(){}
-		public Account(String username, String password, Role role){
+		public Account(String username, String password){
 			this.username = username;
 			this.password = password;
-			this.role = role;
 		}
 
 		public long getId(){
@@ -42,15 +36,7 @@ public class Account {
 			return this.username;
 		}
 
-		public Role getRole(){
-			return this.role;
-		}
-
 		public void setPassword(String password){
 			this.password = password;
-		}
-
-		public void setRole(Role role){
-			this.role = role;
 		}
 }

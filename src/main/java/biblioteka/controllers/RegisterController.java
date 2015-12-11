@@ -13,11 +13,16 @@ import biblioteka.repositories.AccountsRepository;
 import biblioteka.models.Person;
 import biblioteka.repositories.PeopleRepository;
 import biblioteka.models.Role;
+import biblioteka.repositories.RolesRepository;
+import biblioteka.models.RoleEnum;
 
 @Controller
 public class RegisterController {
 	@Autowired
 	private AccountsRepository accountsRepository;
+
+	@Autowired
+	private RolesRepository rolesRepository;
 
 	@Autowired
 	private PeopleRepository peopleRepository;
@@ -42,9 +47,11 @@ public class RegisterController {
 		}
 		Account account = accountsRepository.findByUsername(username);
 		if (account == null){
-			account = new Account(username, password, Role.ROLE_USER);
+			account = new Account(username, password);
 			accountsRepository.save(account);
 			accountsRepository.flush();
+			rolesRepository.save(new Role(account, RoleEnum.ROLE_USER));
+			rolesRepository.flush();
 			peopleRepository.save(new Person(account, firstname, secondname));
 			peopleRepository.flush();
 			model.addAttribute("message", "Rejestracja zakończona pomyślnie.");

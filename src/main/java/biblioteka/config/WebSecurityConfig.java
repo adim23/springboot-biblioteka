@@ -17,6 +17,10 @@ import biblioteka.repositories.AccountsRepository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.ArrayList;
+import biblioteka.models.Role;
+import biblioteka.repositories.RolesRepository;
+import biblioteka.models.RoleEnum;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -25,12 +29,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Autowired
 		private AccountsRepository accountRepository;
 
+		@Autowired
+		private RolesRepository rolesRepository;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/css/**", "/js/**", "/api/**", "/fonts/**", "/contact", "/register", "/book/**", "/author/**").permitAll()
-								.antMatchers("/manage").hasRole("WORKER")
+                .antMatchers("/", "/css/**", "/js/**", "/api/books/**", "/api/authors/**", "/fonts/**", "/contact", "/register", "/book/**", "/author/**").permitAll()
+								.antMatchers("/manage", "/api/people/**").hasRole("WORKER")
 								.antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -51,7 +58,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 						Account account = accountRepository.findByUsername(username);
 						if (account == null) return null;
-						List<GrantedAuthority> auth = AuthorityUtils.createAuthorityList(account.getRole().name());
+						List<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+						Iterable<Role> roles = rolesRepository.findByAccount(account);
+						for (Role role: roles){
+							auth.add(new GrantedAuthority(){
+								public String getAuthority(){
+									return role.getRole().name();
+								}
+							});
+						}
 						return new User(username, account.securityGetPassword(), auth);
 					}
 				});

@@ -1,8 +1,7 @@
 CREATE TABLE accounts(
 id serial primary key,
 username text not null,
-password text not null,
-role text not null
+password text not null
 );
 
 CREATE TABLE people(
@@ -10,6 +9,12 @@ id serial primary key,
 id_account integer not null,
 firstname text,
 secondname text
+);
+
+CREATE TABLE roles(
+id serial primary key,
+id_account integer not null,
+role text not null
 );
 
 CREATE TABLE books(
@@ -36,14 +41,20 @@ id serial primary key,
 author text not null
 );
 
-INSERT INTO accounts(username, password, role) VALUES ('administrator', 'administrator', 'ROLE_ADMIN');
-INSERT INTO accounts(username, password, role) VALUES ('biblioteka', 'biblioteka', 'ROLE_WORKER');
-INSERT INTO accounts(username, password, role) VALUES ('jankowalski', 'jankowalski', 'ROLE_USER');
+INSERT INTO accounts(username, password, role) VALUES ('administrator', 'administrator');
+INSERT INTO accounts(username, password, role) VALUES ('biblioteka', 'biblioteka');
+INSERT INTO accounts(username, password, role) VALUES ('jankowalski', 'jankowalski');
 
 INSERT INTO people(id_account, firstname, secondname) VALUES (1, 'Administator', 'Biblioteki');
 INSERT INTO people(id_account, firstname, secondname) VALUES (2, 'Pracownik', 'Biblioteki');
 INSERT INTO people(id_account, firstname, secondname) VALUES (3, 'Jan', 'Kowalski');
 
+INSERT INTO roles(id_account, role) VALUES (1, 'ROLE_ADMIN');
+INSERT INTO roles(id_account, role) VALUES (1, 'ROLE_WORKER');
+INSERT INTO roles(id_account, role) VALUES (1, 'ROLE_USER');
+INSERT INTO roles(id_account, role) VALUES (2, 'ROLE_WORKER');
+INSERT INTO roles(id_account, role) VALUES (2, 'ROLE_USER');
+INSERT INTO roles(id_account, role) VALUES (3, 'ROLE_USER');
 
 INSERT INTO authors(author) VALUES ('Bolesław Prus');
 INSERT INTO authors(author) VALUES ('Henryk Sienkiewicz');
