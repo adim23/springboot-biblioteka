@@ -2,6 +2,8 @@ var PersonRow = require('./PersonRow.jsx');
 
 var PeopleTable = React.createClass({
 	render: function() {
+		
+		
 		var rows = this.props.people.map(function(person, index) {
 			return (<PersonRow index={index+1} firstname={person.firstname} secondname={person.secondname} id={person.id}/>);
 		});

@@ -3,13 +3,24 @@ var Dispatcher = require('../core/Dispatcher'),
 		EventEmitter = require('events').EventEmitter,
 		assign = require('object-assign');
 
-var _people = [];
+var _people = [],
+		_loans = [],
+		_show = "people";
 
 function setPeople(people) {
 	_people = people;
 };
 
-var PeopleStore = assign({}, EventEmitter.prototype, {
+function setLoans(loans) {
+	_loans = loans;
+};
+
+function setShow(show) {
+	_show = show;
+};
+
+
+var ManageStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
 		this.emit('change')
 	},
@@ -21,22 +32,31 @@ var PeopleStore = assign({}, EventEmitter.prototype, {
 	},
 	getPeople: function() {
 		return _people;
+	},
+	getLoans: function() {
+		return _loans;
+	},
+	getShow: function() {
+		return _show;
 	}
 });
 
-PeopleStore.dispatchToken = Dispatcher.register(function(payload) {
+ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 	var action = payload.action;
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_PEOPLE:
 			setPeople(action.people);
+			setShow("people");
+			break;
+		case ActionConstants.RECEIVE_LOANS:
+			setLoans(action.loans);
+			setShow("loans");
 			break;
 		case ActionConstants.RECEIVE_ERROR:
 			break;
-		default:
-			return true;
 	}
-	PeopleStore.emitChange();
+	ManageStore.emitChange();
 	return true;
 });
 
-module.exports = PeopleStore;
+module.exports = ManageStore;

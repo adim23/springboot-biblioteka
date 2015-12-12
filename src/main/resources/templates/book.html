@@ -3,7 +3,7 @@
 		<title>Biblioteka</title>
 		<link rel='stylesheet' type='text/css' href='/css/normalize.css'/>
 		<link rel='stylesheet' type='text/css' href='/css/skeleton.css'/>
-		<link rel='stylesheet' type='text/css' href='/css/font-awesome.min.css'/>
+		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'/>
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
@@ -38,6 +38,7 @@ Zarządzaj</a></li>
 					<h3 th:text="${title}"></h3>
 					<div class='divider'></div>
 					<label>Autor:</label><p th:text="${author.author}"></p>
+					<label>Ilość wypożyczeń:</label><p th:text="${timesLoaned}"></p>
 					<label>Liczba egzemplarzy:</label><p th:text="${numberOfCopies}"></p>
 					<div th:if="${workerMode}" class='divider'></div>
 					<h5 th:if="${workerMode}">Lista egzemplarzy:</h5>

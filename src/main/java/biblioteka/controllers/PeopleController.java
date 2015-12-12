@@ -25,6 +25,7 @@ public class PeopleController {
 		model.addAttribute("id", person.getId());
 		model.addAttribute("firstname", person.getFirstname());
 		model.addAttribute("secondname", person.getSecondname());
+		model.addAttribute("loans", person.getLoans());
 		roleBasedModel.parseModel(request, model);
 		return "person";
 	}

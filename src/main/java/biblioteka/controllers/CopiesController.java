@@ -8,19 +8,20 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import biblioteka.models.Book;
-import biblioteka.repositories.BooksRepository;
 import biblioteka.models.Copy;
 import biblioteka.repositories.CopiesRepository;
+import biblioteka.models.Loan;
+import biblioteka.repositories.LoansRepository;
 import java.util.List;
 
 @Controller
 public class CopiesController {
-	@Autowired
-	private BooksRepository booksRepository;
 
 	@Autowired
 	private CopiesRepository copiesRepository;
+
+	@Autowired
+	private LoansRepository loansRepository;
 
 	@Autowired
 	private RoleBasedModel roleBasedModel;
@@ -30,6 +31,8 @@ public class CopiesController {
 		Copy copy = copiesRepository.findOne(id);
 		model.addAttribute("id", id);
 		model.addAttribute("book", copy.getBook());
+		List<Loan> loans = copy.getLoans();
+		model.addAttribute("timesLoaned", loans.size());
 		roleBasedModel.parseModel(request, model);
 		return "copy";
 	}

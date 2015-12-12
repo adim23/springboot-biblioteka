@@ -3,7 +3,7 @@
 		<title>Biblioteka</title>
 		<link rel='stylesheet' type='text/css' href='/css/normalize.css'/>
 		<link rel='stylesheet' type='text/css' href='/css/skeleton.css'/>
-		<link rel='stylesheet' type='text/css' href='/css/font-awesome.min.css'/>
+		<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'/>
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
@@ -37,7 +37,7 @@ Zarządzaj</a></li>
 				<div class="row">
 					<h3 th:text="${book.title}"></h3>
 					<div class='divider'></div>
-					<label>Aktualnie wypożyczona przez:</label><p></p>
+					<label>Ilość wypożyczeń:</label><p th:text="${timesLoaned}"></p>
 				</div>
 				<div th:if="${message}" th:text="${message}">
 				</div>

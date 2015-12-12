@@ -27,27 +27,27 @@ gulp.task('books-app', function() {
 		.pipe(gulp.dest('./src/main/resources/static/js/app'));
 });
 
-gulp.task('people-app-min', function() {
-	var bundler = browserify('./src/main/resources/source/react/people-app.jsx');
+gulp.task('manage-app-min', function() {
+	var bundler = browserify('./src/main/resources/source/react/manage-app.jsx');
 	bundler.transform(reactify);
 	var stream = bundler.bundle();
 	return stream
-		.pipe(source('people-app.js'))
+		.pipe(source('manage-app.js'))
 		.pipe(buffer())
 		.pipe(uglify())
 		.pipe(gulp.dest('./src/main/resources/static/js/app'));
 });
-gulp.task('people-app', function() {
-	var bundler = browserify('./src/main/resources/source/react/people-app.jsx');
+gulp.task('manage-app', function() {
+	var bundler = browserify('./src/main/resources/source/react/manage-app.jsx');
 	bundler.transform(reactify);
 	var stream = bundler.bundle();
 	return stream
-		.pipe(source('people-app.js'))
+		.pipe(source('manage-app.js'))
 		.pipe(gulp.dest('./src/main/resources/static/js/app'));
 });
 
-gulp.task('react', ['people-app', 'books-app']);
-gulp.task('react-min', ['people-app-min', 'books-app-min']);
+gulp.task('react', ['manage-app', 'books-app']);
+gulp.task('react-min', ['manage-app-min', 'books-app-min']);
 
 gulp.task('sass-min', function() {
 	return gulp.src('./src/main/resources/source/sass/*.scss')

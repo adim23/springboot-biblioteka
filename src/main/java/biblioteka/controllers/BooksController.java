@@ -32,8 +32,13 @@ public class BooksController {
 		model.addAttribute("title", book.getTitle());
 		model.addAttribute("author", book.getAuthor());
 		List<Copy> copies = copiesRepository.findByBook(book);
+		int timesLoaned = 0;
+		for (Copy copy: copies){
+			timesLoaned += copy.getLoans().size();
+		}
 		model.addAttribute("numberOfCopies", copies.size());
 		model.addAttribute("copies", copies);
+		model.addAttribute("timesLoaned", timesLoaned);
 		roleBasedModel.parseModel(request, model);
 		return "book";
 	}
