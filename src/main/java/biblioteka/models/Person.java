@@ -8,6 +8,10 @@ import javax.persistence.Table;
 import biblioteka.models.Account;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import biblioteka.models.Loan;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="people")
@@ -24,11 +28,23 @@ public class Person {
 	private String firstname;
 	private String secondname;
 
+	@OneToMany(mappedBy="person")
+	private List<Loan> loans;
+
 	protected Person(){}
 	public Person(Account account, String firstname, String secondname){
 		this.account = account;
 		this.firstname = firstname;
 		this.secondname = secondname;
+	}
+
+	@JsonIgnore
+	public List<Loan> getLoans(){
+		return this.loans;
+	}
+
+	public void setLoans(List<Loan> loans){
+		this.loans = loans;
 	}
 
 	public long getId(){

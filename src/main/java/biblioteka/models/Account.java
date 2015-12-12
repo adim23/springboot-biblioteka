@@ -6,7 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import biblioteka.models.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 
 @Entity
 @Table(name="accounts")
@@ -18,6 +21,9 @@ public class Account {
     private String username;
     private String password;
 
+		@OneToMany(mappedBy="account")
+		private List<Role> roles;
+
 		protected Account(){}
 		public Account(String username, String password){
 			this.username = username;
@@ -26,6 +32,15 @@ public class Account {
 
 		public long getId(){
 			return this.id;
+		}
+
+		@JsonIgnore
+		public List<Role> getRoles(){
+			return this.roles;
+		}
+
+		public void setRoles(List<Role> roles){
+			this.roles = roles;
 		}
 
 		public String securityGetPassword(){

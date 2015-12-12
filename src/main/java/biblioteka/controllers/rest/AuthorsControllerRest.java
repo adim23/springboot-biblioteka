@@ -32,7 +32,7 @@ public class AuthorsControllerRest {
 
 	@RequestMapping(value = "/api/authors/{id}/books")
 	public Iterable<Book> authorsBooks(@PathVariable("id") long id) {
-		return booksRepository.findByAuthor(authorsRepository.findOne(id).getAuthor());
+		return authorsRepository.findOne(id).getBooks();
 	}
 
 	public Iterable<Author> authorsById(@RequestParam("id") long id) {

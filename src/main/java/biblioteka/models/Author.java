@@ -7,10 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
 import java.util.List;
 import java.util.ArrayList;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import biblioteka.models.Book;
 
 @Entity
@@ -22,6 +23,9 @@ public class Author {
 	private long id;
 	private String author;
 
+	@OneToMany(mappedBy="author")
+	private List<Book> books;
+
 	protected Author() {}
 	public Author(String author) {
 		this.author = author;
@@ -29,6 +33,15 @@ public class Author {
 
 	public long getId(){
 		return this.id;
+	}
+
+	@JsonIgnore
+	public List<Book> getBooks(){
+		return this.books;
+	}
+
+	public void setBooks(List<Book> books){
+		this.books = books;
 	}
 
 	public String getAuthor(){
@@ -42,11 +55,4 @@ public class Author {
 	public void setAuthor(String author){
 		this.author = author;
 	}
-
-	@Override
-	public String toString() {
-		return String.format(
-			"Author[id=%d, author='%s']",
-			id, author);
-		}
 }

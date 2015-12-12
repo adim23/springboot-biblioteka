@@ -6,9 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
-
+import java.util.List;
 import biblioteka.models.Book;
+import biblioteka.models.Loan;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="copies")
@@ -22,6 +25,9 @@ public class Copy {
 	@JoinColumn(name="id_book")
 	private Book book;
 
+	@OneToMany(mappedBy="copy")
+	private List<Loan> loans;
+
 	protected Copy() {}
 	public Copy(Book book) {
 		this.book = book;
@@ -33,6 +39,15 @@ public class Copy {
 
 	public Book getBook(){
 		return this.book;
+	}
+
+	@JsonIgnore
+	public List<Loan> getLoans(){
+		return this.loans;
+	}
+
+	public void setLoans(List<Loan> loans){
+		this.loans = loans;
 	}
 
 	public void setId(long id){

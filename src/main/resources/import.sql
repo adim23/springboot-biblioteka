@@ -94,8 +94,6 @@ INSERT INTO books(title, id_author) VALUES ('Zew Cthulhu', 6);
 
 INSERT INTO books(title, id_author) VALUES ('Cierpienia młodego Wertera', 7);
 
-
-
 INSERT INTO copies(id_book) VALUES (1);
 INSERT INTO copies(id_book) VALUES (1);
 INSERT INTO copies(id_book) VALUES (1);
@@ -137,3 +135,8 @@ INSERT INTO copies(id_book) VALUES (21);
 INSERT INTO copies(id_book) VALUES (22);
 INSERT INTO copies(id_book) VALUES (23);
 INSERT INTO copies(id_book) VALUES (24);
+
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 5, FALSE);
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 6, FALSE);
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 7, FALSE);
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 8, TRUE);

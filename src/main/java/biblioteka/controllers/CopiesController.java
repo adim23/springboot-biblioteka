@@ -15,7 +15,7 @@ import biblioteka.repositories.CopiesRepository;
 import java.util.List;
 
 @Controller
-public class BooksController {
+public class CopiesController {
 	@Autowired
 	private BooksRepository booksRepository;
 
@@ -25,16 +25,12 @@ public class BooksController {
 	@Autowired
 	private RoleBasedModel roleBasedModel;
 
-	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/copy/{id}", method = RequestMethod.GET)
 	public String bookView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
-		Book book = booksRepository.findOne(id);
-		model.addAttribute("id", book.getId());
-		model.addAttribute("title", book.getTitle());
-		model.addAttribute("author", book.getAuthor());
-		List<Copy> copies = copiesRepository.findByBook(book);
-		model.addAttribute("numberOfCopies", copies.size());
-		model.addAttribute("copies", copies);
+		Copy copy = copiesRepository.findOne(id);
+		model.addAttribute("id", id);
+		model.addAttribute("book", copy.getBook());
 		roleBasedModel.parseModel(request, model);
-		return "book";
+		return "copy";
 	}
 }
