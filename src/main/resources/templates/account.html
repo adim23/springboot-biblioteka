@@ -32,7 +32,9 @@ Zarządzaj</a></li>
 			</div>
 			<div class="container">
 				<div class="row">
-					<h5>Zalogowany jako: </h5><h3><b th:text="${person.firstname}"></b> <b th:text="${person.secondname}"></b></h3><h5 th:text="${person.account.username}"></h5>
+					<p>
+						<span>Zalogowany jako: </span><b th:text="${person.firstname}"></b> <b th:text="${person.secondname}"></b> <span th:text="@{|(${person.account.username})|}"></span>
+					</p>
 					<form th:action="@{/logout}" method="post">
 							<input type="submit" value="Wyloguj"/>
 					</form>
@@ -41,10 +43,10 @@ Zarządzaj</a></li>
 						<h5>Zmiana hasła</h5>
 						<form class='u-full-width form' th:action="@{/changepassword}" method="post">
 								<div class='form-row'>
-									<label>Stare hasło: </label><input type="password" name="username"/>
+									<label>Stare hasło: </label><input type="password" name="oldpassword"/>
 								</div>
 								<div class='form-row'>
-									<label>Nowe hasło: </label><input type="password" name="password"/>
+									<label>Nowe hasło: </label><input type="password" name="newpassword"/>
 								</div>
 								<div class='form-row'>
 									<input class='button-primary' type="submit" value="Zmień"/>
@@ -54,7 +56,7 @@ Zarządzaj</a></li>
 				</div>
 			</div>
 		</div>
-		<script src="/js/react.min.js"></script>
-		<script src="/js/react-dom.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
 	</body>
 </html>

@@ -38,12 +38,20 @@ Zarządzaj</a></li>
 					<h3 th:text="${book.title}"></h3>
 					<div class='divider'></div>
 					<label>Ilość wypożyczeń:</label><p th:text="${timesLoaned}"></p>
+					<label>Historia wypożyczeń:</label>
+					<ul>
+						<li th:each="loan : ${loans}">
+							<a th:href="@{|/loan/${loan.id}|}" th:text="@{|Wypożyczenie id. ${loan.id}|}"></a>
+							<i th:if="${loan.returned}" class="fa fa-check"></i>
+							<i th:unless="${loan.returned}" class="fa fa-question"></i>
+						</li>
+					</ul>
 				</div>
 				<div th:if="${message}" th:text="${message}">
 				</div>
 			</div>
 		</div>
-		<script src="/js/react.min.js"></script>
-		<script src="/js/react-dom.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
 	</body>
 </html>

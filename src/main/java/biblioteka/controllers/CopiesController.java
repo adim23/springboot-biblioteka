@@ -32,6 +32,7 @@ public class CopiesController {
 		model.addAttribute("id", id);
 		model.addAttribute("book", copy.getBook());
 		List<Loan> loans = copy.getLoans();
+		model.addAttribute("loans", loans);
 		model.addAttribute("timesLoaned", loans.size());
 		roleBasedModel.parseModel(request, model);
 		return "copy";

@@ -137,6 +137,6 @@ INSERT INTO copies(id_book) VALUES (23);
 INSERT INTO copies(id_book) VALUES (24);
 
 INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 5, FALSE);
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 6, FALSE);
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 7, FALSE);
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 8, TRUE);
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 17, TRUE);
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 24, TRUE);
+INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 41, TRUE);
