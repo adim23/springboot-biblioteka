@@ -1,8 +1,11 @@
 var PeopleTable = require('./PeopleTable.jsx'),
 		LoansTable = require('./LoansTable.jsx'),
-		ManageSearchBar = require('./ManageSearchBar.jsx'),
+		PeopleSearchBar = require('./PeopleSearchBar.jsx'),
+		LoansSearchBar = require('./LoansSearchBar.jsx'),
 		ManageStore = require('../stores/ManageStore'),
-		ManageActionCreator = require('../actions/ManageActionCreator');
+		ManageOptions = require('./ManageOptions.jsx'),
+		PeopleActionCreator = require('../actions/PeopleActionCreator'),
+		LoansActionCreator = require('../actions/LoansActionCreator');
 
 var ManageApp = React.createClass({
 	getInitialState: function() {
@@ -16,7 +19,8 @@ var ManageApp = React.createClass({
 		ManageStore.addChangeListener(this.onChange);
 	},
 	componentDidMount: function() {
-		ManageActionCreator.getPeople();
+		PeopleActionCreator.getPeople();
+		LoansActionCreator.getLoans();
 	},
 	componentWillUnmount: function() {
 		ManageStore.removeChangeListener(this.onChange);
@@ -32,7 +36,8 @@ var ManageApp = React.createClass({
 		if (this.state.show == "people"){
 			return (
 				<div className='u-full-width'>
-					<ManageSearchBar />
+					<ManageOptions />
+					<PeopleSearchBar />
 					<PeopleTable people={this.state.people}/>
 				</div>
 			);
@@ -40,7 +45,8 @@ var ManageApp = React.createClass({
 		else {
 			return (
 				<div className='u-full-width'>
-					<ManageSearchBar />
+					<ManageOptions />
+					<LoansSearchBar />
 					<LoansTable loans={this.state.loans}/>
 				</div>
 			);

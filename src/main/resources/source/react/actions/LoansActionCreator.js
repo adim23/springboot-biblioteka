@@ -3,14 +3,14 @@ var Dispatcher = require('../core/Dispatcher'),
 		Promise = require('es6-promise').Promise,
 		API = require('../services/API');
 
-var BooksActionCreator = {
-	getBooks: function() {
+var LoansActionCreator = {
+	getLoans: function() {
 		API
-			.get('/api/books')
-			.then(function(books) {
+			.get('/api/loans')
+			.then(function(loans) {
 				Dispatcher.handleViewAction({
-					actionType: ActionConstants.RECEIVE_BOOKS,
-					books: books
+					actionType: ActionConstants.RECEIVE_LOANS,
+					loans: loans
 				});
 			})
 			.catch(function() {
@@ -20,13 +20,13 @@ var BooksActionCreator = {
 				});
 			});
 	},
-	getBooksBy: function(parameters) {
+	getLoansBy: function(parameters) {
 		API
-			.get('/api/books?title=' + parameters.title + '&author=' + parameters.author)
-			.then(function(books) {
+			.get('/api/loans?firstname=' + parameters.firstname + '&secondname=' + parameters.secondname)
+			.then(function(loans) {
 				Dispatcher.handleViewAction({
-					actionType: ActionConstants.RECEIVE_BOOKS,
-					books: books
+					actionType: ActionConstants.RECEIVE_LOANS,
+					loans: loans
 				});
 			})
 			.catch(function() {
@@ -38,4 +38,4 @@ var BooksActionCreator = {
 	}
 };
 
-module.exports = BooksActionCreator;
+module.exports = LoansActionCreator;

@@ -46,11 +46,12 @@ ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_PEOPLE:
 			setPeople(action.people);
-			setShow("people");
 			break;
 		case ActionConstants.RECEIVE_LOANS:
 			setLoans(action.loans);
-			setShow("loans");
+			break;
+		case ActionConstants.CHANGE_OPTION:
+			setShow(action.show);
 			break;
 		case ActionConstants.RECEIVE_ERROR:
 			break;

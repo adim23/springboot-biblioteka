@@ -1,5 +1,4 @@
-var BooksActionCreator = require('../actions/BooksActionCreator'),
-		ActionConstants = require('../constants/ActionConstants');
+var BooksActionCreator = require('../actions/BooksActionCreator');
 
 var SearchBar = React.createClass({
 	getInitialState: function() {
