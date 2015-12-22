@@ -32,6 +32,7 @@ CREATE TABLE loans(
 id serial primary key,
 id_person integer not null,
 id_copy integer not null,
+date_loaned timestamp not null,
 returned boolean not null
 );
 
@@ -136,7 +137,7 @@ INSERT INTO copies(id_book) VALUES (22);
 INSERT INTO copies(id_book) VALUES (23);
 INSERT INTO copies(id_book) VALUES (24);
 
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 5, FALSE);
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 17, TRUE);
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 24, TRUE);
-INSERT INTO loans(id_person, id_copy, returned) VALUES (3, 41, TRUE);
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 5, '2015-11-20 15:05:06', TRUE);
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 17, '2015-11-20 15:05:20', TRUE);
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 24, '2015-11-21 14:30:47', TRUE);
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 41, '2015-12-23 17:51:02', FALSE);

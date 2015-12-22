@@ -33,18 +33,23 @@ Zarządzaj</a></li>
 			<div class="container">
 				<div class="row">
 					Wypożyczenia
-					- <a th:href="@{|/loan/${loan.id}|}" tth:text="@{|Wypożyczenie id. ${loan.id}|}"></a>
+					- <a th:href="@{|/loan/${loan.id}|}" th:text="@{|Wypożyczenie id. ${loan.id}|}"></a>
 				</div>
 				<div class="row">
 					<h3 th:text="@{|Wypożyczenie książki ${loan.copy.book.title}|}"></h3>
 					<div class='divider'></div>
 					<label>Czytelnik:</label>
 						<p><a th:href="@{|/person/${loan.person.id}|}" th:text="@{|${loan.person.firstname} ${loan.person.secondname}|}"></a></p>
-					<label>Egzemplarz:</label>
-						<p><a th:href="@{|/copy/${loan.copy.id}|}" th:text="@{|Egzemplarz id. ${loan.copy.id}|}"></a></p>
+					<label>Książka:</label>
+							<div>Tytuł: <a th:href="@{|/book/${loan.copy.book.id}|}" th:text="${loan.copy.book.title}"></a></div>
+							<div>Autor: <a th:href="@{|/author/${loan.copy.book.author.id}|}" th:text="${loan.copy.book.author.author}"></a></div>
+							<div>Egzemplarz: <a th:href="@{|/copy/${loan.copy.id}|}" th:text="@{|id. ${loan.copy.id}|}"></a></div>
+						<p></p>
+					<label>Data wypożyczenia:</label>
+						<p th:text="${#calendars.format(loan.loaned, 'dd/MM/yyyy')}"></p>
 					<label>Status:</label>
-						<p th:if="${loan.returned}"><i class="fa fa-check"></i></p>
-						<p th:unless="${loan.returned}"><i class="fa fa-question"></i></p>
+						<p th:if="${loan.returned}">Zwrócony <i class="fa fa-check"></i></p>
+						<p th:unless="${loan.returned}">Wypożyczony <i class="fa fa-question"></i></p>
 				</div>
 			</div>
 		</div>

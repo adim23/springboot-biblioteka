@@ -40,11 +40,14 @@ Zarządzaj</a></li>
 				<div class="row">
 					<h3 th:text="${copy.book.title}"></h3>
 					<div class='divider'></div>
-					<label>Ilość wypożyczeń:</label><p th:text="${#lists.size(copy.loans)}"></p>
-					<label>Historia wypożyczeń:</label>
-					<ul>
+					<label th:if="${#lists.isEmpty(copy.loans)}">Ilość wypożyczeń:</label>
+						<p th:if="${#lists.isEmpty(copy.loans)}" th:text="${#lists.size(copy.loans)}"></p>
+					<label th:if="${#lists.isEmpty(copy.loans)}" th:text="@{|Brak wypożyczeń.|}"></label>
+					<label th:unless="${#lists.isEmpty(copy.loans)}">Historia wypożyczeń:</label>
+					<ul th:unless="${#lists.isEmpty(copy.loans)}">
 						<li th:each="loan : ${copy.loans}">
-							<a th:href="@{|/loan/${loan.id}|}" th:text="@{|Wypożyczenie id. ${loan.id}|}"></a>
+							<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
+							<a th:href="@{|/person/${loan.person.id}|}" th:text="@{|${loan.person.firstname} ${loan.person.secondname}|}"></a> -
 							<i th:if="${loan.returned}" class="fa fa-check"></i>
 							<i th:unless="${loan.returned}" class="fa fa-question"></i>
 						</li>

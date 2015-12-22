@@ -40,7 +40,9 @@ Zarządzaj</a></li>
 					<label>Historia wypożyczeń:</label>
 					<ul>
 						<li th:each="loan : ${person.loans}">
-							<a th:href="@{|/copy/${loan.copy.id}|}" th:text="${loan.copy.book.title}"></a>
+							<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
+							<a th:href="@{|/book/${loan.copy.book.id}|}" th:text="${loan.copy.book.title}"></a> -
+							<a th:href="@{|/copy/${loan.copy.id}|}" th:text="@{|Egzemplarz id. ${loan.copy.id}|}"></a>
 							<i th:if="${loan.returned}" class="fa fa-check"></i>
 							<i th:unless="${loan.returned}" class="fa fa-question"></i>
 						</li>

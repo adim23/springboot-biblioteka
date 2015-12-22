@@ -13,7 +13,8 @@ var LoansTable = React.createClass({
 							<th></th>
 							<th>Egzemplarz</th>
 							<th>Czytelnik</th>
-							<th>Zwrócone</th>
+							<th>Wypożyczenie</th>
+							<th>Status</th>
 						</tr>
 					</thead>
 					<tbody>{rows}</tbody>
