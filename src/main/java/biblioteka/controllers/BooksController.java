@@ -28,17 +28,7 @@ public class BooksController {
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
 	public String bookView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
 		Book book = booksRepository.findOne(id);
-		model.addAttribute("id", book.getId());
-		model.addAttribute("title", book.getTitle());
-		model.addAttribute("author", book.getAuthor());
-		List<Copy> copies = copiesRepository.findByBook(book);
-		int timesLoaned = 0;
-		for (Copy copy: copies){
-			timesLoaned += copy.getLoans().size();
-		}
-		model.addAttribute("numberOfCopies", copies.size());
-		model.addAttribute("copies", copies);
-		model.addAttribute("timesLoaned", timesLoaned);
+		model.addAttribute("book", book);
 		roleBasedModel.parseModel(request, model);
 		return "book";
 	}

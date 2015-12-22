@@ -33,7 +33,7 @@ Zarządzaj</a></li>
 			<div class="container">
 				<div class="row">
 					<p>
-						<span>Zalogowany jako: </span><b th:text="${person.firstname}"></b> <b th:text="${person.secondname}"></b> <span th:text="@{|(${person.account.username})|}"></span>
+						<span>Zalogowany jako: </span><b th:text="${user.firstname}"></b> <b th:text="${user.secondname}"></b> <span th:text="@{|(${user.account.username})|}"></span>
 					</p>
 					<form th:action="@{/logout}" method="post">
 							<input class='button-primary' type="submit" value="Wyloguj"/>

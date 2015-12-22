@@ -29,11 +29,7 @@ public class CopiesController {
 	@RequestMapping(value = "/copy/{id}", method = RequestMethod.GET)
 	public String bookView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
 		Copy copy = copiesRepository.findOne(id);
-		model.addAttribute("id", id);
-		model.addAttribute("book", copy.getBook());
-		List<Loan> loans = copy.getLoans();
-		model.addAttribute("loans", loans);
-		model.addAttribute("timesLoaned", loans.size());
+		model.addAttribute("copy", copy);
 		roleBasedModel.parseModel(request, model);
 		return "copy";
 	}

@@ -32,22 +32,22 @@ Zarządzaj</a></li>
 			</div>
 			<div class="container">
 				<div class="row">
-					Książki - <a th:href="@{|/author/${author.id}|}" th:text="${author.author}"></a> - <a th:href="@{|/book/${id}|}" th:text="${title}"></a>
+					Książki - <a th:href="@{|/author/${book.author.id}|}" th:text="${book.author.author}"></a> - <a th:href="@{|/book/${book.id}|}" th:text="${book.title}"></a>
 				</div>
 				<div class="row">
-					<h3 th:text="${title}"></h3>
+					<h3 th:text="${book.title}"></h3>
 					<div class='divider'></div>
-					<label>Autor:</label><p th:text="${author.author}"></p>
-					<label>Ilość wypożyczeń:</label><p th:text="${timesLoaned}"></p>
-					<label>Liczba egzemplarzy:</label><p th:text="${numberOfCopies}"></p>
+					<label>Autor:</label>
+						<p th:text="${book.author.author}"></p>
+					<label>Liczba egzemplarzy:</label>
+						<p th:text="${#lists.size(book.copies)}"></p>
+
 					<label th:if="${workerMode}">Lista egzemplarzy:</label>
 					<ul th:if="${workerMode}">
-						<li th:each="copy : ${copies}">
+						<li th:each="copy : ${book.copies}">
 							<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
 						</li>
 					</ul>
-				</div>
-				<div th:if="${message}" th:text="${message}">
 				</div>
 			</div>
 		</div>

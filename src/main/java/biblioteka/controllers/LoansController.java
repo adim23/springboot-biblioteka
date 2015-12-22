@@ -8,22 +8,23 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import biblioteka.models.Person;
-import biblioteka.repositories.PeopleRepository;
+import biblioteka.models.Loan;
+import biblioteka.repositories.LoansRepository;
+import java.util.List;
 
 @Controller
-public class PeopleController {
+public class LoansController {
 	@Autowired
-	private PeopleRepository peopleRepository;
+	private LoansRepository loansRepository;
 
 	@Autowired
 	private RoleBasedModel roleBasedModel;
 
-	@RequestMapping(value = "/person/{id}", method = RequestMethod.GET)
-	public String personView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
-		Person person = peopleRepository.findOne(id);
-		model.addAttribute("person", person);
+	@RequestMapping(value = "/loan/{id}", method = RequestMethod.GET)
+	public String loanView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
+		Loan loan = loansRepository.findOne(id);
+		model.addAttribute("loan", loan);
 		roleBasedModel.parseModel(request, model);
-		return "person";
+		return "loan";
 	}
 }

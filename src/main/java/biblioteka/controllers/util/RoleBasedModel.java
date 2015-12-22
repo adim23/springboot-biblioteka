@@ -30,7 +30,7 @@ public class RoleBasedModel {
 		Account account = accountRepository.findByUsername(username);
 		if (account == null) return;
 		Person person = peopleRepository.findByAccount(account);
-		model.addAttribute("person", person);
+		model.addAttribute("user", person);
 	}
 	public void addAdminTools(HttpServletRequest request, Model model){
 		if (request.isUserInRole("ADMIN")){
