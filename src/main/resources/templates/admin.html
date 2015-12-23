@@ -32,7 +32,22 @@ Zarządzaj</a></li>
 			</div>
 			<div class="container">
 				<div class="row">
-					Panel administracyjny
+					<h3>Panel administracyjny</h3>
+					<div class="divider"></div>
+					<div class="six columns">
+						<h5>Dodaj plik</h5>
+						<form class='u-full-width form' th:action="@{/upload}" enctype="multipart/form-data" method="post">
+								<div class='form-row'>
+									<label class='four columns'>Plik obrazu: </label><input class='eight columns' type="file" name="file"/>
+								</div>
+								<div class='form-row'>
+									<label class='four columns'>Nazwa: </label><input class='eight columns' type="text" name="name"/>
+								</div>
+								<div class='form-row'>
+									<input class='button-primary' type="submit" value="Dodaj"/>
+								</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

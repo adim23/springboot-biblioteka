@@ -110,3 +110,27 @@ nav {
 		}
 	}
 }
+
+.image {
+	display: block;
+	background: #F1F1F1 none repeat scroll 0% 0%;
+	border: 1px solid #E1E1E1;
+	padding: 1rem 1.5rem;
+	margin: 0px 0.2rem;
+	border-radius: 4px;
+	img, .placeholder {
+		width: 100%;
+	}
+	.placeholder {
+		font-size: 3em;
+		line-height: 100%;
+		text-align: center;
+	}
+}
+
+table .image {
+	max-width: 100px;
+	.placeholder {
+		font-size: 1em;
+	}
+}

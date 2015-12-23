@@ -3,10 +3,15 @@ var Dispatcher = require('../core/Dispatcher'),
 		EventEmitter = require('events').EventEmitter,
 		assign = require('object-assign');
 
-var _books = [];
+var _books = [],
+		_view = 'list';
 
 function setBooks(books) {
 	_books = books;
+};
+
+function setView(view) {
+	_view = view;
 };
 
 var BooksStore = assign({}, EventEmitter.prototype, {
@@ -21,6 +26,9 @@ var BooksStore = assign({}, EventEmitter.prototype, {
 	},
 	getBooks: function() {
 		return _books;
+	},
+	getView: function() {
+		return _view;
 	}
 });
 
@@ -29,6 +37,9 @@ BooksStore.dispatchToken = Dispatcher.register(function(payload) {
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_BOOKS:
 			setBooks(action.books);
+			break;
+		case ActionConstants.CHANGE_VIEW:
+			setView(action.view);
 			break;
 		case ActionConstants.RECEIVE_ERROR:
 			break;

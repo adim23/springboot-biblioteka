@@ -20,7 +20,13 @@ role text not null
 CREATE TABLE books(
 id serial primary key,
 title text not null,
-id_author integer not null
+id_author integer not null,
+id_image integer not null
+);
+
+CREATE TABLE images(
+id serial primary key,
+path text not null default ''
 );
 
 CREATE TABLE copies(
@@ -64,36 +70,61 @@ INSERT INTO authors(author) VALUES ('Dmitry Glukhovsky');
 INSERT INTO authors(author) VALUES ('Howard Phillips Lovecraft');
 INSERT INTO authors(author) VALUES ('Johann Wolfgang von Goethe');
 
-INSERT INTO books(title, id_author) VALUES ('Faraon', 1);
-INSERT INTO books(title, id_author) VALUES ('Lalka', 1);
-INSERT INTO books(title, id_author) VALUES ('Kamizelka', 1);
+INSERT INTO images(path) VALUES ('faraon.jpg');
+INSERT INTO images(path) VALUES ('lalka.jpg');
+INSERT INTO images(path) VALUES ('kamizelka.jpg');
+INSERT INTO images(path) VALUES ('w_pustyni_i_w_puszczy.jpg');
+INSERT INTO images(path) VALUES ('quo_vadis.jpg');
+INSERT INTO images(path) VALUES ('potop.jpg');
+INSERT INTO images(path) VALUES ('krzyzacy.jpg');
+INSERT INTO images(path) VALUES ('ogniem_i_mieczem.jpg');
+INSERT INTO images(path) VALUES ('pan_tadeusz.jpg');
+INSERT INTO images(path) VALUES ('konrad_wallenrod.jpg');
+INSERT INTO images(path) VALUES ('sonety_krymskie.jpg');
+INSERT INTO images(path) VALUES ('dziady_cz3.jpg');
+INSERT INTO images(path) VALUES ('ostatnie_zyczenie.jpg');
+INSERT INTO images(path) VALUES ('miecz_przeznaczenia.jpg');
+INSERT INTO images(path) VALUES ('krew_elfow.jpg');
+INSERT INTO images(path) VALUES ('czas_pogardy.jpg');
+INSERT INTO images(path) VALUES ('chrzest_ognia.jpg');
+INSERT INTO images(path) VALUES ('wieza_jaskolki.jpg');
+INSERT INTO images(path) VALUES ('pani_jeziora.jpg');
+INSERT INTO images(path) VALUES ('metro_2033.jpg');
+INSERT INTO images(path) VALUES ('metro_2034.jpg');
+INSERT INTO images(path) VALUES ('future.jpg');
+INSERT INTO images(path) VALUES ('zew_cthulhu.jpg');
+INSERT INTO images(path) VALUES ('cierpienia_mlodego_wertera.jpg');
 
-INSERT INTO books(title, id_author) VALUES ('W pustyni i w puszczy', 2);
-INSERT INTO books(title, id_author) VALUES ('Quo vadis', 2);
-INSERT INTO books(title, id_author) VALUES ('Potop', 2);
-INSERT INTO books(title, id_author) VALUES ('Krzyżacy', 2);
-INSERT INTO books(title, id_author) VALUES ('Ogniem i mieczem', 2);
+INSERT INTO books(title, id_author, id_image) VALUES ('Faraon', 1, 1);
+INSERT INTO books(title, id_author, id_image) VALUES ('Lalka', 1, 2);
+INSERT INTO books(title, id_author, id_image) VALUES ('Kamizelka', 1, 3);
 
-INSERT INTO books(title, id_author) VALUES ('Pan Tadeusz', 3);
-INSERT INTO books(title, id_author) VALUES ('Konrad Wallenrod', 3);
-INSERT INTO books(title, id_author) VALUES ('Sonety krymskie', 3);
-INSERT INTO books(title, id_author) VALUES ('Dziady cz. 3', 3);
+INSERT INTO books(title, id_author, id_image) VALUES ('W pustyni i w puszczy', 2, 4);
+INSERT INTO books(title, id_author, id_image) VALUES ('Quo vadis', 2, 5);
+INSERT INTO books(title, id_author, id_image) VALUES ('Potop', 2, 6);
+INSERT INTO books(title, id_author, id_image) VALUES ('Krzyżacy', 2, 7);
+INSERT INTO books(title, id_author, id_image) VALUES ('Ogniem i mieczem', 2, 8);
 
-INSERT INTO books(title, id_author) VALUES ('Ostatnie życzenie', 4);
-INSERT INTO books(title, id_author) VALUES ('Miecz przeznaczenia', 4);
-INSERT INTO books(title, id_author) VALUES ('Krew elfów', 4);
-INSERT INTO books(title, id_author) VALUES ('Czas pogardy', 4);
-INSERT INTO books(title, id_author) VALUES ('Chrzest ognia', 4);
-INSERT INTO books(title, id_author) VALUES ('Wieża Jaskółki', 4);
-INSERT INTO books(title, id_author) VALUES ('Pani Jeziora', 4);
+INSERT INTO books(title, id_author, id_image) VALUES ('Pan Tadeusz', 3, 9);
+INSERT INTO books(title, id_author, id_image) VALUES ('Konrad Wallenrod', 3, 10);
+INSERT INTO books(title, id_author, id_image) VALUES ('Sonety krymskie', 3, 11);
+INSERT INTO books(title, id_author, id_image) VALUES ('Dziady cz. 3', 3, 12);
 
-INSERT INTO books(title, id_author) VALUES ('Metro 2033', 5);
-INSERT INTO books(title, id_author) VALUES ('Metro 2034', 5);
-INSERT INTO books(title, id_author) VALUES ('FUTU.RE', 5);
+INSERT INTO books(title, id_author, id_image) VALUES ('Ostatnie życzenie', 4, 13);
+INSERT INTO books(title, id_author, id_image) VALUES ('Miecz przeznaczenia', 4, 14);
+INSERT INTO books(title, id_author, id_image) VALUES ('Krew elfów', 4, 15);
+INSERT INTO books(title, id_author, id_image) VALUES ('Czas pogardy', 4, 16);
+INSERT INTO books(title, id_author, id_image) VALUES ('Chrzest ognia', 4, 17);
+INSERT INTO books(title, id_author, id_image) VALUES ('Wieża Jaskółki', 4, 18);
+INSERT INTO books(title, id_author, id_image) VALUES ('Pani Jeziora', 4, 19);
 
-INSERT INTO books(title, id_author) VALUES ('Zew Cthulhu', 6);
+INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2033', 5, 20);
+INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2034', 5, 21);
+INSERT INTO books(title, id_author, id_image) VALUES ('FUTU.RE', 5, 22);
 
-INSERT INTO books(title, id_author) VALUES ('Cierpienia młodego Wertera', 7);
+INSERT INTO books(title, id_author, id_image) VALUES ('Zew Cthulhu', 6, 23);
+
+INSERT INTO books(title, id_author, id_image) VALUES ('Cierpienia młodego Wertera', 7, 24);
 
 INSERT INTO copies(id_book) VALUES (1);
 INSERT INTO copies(id_book) VALUES (1);

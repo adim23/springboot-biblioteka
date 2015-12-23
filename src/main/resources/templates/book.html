@@ -37,17 +37,29 @@ Zarządzaj</a></li>
 				<div class="row">
 					<h3 th:text="${book.title}"></h3>
 					<div class='divider'></div>
-					<label>Autor:</label>
-						<p th:text="${book.author.author}"></p>
-					<label>Liczba egzemplarzy:</label>
-						<p th:text="${#lists.size(book.copies)}"></p>
+				</div>
+				<div class="row">
+					<div class="three columns">
+						<div th:switch="${book.image.path}" class="image">
+							<div class="placeholder" th:case="''">
+								<i class="fa fa-question"></i>
+							</div>
+							<img th:case="*" th:src="@{|/img/${book.image.path}|}"></img>
+						</div>
+					</div>
+					<div class="nine columns">
+						<label>Autor:</label>
+							<p th:text="${book.author.author}"></p>
+						<label>Liczba egzemplarzy:</label>
+							<p th:text="${#lists.size(book.copies)}"></p>
 
-					<label th:if="${workerMode}">Lista egzemplarzy:</label>
-					<ul th:if="${workerMode}">
-						<li th:each="copy : ${book.copies}">
-							<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
-						</li>
-					</ul>
+						<label th:if="${workerMode}">Lista egzemplarzy:</label>
+						<ul th:if="${workerMode}">
+							<li th:each="copy : ${book.copies}">
+								<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

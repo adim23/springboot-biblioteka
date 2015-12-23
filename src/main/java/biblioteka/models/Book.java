@@ -7,10 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import java.util.List;
 import biblioteka.models.Author;
 import biblioteka.models.Copy;
+import biblioteka.models.Image;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -29,10 +31,15 @@ public class Book {
 	@OneToMany(mappedBy="book")
 	private List<Copy> copies;
 
+	@OneToOne
+	@JoinColumn(name="id_image")
+	private Image image;
+
 	protected Book() {}
-	public Book(String title, Author author) {
+	public Book(String title, Author author, Image image) {
 		this.title = title;
 		this.author = author;
+		this.image = image;
 	}
 
 	public long getId(){
@@ -45,6 +52,10 @@ public class Book {
 
 	public Author getAuthor(){
 		return this.author;
+	}
+
+	public Image getImage(){
+		return this.image;
 	}
 
 	@JsonIgnore
@@ -66,5 +77,9 @@ public class Book {
 
 	public void setAuthor(Author author){
 		this.author = author;
+	}
+
+	public void setImage(Image image){
+		this.image = image;
 	}
 }
