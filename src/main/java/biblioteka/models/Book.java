@@ -31,7 +31,7 @@ public class Book {
 	@OneToMany(mappedBy="book")
 	private List<Copy> copies;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="id_image")
 	private Image image;
 

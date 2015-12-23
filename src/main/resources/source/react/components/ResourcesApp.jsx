@@ -1,6 +1,7 @@
 var ResourcesStore = require('../stores/ResourcesStore'),
 		ResourcesOptions = require('./ResourcesOptions.jsx'),
-		AuthorForm = require('./AuthorForm.jsx');
+		AuthorForm = require('./AuthorForm.jsx'),
+		BookForm = require('./BookForm.jsx');
 
 var ResourcesApp = React.createClass({
 	getInitialState: function() {
@@ -27,6 +28,12 @@ var ResourcesApp = React.createClass({
 			case 'author': {
 					form = (
 						<AuthorForm />
+					);
+					break;
+				}
+			case 'book': {
+					form = (
+						<BookForm />
 					);
 					break;
 				}

@@ -27,7 +27,7 @@ public class AuthorsControllerRest {
 	}
 
 	@RequestMapping(value = "/api/authors", method = RequestMethod.POST)
-	public Author authors(@RequestBody Author author) {
+	public Author authorsPost(@RequestBody Author author) {
 		authorsRepository.save(author);
 		authorsRepository.flush();
 		return author;

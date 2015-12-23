@@ -26,7 +26,7 @@ id_image integer not null
 
 CREATE TABLE images(
 id serial primary key,
-path text not null default ''
+path text
 );
 
 CREATE TABLE copies(
