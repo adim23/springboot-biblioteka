@@ -1,6 +1,6 @@
 build/
 .gradle/
 node_modules/
-src/main/java/resources/static/css/style.css
-src/main/java/resources/static/js/app/
-src/main/java/resources/static/img/
+src/main/resources/static/css/style.css
+src/main/resources/static/js/app/
+src/main/resources/static/img/

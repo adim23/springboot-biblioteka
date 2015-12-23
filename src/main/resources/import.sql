@@ -94,6 +94,7 @@ INSERT INTO images(path) VALUES ('metro_2034.jpg');
 INSERT INTO images(path) VALUES ('future.jpg');
 INSERT INTO images(path) VALUES ('zew_cthulhu.jpg');
 INSERT INTO images(path) VALUES ('cierpienia_mlodego_wertera.jpg');
+INSERT INTO images(path) VALUES ('sezon_burz.jpg');
 
 INSERT INTO books(title, id_author, id_image) VALUES ('Faraon', 1, 1);
 INSERT INTO books(title, id_author, id_image) VALUES ('Lalka', 1, 2);
@@ -117,6 +118,7 @@ INSERT INTO books(title, id_author, id_image) VALUES ('Czas pogardy', 4, 16);
 INSERT INTO books(title, id_author, id_image) VALUES ('Chrzest ognia', 4, 17);
 INSERT INTO books(title, id_author, id_image) VALUES ('Wieża Jaskółki', 4, 18);
 INSERT INTO books(title, id_author, id_image) VALUES ('Pani Jeziora', 4, 19);
+INSERT INTO books(title, id_author, id_image) VALUES ('Sezon Burz', 4, 25);
 
 INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2033', 5, 20);
 INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2034', 5, 21);

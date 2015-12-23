@@ -3,13 +3,16 @@ var BooksTable = require('./BooksTable.jsx'),
 		BooksSearchBar = require('./BooksSearchBar.jsx'),
 		BooksStore = require('../stores/BooksStore'),
 		BooksActionCreator = require('../actions/BooksActionCreator'),
-		BooksOptions = require('./BooksOptions.jsx');
+		BooksOptions = require('./BooksOptions.jsx'),
+		Pagination = require('./Pagination.jsx');
 
 var BooksApp = React.createClass({
 	getInitialState: function() {
 		return {
 			books: [],
-			view: 'list'
+			view: 'list',
+			page: 0,
+			items: 8
 		};
 	},
 	componentWillMount: function() {
@@ -24,8 +27,18 @@ var BooksApp = React.createClass({
 	onChange: function() {
 		this.setState({
 			books: BooksStore.getBooks(),
-			view: BooksStore.getView()
+			view: BooksStore.getView(),
+			page: BooksStore.getCurrent()
 		});
+	},
+	getSlicedItems: function(items) {
+		return items.slice(
+			(this.state.page+1) * this.state.items - this.state.items,
+			(this.state.page+1) * this.state.items
+		);
+	},
+	getPages: function(items) {
+		return Math.ceil(items.length / this.state.items);
 	},
 	render: function() {
 		switch (this.state.view){
@@ -34,7 +47,8 @@ var BooksApp = React.createClass({
 						<div className='u-full-width'>
 							<BooksOptions />
 							<BooksSearchBar />
-							<BooksTable books={this.state.books}/>
+							<BooksTable books={this.getSlicedItems(this.state.books)} />
+							<Pagination pages={this.getPages(this.state.books)} current={this.state.page} />
 						</div>
 					);
 				}
@@ -43,7 +57,8 @@ var BooksApp = React.createClass({
 						<div className='u-full-width'>
 							<BooksOptions />
 							<BooksSearchBar />
-							<BooksThumbnails books={this.state.books}/>
+							<BooksThumbnails books={this.getSlicedItems(this.state.books)}/>
+							<Pagination pages={this.getPages(this.state.books)} current={this.state.page} />
 						</div>
 					);
 				}

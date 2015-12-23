@@ -5,14 +5,17 @@ var PeopleTable = require('./PeopleTable.jsx'),
 		ManageStore = require('../stores/ManageStore'),
 		ManageOptions = require('./ManageOptions.jsx'),
 		PeopleActionCreator = require('../actions/PeopleActionCreator'),
-		LoansActionCreator = require('../actions/LoansActionCreator');
+		LoansActionCreator = require('../actions/LoansActionCreator'),
+		Pagination = require('./Pagination.jsx');
 
 var ManageApp = React.createClass({
 	getInitialState: function() {
 		return {
 			people: [],
 			loans: [],
-			show: "people"
+			show: "people",
+			page: 0,
+			items: 8
 		};
 	},
 	componentWillMount: function() {
@@ -29,8 +32,18 @@ var ManageApp = React.createClass({
 		this.setState({
 			people: ManageStore.getPeople(),
 			loans: ManageStore.getLoans(),
-			show: ManageStore.getShow()
+			show: ManageStore.getShow(),
+			page: ManageStore.getCurrent()
 		});
+	},
+	getSlicedItems: function(items) {
+		return items.slice(
+			(this.state.page+1) * this.state.items - this.state.items,
+			(this.state.page+1) * this.state.items
+		);
+	},
+	getPages: function(items) {
+		return Math.ceil(items.length / this.state.items);
 	},
 	render: function() {
 		if (this.state.show == "people"){
@@ -38,7 +51,8 @@ var ManageApp = React.createClass({
 				<div className='u-full-width'>
 					<ManageOptions />
 					<PeopleSearchBar />
-					<PeopleTable people={this.state.people}/>
+					<PeopleTable people={this.getSlicedItems(this.state.people)}/>
+					<Pagination pages={this.getPages(this.state.people)} current={this.state.page} />
 				</div>
 			);
 		}
@@ -47,7 +61,8 @@ var ManageApp = React.createClass({
 				<div className='u-full-width'>
 					<ManageOptions />
 					<LoansSearchBar />
-					<LoansTable loans={this.state.loans}/>
+					<LoansTable loans={this.getSlicedItems(this.state.loans)}/>
+					<Pagination pages={this.getPages(this.state.loans)} current={this.state.page} />
 				</div>
 			);
 		}

@@ -11,7 +11,7 @@ var BooksThumbnails = React.createClass({
 					return false;
 				});
 				return (
-					<div className="row">
+					<div className="row thumbnails-row">
 						{row}
 					</div>
 				)
@@ -28,7 +28,7 @@ var BooksThumbnails = React.createClass({
 			);
 		}
 		return (
-			<div className="three columns">
+			<div className="twelve columns">
 				<p>Nie znaleziono wyników.</p>
 			</div>
 		);
