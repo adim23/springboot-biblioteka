@@ -17,7 +17,22 @@ var Pagination = React.createClass({
 				);
 			};
 		})(this);
-		var buttons = Array.apply(this, new Array(this.props.pages)).map(buttonsFn);
+		var buttons = Array
+			.apply(this, new Array(this.props.pages))
+			.map(buttonsFn)
+			.map(function(button, index, buttons) {
+				if (index % 6 == 0){
+					var row = buttons.slice(index, index + 6);
+					return (
+						<div className="row">
+							{row}
+						</div>
+					)
+				}
+				return false;
+			}).filter(function(row){
+			return row != false;
+			});
 		return (
 			<div className='u-full-width pagination'>
 				<div className='row'>

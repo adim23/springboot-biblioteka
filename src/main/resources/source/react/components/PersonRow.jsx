@@ -2,10 +2,9 @@ var PersonRow = React.createClass({
 	render: function() {
 		return (
 			<tr>
-				<td>{this.props.index}</td>
-				<td>{this.props.firstname}</td>
-				<td>{this.props.secondname}</td>
-				<td><a href={"/person/" + this.props.id}>Profil</a></td>
+				<td><a href={"/person/" + this.props.person.id}>{this.props.person.id}</a></td>
+				<td>{this.props.person.firstname}</td>
+				<td>{this.props.person.secondname}</td>
 			</tr>
 		);
 	}

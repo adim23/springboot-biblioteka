@@ -23,6 +23,7 @@ var ManageOptions = React.createClass({
 						<option value="copies">Egzemplarze</option>
 						<option value="people" selected>Czytelnicy</option>
 						<option value="loans">Wypożyczenia</option>
+						<option value="images">Miniatury</option>
 					</select>
 				</div>
 			</div>

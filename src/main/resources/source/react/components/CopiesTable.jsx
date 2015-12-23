@@ -1,9 +1,9 @@
-var PersonRow = require('./PersonRow.jsx');
+var CopyRow = require('./CopyRow.jsx');
 
-var PeopleTable = React.createClass({
+var CopiesTable = React.createClass({
 	render: function() {
-		var rows = this.props.people.map(function(person) {
-			return (<PersonRow person={person}/>);
+		var rows = this.props.copies.map(function(copy) {
+			return (<CopyRow copy={copy}/>);
 		});
 		if (rows.length){
 			return (
@@ -11,8 +11,8 @@ var PeopleTable = React.createClass({
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Imię</th>
-							<th>Nazwisko</th>
+							<th>Książka</th>
+							<th>Autor</th>
 						</tr>
 					</thead>
 					<tbody>{rows}</tbody>
@@ -29,4 +29,4 @@ var PeopleTable = React.createClass({
 	}
 });
 
-module.exports = PeopleTable;
+module.exports = CopiesTable;

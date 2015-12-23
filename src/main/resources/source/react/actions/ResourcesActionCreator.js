@@ -20,6 +20,22 @@ var ResourcesActionCreator = {
 				});
 			});
 	},
+	postCopy: function(data) {
+		API
+			.post('/api/copies', data)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_POST,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd.'
+				});
+			});
+	},
 	postBook: function(data) {
 		API
 			.post('/api/books', data)

@@ -5,6 +5,7 @@ var Dispatcher = require('../core/Dispatcher'),
 
 var _people = [],
 		_loans = [],
+		_copies = [],
 		_show = "people",
 		_message = "",
 		_current = 0;
@@ -15,6 +16,10 @@ function setPeople(people) {
 
 function setLoans(loans) {
 	_loans = loans;
+};
+
+function setCopies(copies) {
+	_copies = copies;
 };
 
 function setShow(show) {
@@ -46,6 +51,9 @@ var ManageStore = assign({}, EventEmitter.prototype, {
 	getLoans: function() {
 		return _loans;
 	},
+	getCopies: function() {
+		return _copies;
+	},
 	getShow: function() {
 		return _show;
 	},
@@ -67,6 +75,11 @@ ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 			break;
 		case ActionConstants.RECEIVE_LOANS:
 			setLoans(action.loans);
+			setMessage('');
+			setCurrent(0);
+			break;
+		case ActionConstants.RECEIVE_COPIES:
+			setCopies(action.copies);
 			setMessage('');
 			setCurrent(0);
 			break;

@@ -1,6 +1,6 @@
 var ResourcesActionCreator = require('../actions/ResourcesActionCreator');
 
-var AuthorForm = React.createClass({
+var BookForm = React.createClass({
 	getInitialState: function() {
 		return {
 			author: '',
@@ -48,4 +48,4 @@ var AuthorForm = React.createClass({
 	}
 });
 
-module.exports = AuthorForm;
+module.exports = BookForm;

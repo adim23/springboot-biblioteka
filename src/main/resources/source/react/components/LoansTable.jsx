@@ -2,18 +2,18 @@ var LoanRow = require('./LoanRow.jsx');
 
 var LoansTable = React.createClass({
 	render: function() {
-		var rows = this.props.loans.map(function(loan, index) {
-			return (<LoanRow index={index+1} loan={loan}/>);
+		var rows = this.props.loans.map(function(loan) {
+			return (<LoanRow loan={loan}/>);
 		});
 		if (rows.length){
 			return (
 				<table className='u-full-width'>
 					<thead>
 						<tr>
-							<th></th>
+							<th>ID</th>
 							<th>Egzemplarz</th>
 							<th>Czytelnik</th>
-							<th>Wypożyczenie</th>
+							<th>Data wypożyczenia</th>
 							<th>Status</th>
 						</tr>
 					</thead>

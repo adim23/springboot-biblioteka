@@ -1,11 +1,14 @@
 var PeopleTable = require('./PeopleTable.jsx'),
 		LoansTable = require('./LoansTable.jsx'),
+		CopiesTable = require('./CopiesTable.jsx'),
 		PeopleSearchBar = require('./PeopleSearchBar.jsx'),
 		LoansSearchBar = require('./LoansSearchBar.jsx'),
+		CopiesSearchBar = require('./CopiesSearchBar.jsx'),
 		ManageStore = require('../stores/ManageStore'),
 		ManageOptions = require('./ManageOptions.jsx'),
 		PeopleActionCreator = require('../actions/PeopleActionCreator'),
 		LoansActionCreator = require('../actions/LoansActionCreator'),
+		CopiesActionCreator = require('../actions/CopiesActionCreator'),
 		Pagination = require('./Pagination.jsx');
 
 var ManageApp = React.createClass({
@@ -13,6 +16,7 @@ var ManageApp = React.createClass({
 		return {
 			people: [],
 			loans: [],
+			copies: [],
 			show: "people",
 			page: 0,
 			items: 8,
@@ -25,6 +29,7 @@ var ManageApp = React.createClass({
 	componentDidMount: function() {
 		PeopleActionCreator.getPeople();
 		LoansActionCreator.getLoans();
+		CopiesActionCreator.getCopies();
 	},
 	componentWillUnmount: function() {
 		ManageStore.removeChangeListener(this.onChange);
@@ -33,6 +38,7 @@ var ManageApp = React.createClass({
 		this.setState({
 			people: ManageStore.getPeople(),
 			loans: ManageStore.getLoans(),
+			copies: ManageStore.getCopies(),
 			show: ManageStore.getShow(),
 			page: ManageStore.getCurrent(),
 			message: ManageStore.getMessage()
@@ -57,27 +63,44 @@ var ManageApp = React.createClass({
 			);
 		}
 
-		if (this.state.show == "people"){
-			return (
-				<div className='u-full-width'>
-					{message}
-					<ManageOptions />
-					<PeopleSearchBar />
-					<PeopleTable people={this.getSlicedItems(this.state.people)}/>
-					<Pagination pages={this.getPages(this.state.people)} current={this.state.page} />
-				</div>
-			);
-		}
-		else {
-			return (
-				<div className='u-full-width'>
-					{message}
-					<ManageOptions />
-					<LoansSearchBar />
-					<LoansTable loans={this.getSlicedItems(this.state.loans)}/>
-					<Pagination pages={this.getPages(this.state.loans)} current={this.state.page} />
-				</div>
-			);
+		switch (this.state.show){
+			case 'people':
+				return (
+					<div className='u-full-width'>
+						{message}
+						<ManageOptions />
+						<PeopleSearchBar />
+						<PeopleTable people={this.getSlicedItems(this.state.people)}/>
+						<Pagination pages={this.getPages(this.state.people)} current={this.state.page} />
+					</div>
+				);
+			case 'loans':
+				return (
+					<div className='u-full-width'>
+						{message}
+						<ManageOptions />
+						<LoansSearchBar />
+						<LoansTable loans={this.getSlicedItems(this.state.loans)}/>
+						<Pagination pages={this.getPages(this.state.loans)} current={this.state.page} />
+					</div>
+				);
+			case 'copies':
+				return (
+					<div className='u-full-width'>
+						{message}
+						<ManageOptions />
+						<CopiesSearchBar />
+						<CopiesTable copies={this.getSlicedItems(this.state.copies)}/>
+						<Pagination pages={this.getPages(this.state.copies)} current={this.state.page} />
+					</div>
+				);
+			default:
+				return (
+					<div className='u-full-width'>
+						{message}
+						<ManageOptions />
+					</div>
+				);
 		}
 	}
 });

@@ -6,15 +6,17 @@ var LoanRow = React.createClass({
 			dateLoaned.getFullYear();
 		return (
 			<tr>
-				<td>{this.props.index}</td>
 				<td>
-					<a href={"/copy/" + this.props.loan.copy.id}>{this.props.loan.copy.book.title}</a>
+					<a href={"/loan/" + this.props.loan.id}>{this.props.loan.id}</a>
+				</td>
+				<td>
+					<a href={"/copy/" + this.props.loan.copy.id}>{this.props.loan.copy.book.title} id. {this.props.loan.copy.id}</a>
 				</td>
 				<td>
 					<a href={"/person/" + this.props.loan.person.id}>{this.props.loan.person.firstname + " " + this.props.loan.person.secondname}</a>
 				</td>
 				<td>
-					<a href={"/loan/" + this.props.loan.id}>{loaned}</a>
+					{loaned}
 				</td>
 				<td>
 					{this.props.loan.returned ?

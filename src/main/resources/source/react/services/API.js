@@ -24,7 +24,12 @@ var API = {
 					if (res.status === 404) {
 						reject();
 					} else {
-						resolve(JSON.parse(res.text));
+						try {
+							resolve(JSON.parse(res.text));
+						}
+						catch (err){
+							reject();
+						}
 					}
 				});
 		});
