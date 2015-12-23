@@ -17,7 +17,6 @@ var Pagination = React.createClass({
 				);
 			};
 		})(this);
-		console.log("Array size: " + (this.props.pages));
 		var buttons = Array.apply(this, new Array(this.props.pages)).map(buttonsFn);
 		return (
 			<div className='u-full-width pagination'>

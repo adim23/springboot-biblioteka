@@ -18,7 +18,10 @@ var ManageOptions = React.createClass({
             Szukaj
           </label>
 					<select className="ten columns" onChange={this.handleChange}>
-						<option value="people">Czytelnicy</option>
+						<option value="authors">Autorzy</option>
+						<option value="books">Książki</option>
+						<option value="copies">Egzemplarze</option>
+						<option value="people" selected>Czytelnicy</option>
 						<option value="loans">Wypożyczenia</option>
 					</select>
 				</div>

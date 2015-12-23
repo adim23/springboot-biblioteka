@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import biblioteka.models.Book;
 import biblioteka.models.Author;
@@ -20,17 +21,24 @@ public class AuthorsControllerRest {
 	@Autowired
 	protected BooksRepository booksRepository;
 
-	@RequestMapping(value = "/api/authors")
+	@RequestMapping(value = "/api/authors", method = RequestMethod.GET)
 	public Iterable<Author> authors(@RequestParam(value="author", defaultValue="") String author) {
 		return authorsRepository.findByAuthorContainingIgnoreCase(author);
 	}
 
-	@RequestMapping(value = "/api/authors/{id}")
+	@RequestMapping(value = "/api/authors", method = RequestMethod.POST)
+	public Author authors(@RequestBody Author author) {
+		authorsRepository.save(author);
+		authorsRepository.flush();
+		return author;
+	}
+
+	@RequestMapping(value = "/api/authors/{id}", method = RequestMethod.GET)
 	public Author authorsId(@PathVariable("id") long id) {
 		return authorsRepository.findOne(id);
 	}
 
-	@RequestMapping(value = "/api/authors/{id}/books")
+	@RequestMapping(value = "/api/authors/{id}/books", method = RequestMethod.GET)
 	public Iterable<Book> authorsBooks(@PathVariable("id") long id) {
 		return authorsRepository.findOne(id).getBooks();
 	}

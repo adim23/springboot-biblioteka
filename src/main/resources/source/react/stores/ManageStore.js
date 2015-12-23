@@ -6,6 +6,7 @@ var Dispatcher = require('../core/Dispatcher'),
 var _people = [],
 		_loans = [],
 		_show = "people",
+		_message = "",
 		_current = 0;
 
 function setPeople(people) {
@@ -18,6 +19,10 @@ function setLoans(loans) {
 
 function setShow(show) {
 	_show = show;
+};
+
+function setMessage(message) {
+	_message = message;
 };
 
 function setCurrent(current) {
@@ -44,6 +49,9 @@ var ManageStore = assign({}, EventEmitter.prototype, {
 	getShow: function() {
 		return _show;
 	},
+	getMessage: function() {
+		return _message;
+	},
 	getCurrent: function() {
 		return _current;
 	}
@@ -54,20 +62,25 @@ ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_PEOPLE:
 			setPeople(action.people);
+			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_LOANS:
 			setLoans(action.loans);
+			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.CHANGE_OPTION:
 			setShow(action.show);
+			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.CHANGE_PAGE:
 			setCurrent(action.page);
+			setMessage('');
 			break;
 		case ActionConstants.RECEIVE_ERROR:
+			setMessage('Wystąpił błąd.');
 			break;
 	}
 	ManageStore.emitChange();

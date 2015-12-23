@@ -12,7 +12,8 @@ var BooksApp = React.createClass({
 			books: [],
 			view: 'list',
 			page: 0,
-			items: 8
+			items: 8,
+			message: ''
 		};
 	},
 	componentWillMount: function() {
@@ -28,7 +29,8 @@ var BooksApp = React.createClass({
 		this.setState({
 			books: BooksStore.getBooks(),
 			view: BooksStore.getView(),
-			page: BooksStore.getCurrent()
+			page: BooksStore.getCurrent(),
+			message: BooksStore.getMessage()
 		});
 	},
 	getSlicedItems: function(items) {
@@ -41,10 +43,20 @@ var BooksApp = React.createClass({
 		return Math.ceil(items.length / this.state.items);
 	},
 	render: function() {
+		var message;
+		if (this.state.message != ''){
+			message = (
+				<h5 className='message'>
+					{this.state.message}
+				</h5>
+			);
+		}
+
 		switch (this.state.view){
 			case 'list': {
 					return (
 						<div className='u-full-width'>
+							{message}
 							<BooksOptions />
 							<BooksSearchBar />
 							<BooksTable books={this.getSlicedItems(this.state.books)} />
@@ -55,6 +67,7 @@ var BooksApp = React.createClass({
 			case 'thumbnails': {
 					return (
 						<div className='u-full-width'>
+							{message}
 							<BooksOptions />
 							<BooksSearchBar />
 							<BooksThumbnails books={this.getSlicedItems(this.state.books)}/>

@@ -5,6 +5,7 @@ var Dispatcher = require('../core/Dispatcher'),
 
 var _books = [],
 		_view = 'list',
+		_message = '',
 		_current = 0;
 
 function setBooks(books) {
@@ -13,6 +14,10 @@ function setBooks(books) {
 
 function setView(view) {
 	_view = view;
+};
+
+function setMessage(message) {
+	_message = message;
 };
 
 function setCurrent(current) {
@@ -35,6 +40,9 @@ var BooksStore = assign({}, EventEmitter.prototype, {
 	getView: function() {
 		return _view;
 	},
+	getMessage: function() {
+		return _message;
+	},
 	getCurrent: function() {
 		return _current;
 	}
@@ -45,15 +53,19 @@ BooksStore.dispatchToken = Dispatcher.register(function(payload) {
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_BOOKS:
 			setBooks(action.books);
+			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.CHANGE_VIEW:
 			setView(action.view);
+			setMessage('');
 			break;
 		case ActionConstants.CHANGE_PAGE:
 			setCurrent(action.page);
+			setMessage('');
 			break;
 		case ActionConstants.RECEIVE_ERROR:
+			setMessage('Wystąpił błąd.');
 			break;
 		default:
 			return true;

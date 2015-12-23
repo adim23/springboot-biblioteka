@@ -15,7 +15,8 @@ var ManageApp = React.createClass({
 			loans: [],
 			show: "people",
 			page: 0,
-			items: 8
+			items: 8,
+			message: ''
 		};
 	},
 	componentWillMount: function() {
@@ -33,7 +34,8 @@ var ManageApp = React.createClass({
 			people: ManageStore.getPeople(),
 			loans: ManageStore.getLoans(),
 			show: ManageStore.getShow(),
-			page: ManageStore.getCurrent()
+			page: ManageStore.getCurrent(),
+			message: ManageStore.getMessage()
 		});
 	},
 	getSlicedItems: function(items) {
@@ -46,9 +48,19 @@ var ManageApp = React.createClass({
 		return Math.ceil(items.length / this.state.items);
 	},
 	render: function() {
+		var message;
+		if (this.state.message != ''){
+			message = (
+				<h5 className='message'>
+					{this.state.message}
+				</h5>
+			);
+		}
+
 		if (this.state.show == "people"){
 			return (
 				<div className='u-full-width'>
+					{message}
 					<ManageOptions />
 					<PeopleSearchBar />
 					<PeopleTable people={this.getSlicedItems(this.state.people)}/>
@@ -59,6 +71,7 @@ var ManageApp = React.createClass({
 		else {
 			return (
 				<div className='u-full-width'>
+					{message}
 					<ManageOptions />
 					<LoansSearchBar />
 					<LoansTable loans={this.getSlicedItems(this.state.loans)}/>

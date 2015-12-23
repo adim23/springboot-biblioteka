@@ -46,8 +46,28 @@ gulp.task('manage-app', function() {
 		.pipe(gulp.dest('./src/main/resources/static/js/app'));
 });
 
-gulp.task('react', ['manage-app', 'books-app']);
-gulp.task('react-min', ['manage-app-min', 'books-app-min']);
+gulp.task('resources-app-min', function() {
+	var bundler = browserify('./src/main/resources/source/react/resources-app.jsx');
+	bundler.transform(reactify);
+	var stream = bundler.bundle();
+	return stream
+		.pipe(source('resources-app.js'))
+		.pipe(buffer())
+		.pipe(uglify())
+		.pipe(gulp.dest('./src/main/resources/static/js/app'));
+});
+gulp.task('resources-app', function() {
+	var bundler = browserify('./src/main/resources/source/react/resources-app.jsx');
+	bundler.transform(reactify);
+	var stream = bundler.bundle();
+	return stream
+		.pipe(source('resources-app.js'))
+		.pipe(gulp.dest('./src/main/resources/static/js/app'));
+});
+
+
+gulp.task('react', ['manage-app', 'books-app', 'resources-app']);
+gulp.task('react-min', ['manage-app-min', 'books-app-min', 'resources-app-min']);
 
 gulp.task('sass-min', function() {
 	return gulp.src('./src/main/resources/source/sass/*.scss')
