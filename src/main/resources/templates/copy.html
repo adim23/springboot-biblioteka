@@ -7,56 +7,62 @@
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
-		<div class="navigation">
-    	<nav>
+		<div class="wrapper">
+			<div class="navigation">
+	    	<nav>
+					<div class="container">
+				    <ul>
+							<li><a href="/"><i class="fa fa-search"></i>
+	 Szukaj</a></li>
+							<li><a href="/account"><i class="fa fa-user"></i>
+	 Konto</a></li>
+	 <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
+	Biblioteka</a></li>
+	 <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+	Zarządzaj</a></li>
+							<li><a href="/contact"><i class="fa fa-question"></i>
+	 Kontakt</a></li>
+			      </ul>
+					</div>
+			  </nav>
+			</div>
+			<div class="panel">
+				<div th:if="${message}" class="container">
+					<div th:text="${message}">
+					</div>
+				</div>
 				<div class="container">
-			    <ul>
-						<li><a href="/"><i class="fa fa-search"></i>
- Szukaj</a></li>
-						<li><a href="/account"><i class="fa fa-user"></i>
- Konto</a></li>
- <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
-Biblioteka</a></li>
- <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
-Zarządzaj</a></li>
-						<li><a href="/contact"><i class="fa fa-question"></i>
- Kontakt</a></li>
-		      </ul>
-				</div>
-		  </nav>
-		</div>
-		<div class="panel">
-			<div class="container">
-				<div th:if="${message}" th:text="${message}">
-				</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					Egzemplarze
-					- <a th:href="@{|/author/${copy.book.author.id}|}" th:text="${copy.book.author.author}"></a>
-					- <a th:href="@{|/book/${copy.book.id}|}" th:text="${copy.book.title}"></a>
-					- <a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
-				</div>
-				<div class="row">
-					<h3 th:text="${copy.book.title}"></h3>
-					<div class='divider'></div>
-					<label th:if="${#lists.isEmpty(copy.loans)}">Ilość wypożyczeń:</label>
-						<p th:if="${#lists.isEmpty(copy.loans)}" th:text="${#lists.size(copy.loans)}"></p>
-					<label th:if="${#lists.isEmpty(copy.loans)}" th:text="@{|Brak wypożyczeń.|}"></label>
-					<label th:unless="${#lists.isEmpty(copy.loans)}">Historia wypożyczeń:</label>
-					<ul th:unless="${#lists.isEmpty(copy.loans)}">
-						<li th:each="loan : ${copy.loans}">
-							<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
-							<a th:href="@{|/person/${loan.person.id}|}" th:text="@{|${loan.person.firstname} ${loan.person.secondname}|}"></a> -
-							<i th:if="${loan.returned}" class="fa fa-check"></i>
-							<i th:unless="${loan.returned}" class="fa fa-question"></i>
-						</li>
-					</ul>
-				</div>
-				<div th:if="${message}" th:text="${message}">
+					<div class="row">
+						Egzemplarze
+						- <a th:href="@{|/author/${copy.book.author.id}|}" th:text="${copy.book.author.author}"></a>
+						- <a th:href="@{|/book/${copy.book.id}|}" th:text="${copy.book.title}"></a>
+						- <a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
+					</div>
+					<div class="row">
+						<h3 th:text="${copy.book.title}"></h3>
+						<div class='divider'></div>
+						<label th:if="${#lists.isEmpty(copy.loans)}">Ilość wypożyczeń:</label>
+							<p th:if="${#lists.isEmpty(copy.loans)}" th:text="${#lists.size(copy.loans)}"></p>
+						<label th:if="${#lists.isEmpty(copy.loans)}" th:text="@{|Brak wypożyczeń.|}"></label>
+						<label th:unless="${#lists.isEmpty(copy.loans)}">Historia wypożyczeń:</label>
+						<ul th:unless="${#lists.isEmpty(copy.loans)}">
+							<li th:each="loan : ${copy.loans}">
+								<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
+								<a th:href="@{|/person/${loan.person.id}|}" th:text="@{|${loan.person.firstname} ${loan.person.secondname}|}"></a> -
+								<i th:if="${loan.returned}" class="fa fa-check"></i>
+								<i th:unless="${loan.returned}" class="fa fa-question"></i>
+							</li>
+						</ul>
+					</div>
+					<div th:if="${message}" th:text="${message}">
+					</div>
 				</div>
 			</div>
+			<div class="push"></div>
 		</div>
+		<footer>
+			Biblioteka 2016
+		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
 	</body>

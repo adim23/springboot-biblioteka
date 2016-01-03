@@ -1,12 +1,48 @@
 $primary-text: #212121;
 $secondary-text: #727272;
 $divider: #b6b6b6;
-$accent: #0091ea;
-$dark-primary: #311b92;
-$primary: #673ab7;
-$light-primary: #9575cd;
+$accent: #073642;
+$primary: #002B36;
 $text-on-primary: #ffffff;
 $body: #fafafa;
+
+$shadow-low: 0px 2px 8px 0px rgba($primary, 0.3);
+$shadow-med: 0px 4px 12px 0px rgba($primary, 0.2);
+$shadow-high: 0px 8px 16px 0px rgba($primary, 0.1);
+
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin: 0 auto -40px;
+}
+
+footer, .push {
+	height: 40px;
+}
+
+* {
+	transition: box-shadow 0.2s ease-in-out;
+}
+
+input[type="button"],
+input[type="submit"],
+button,
+.button,
+.image,
+.panel .container {
+	box-shadow: $shadow-low;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button:hover,
+.button:hover
+.image:hover {
+	box-shadow: $shadow-med;
+}
 
 a {
 	color: $accent;
@@ -36,8 +72,8 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-	background-color: $light-primary;
-	border-color: $light-primary;
+	background-color: darken($primary, 5%);
+	border-color: darken($primary, 5%);
 }
 
 input[type="email"]:focus,
@@ -53,7 +89,8 @@ select:focus {
 }
 
 body {
-	background-color: $body;
+	background: transparent radial-gradient(60% 900px at center 800px , $accent 0%, $primary 100%) repeat scroll 0% 0%;
+	background-attachment: fixed;
 	color: $primary-text;
 }
 
@@ -62,6 +99,10 @@ body {
 	max-width: 100%;
 	width: 100%;
 	display: table;
+	.container {
+		background-color: rgba($body, 0.9);
+		padding: 20px;
+	}
 }
 
 .form {
@@ -82,6 +123,21 @@ label {
 	line-height: 24px;
 }
 
+footer {
+	max-width: 100%;
+	width: 100%;
+	display: table;
+	margin: 0 auto;
+	height: 40px;
+	line-height: 40px;
+	color: $text-on-primary;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	letter-spacing: .2rem;
+	font-weight: 600;
+}
+
 nav {
 	max-width: 100%;
 	width: 100%;
@@ -89,7 +145,6 @@ nav {
 	margin: 0 auto;
 	height: 60px;
 	line-height: 60px;
-	background-color: $primary;
 	color: $text-on-primary;
 	ul {
 		margin: 0px auto;
@@ -113,8 +168,8 @@ nav {
 
 .image {
 	display: block;
-	background: #F1F1F1 none repeat scroll 0% 0%;
-	border: 1px solid #E1E1E1;
+	background: darken($body, 5%) none repeat scroll 0% 0%;
+	border: 1px solid darken($body, 10%);
 	padding: 1rem 1.5rem;
 	margin: 0px 0.2rem;
 	border-radius: 4px;
@@ -125,6 +180,11 @@ nav {
 		font-size: 3em;
 		line-height: 100%;
 		text-align: center;
+		font-variant: small-caps;
+		a {
+			color: $primary-text !important;
+			text-decoration: none !important;
+		}
 	}
 }
 

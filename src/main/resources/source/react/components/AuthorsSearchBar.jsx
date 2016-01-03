@@ -1,17 +1,13 @@
 var ManageActionCreator = require('../actions/ManageActionCreator');
 
-var CopiesSearchBar = React.createClass({
+var AuthorsSearchBar = React.createClass({
 	getInitialState: function() {
 		return {
-			title: '',
 			author: ''
 		};
 	},
 	componentDidMount: function() {
-		ManageActionCreator.getCopies();
-	},
-	handleTitleChange: function(event) {
-		this.setState({title: event.target.value});
+		ManageActionCreator.getAuthors();
 	},
 	handleAuthorChange: function(event) {
 		this.setState({author: event.target.value});
@@ -22,8 +18,7 @@ var CopiesSearchBar = React.createClass({
 		}
 	},
 	handleSearch: function() {
-		ManageActionCreator.getCopiesBy({
-			title: this.state.title,
+		ManageActionCreator.getAuthorsBy({
 			author: this.state.author
 		});
 	},
@@ -31,8 +26,7 @@ var CopiesSearchBar = React.createClass({
 		return (
 			<div className='u-full-width'>
 				<div className='row'>
-					<input className='five columns' onKeyDown={this.handleKeyDown} placeholder="Tytuł" type='text' value={this.state.title} onChange={this.handleTitleChange}/>
-					<input className='five columns' onKeyDown={this.handleKeyDown} placeholder="Autor" type='text' value={this.state.author} onChange={this.handleAuthorChange}/>
+					<input className='ten columns' onKeyDown={this.handleKeyDown} placeholder="Autor" type='text' value={this.state.author} onChange={this.handleAuthorChange}/>
 					<button className="two columns" onClick={this.handleSearch}>Wyszukaj</button>
 				</div>
 			</div>
@@ -40,4 +34,4 @@ var CopiesSearchBar = React.createClass({
 	}
 });
 
-module.exports = CopiesSearchBar;
+module.exports = AuthorsSearchBar;

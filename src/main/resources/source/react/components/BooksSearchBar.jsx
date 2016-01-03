@@ -7,6 +7,9 @@ var SearchBar = React.createClass({
 			author: ''
 		};
 	},
+	componentDidMount: function() {
+		BooksActionCreator.getBooks();
+	},
 	handleTitleChange: function(event) {
 		this.setState({title: event.target.value});
 	},

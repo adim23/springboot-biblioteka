@@ -7,49 +7,55 @@
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
-		<div class="navigation">
-    	<nav>
+		<div class="wrapper">
+			<div class="navigation">
+	    	<nav>
+					<div class="container">
+				    <ul>
+							<li><a href="/"><i class="fa fa-search"></i>
+	 Szukaj</a></li>
+							<li><a href="/account"><i class="fa fa-user"></i>
+	 Konto</a></li>
+	 <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
+	Biblioteka</a></li>
+	 <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+	Zarządzaj</a></li>
+							<li><a href="/contact"><i class="fa fa-question"></i>
+	 Kontakt</a></li>
+			      </ul>
+					</div>
+			  </nav>
+			</div>
+			<div class="panel">
+				<div th:if="${message}" class="container">
+					<div th:text="${message}">
+					</div>
+				</div>
 				<div class="container">
-			    <ul>
-						<li><a href="/"><i class="fa fa-search"></i>
- Szukaj</a></li>
-						<li><a href="/account"><i class="fa fa-user"></i>
- Konto</a></li>
- <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
-Biblioteka</a></li>
- <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
-Zarządzaj</a></li>
-						<li><a href="/contact"><i class="fa fa-question"></i>
- Kontakt</a></li>
-		      </ul>
-				</div>
-		  </nav>
-		</div>
-		<div class="panel">
-			<div class="container">
-				<div th:if="${message}" th:text="${message}">
-				</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					Czytelnicy - <a th:href="@{|/person/${person.id}|}" th:text="@{|${person.firstname} ${person.secondname}|}"></a>
-				</div>
-				<div class="row">
-					<h3 th:text="@{|${person.firstname} ${person.secondname}|}"></h3>
-					<div class='divider'></div>
-					<label>Historia wypożyczeń:</label>
-					<ul>
-						<li th:each="loan : ${person.loans}">
-							<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
-							<a th:href="@{|/book/${loan.copy.book.id}|}" th:text="${loan.copy.book.title}"></a> -
-							<a th:href="@{|/copy/${loan.copy.id}|}" th:text="@{|Egzemplarz id. ${loan.copy.id}|}"></a>
-							<i th:if="${loan.returned}" class="fa fa-check"></i>
-							<i th:unless="${loan.returned}" class="fa fa-question"></i>
-						</li>
-					</ul>
+					<div class="row">
+						Czytelnicy - <a th:href="@{|/person/${person.id}|}" th:text="@{|${person.firstname} ${person.secondname}|}"></a>
+					</div>
+					<div class="row">
+						<h3 th:text="@{|${person.firstname} ${person.secondname}|}"></h3>
+						<div class='divider'></div>
+						<label>Historia wypożyczeń:</label>
+						<ul>
+							<li th:each="loan : ${person.loans}">
+								<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
+								<a th:href="@{|/book/${loan.copy.book.id}|}" th:text="${loan.copy.book.title}"></a> -
+								<a th:href="@{|/copy/${loan.copy.id}|}" th:text="@{|Egzemplarz id. ${loan.copy.id}|}"></a>
+								<i th:if="${loan.returned}" class="fa fa-check"></i>
+								<i th:unless="${loan.returned}" class="fa fa-question"></i>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
+			<div class="push"></div>
 		</div>
+		<footer>
+			Biblioteka 2016
+		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
 	</body>

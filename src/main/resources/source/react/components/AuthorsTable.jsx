@@ -1,9 +1,9 @@
-var BookRow = require('./BookRow.jsx');
+var AuthorRow = require('./AuthorRow.jsx');
 
-var BooksTable = React.createClass({
+var AuthorsTable = React.createClass({
 	render: function() {
-		var rows = this.props.books.map(function(book, index) {
-			return (<BookRow book={book}/>);
+		var rows = this.props.authors.map(function(author) {
+			return (<AuthorRow author={author}/>);
 		});
 		if (rows.length){
 			return (
@@ -11,8 +11,6 @@ var BooksTable = React.createClass({
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Okładka</th>
-							<th>Tytuł</th>
 							<th>Autor</th>
 						</tr>
 					</thead>
@@ -30,4 +28,4 @@ var BooksTable = React.createClass({
 	}
 });
 
-module.exports = BooksTable;
+module.exports = AuthorsTable;

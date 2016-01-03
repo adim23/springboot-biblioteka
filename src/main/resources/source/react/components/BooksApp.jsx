@@ -1,4 +1,4 @@
-var BooksTable = require('./BooksTable.jsx'),
+var BooksMainTable = require('./BooksMainTable.jsx'),
 		BooksThumbnails = require('./BooksThumbnails.jsx'),
 		BooksSearchBar = require('./BooksSearchBar.jsx'),
 		BooksStore = require('../stores/BooksStore'),
@@ -18,9 +18,6 @@ var BooksApp = React.createClass({
 	},
 	componentWillMount: function() {
 		BooksStore.addChangeListener(this.onChange);
-	},
-	componentDidMount: function() {
-		BooksActionCreator.getBooks();
 	},
 	componentWillUnmount: function() {
 		BooksStore.removeChangeListener(this.onChange);
@@ -59,7 +56,7 @@ var BooksApp = React.createClass({
 							{message}
 							<BooksOptions />
 							<BooksSearchBar />
-							<BooksTable books={this.getSlicedItems(this.state.books)} />
+							<BooksMainTable books={this.getSlicedItems(this.state.books)} />
 							<Pagination pages={this.getPages(this.state.books)} current={this.state.page} />
 						</div>
 					);

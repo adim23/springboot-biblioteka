@@ -7,74 +7,80 @@
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
-		<div class="navigation">
-    	<nav>
+		<div class="wrapper">
+			<div class="navigation">
+	    	<nav>
+					<div class="container">
+				    <ul>
+							<li><a href="/"><i class="fa fa-search"></i>
+	 Szukaj</a></li>
+							<li><a href="/account"><i class="fa fa-user"></i>
+	 Konto</a></li>
+	 <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
+	Biblioteka</a></li>
+	 <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+	Zarządzaj</a></li>
+							<li><a href="/contact"><i class="fa fa-question"></i>
+	 Kontakt</a></li>
+			      </ul>
+					</div>
+			  </nav>
+			</div>
+			<div class="panel">
+				<div th:if="${message}" class="container">
+					<div th:text="${message}">
+					</div>
+				</div>
 				<div class="container">
-			    <ul>
-						<li><a href="/"><i class="fa fa-search"></i>
- Szukaj</a></li>
-						<li><a href="/account"><i class="fa fa-user"></i>
- Konto</a></li>
- <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
-Biblioteka</a></li>
- <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
-Zarządzaj</a></li>
-						<li><a href="/contact"><i class="fa fa-question"></i>
- Kontakt</a></li>
-		      </ul>
-				</div>
-		  </nav>
-		</div>
-		<div class="panel">
-			<div class="container">
-				<div th:if="${message}" th:text="${message}">
-				</div>
-			</div>
-			<div class="container">
-				<div th:if="${param.error}">
-						Niepoprawny login i hasło.
-				</div>
-				<div th:if="${param.logout}">
-						Wylogowano pomyślnie.
-				</div>
-				<div class="row">
-					<div class="six columns">
-						<h3>Logowanie</h3>
-						<form class='u-full-width form' th:action="@{/login}" method="post">
-		            <div class='form-row'>
-									<label class='three columns'>Login: </label><input class='nine columns' type="text" name="username"/>
-								</div>
-		            <div class='form-row'>
-									<label class='three columns'>Hasło: </label><input class='nine columns' type="password" name="password"/>
-								</div>
-								<div class='form-row'>
-									<input class='button-primary' type="submit" value="Zaloguj"/>
-								</div>
-		        </form>
+					<div th:if="${param.error}">
+							Niepoprawny login i hasło.
 					</div>
-					<div class="six columns">
-						<h3>Rejestracja</h3>
-						<form class='u-full-width form'  th:action="@{/register}" method="post">
-								<div class='form-row'>
-									<label class='three columns'>Login: </label><input class='nine columns' type="text" name="username"/>
-								</div>
-								<div class='form-row'>
-									<label class='three columns'>Hasło: </label><input class='nine columns' type="password" name="password"/>
-								</div>
-								<div class='form-row'>
-									<label class='three columns'>Imię: </label><input class='nine columns' type="text" name="firstname"/>
-								</div>
-								<div class='form-row'>
-									<label class='three columns'>Nazwisko: </label><input class='nine columns' type="text" name="secondname"/>
-								</div>
-								<div class='form-row'>
-									<input class='button-primary' type="submit" value="Zarejestruj"/>
-								</div>
-						</form>
+					<div th:if="${param.logout}">
+							Wylogowano pomyślnie.
+					</div>
+					<div class="row">
+						<div class="six columns">
+							<h3>Logowanie</h3>
+							<form class='u-full-width form' th:action="@{/login}" method="post">
+			            <div class='form-row'>
+										<label class='three columns'>Login: </label><input class='nine columns' type="text" name="username"/>
+									</div>
+			            <div class='form-row'>
+										<label class='three columns'>Hasło: </label><input class='nine columns' type="password" name="password"/>
+									</div>
+									<div class='form-row'>
+										<input class='button-primary' type="submit" value="Zaloguj"/>
+									</div>
+			        </form>
+						</div>
+						<div class="six columns">
+							<h3>Rejestracja</h3>
+							<form class='u-full-width form'  th:action="@{/register}" method="post">
+									<div class='form-row'>
+										<label class='three columns'>Login: </label><input class='nine columns' type="text" name="username"/>
+									</div>
+									<div class='form-row'>
+										<label class='three columns'>Hasło: </label><input class='nine columns' type="password" name="password"/>
+									</div>
+									<div class='form-row'>
+										<label class='three columns'>Imię: </label><input class='nine columns' type="text" name="firstname"/>
+									</div>
+									<div class='form-row'>
+										<label class='three columns'>Nazwisko: </label><input class='nine columns' type="text" name="secondname"/>
+									</div>
+									<div class='form-row'>
+										<input class='button-primary' type="submit" value="Zarejestruj"/>
+									</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="push"></div>
 		</div>
+		<footer>
+			Biblioteka 2016
+		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
 	</body>

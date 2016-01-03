@@ -21,7 +21,7 @@ CREATE TABLE books(
 id serial primary key,
 title text not null,
 id_author integer not null,
-id_image integer not null
+id_image integer
 );
 
 CREATE TABLE images(

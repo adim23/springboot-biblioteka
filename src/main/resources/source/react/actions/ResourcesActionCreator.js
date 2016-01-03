@@ -4,6 +4,72 @@ var Dispatcher = require('../core/Dispatcher'),
 		API = require('../services/API');
 
 var ResourcesActionCreator = {
+	getAuthors: function() {
+		API
+			.get('/api/authors/')
+			.then(function(authors) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_AUTHORS,
+					authors: authors
+				});
+			})
+			.catch(function(error) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu listy autorów.',
+					errorStack: error
+				});
+			});
+	},
+	getImages: function() {
+		API
+			.get('/api/images/')
+			.then(function(images) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_IMAGES,
+					images: images
+				});
+			})
+			.catch(function(error) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu listy miniatur.',
+					errorStack: error
+				});
+			});
+	},
+	getBooks: function() {
+		API
+			.get('/api/books')
+			.then(function(books) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_BOOKS,
+					books: books
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu listy książek.'
+				});
+			});
+	},
+	getBooksByAuthorID: function(parameters) {
+		API
+			.get('/api/authors/' + parameters.authorID + '/books')
+			.then(function(books) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_BOOKS,
+					books: books
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu listy książek.'
+				});
+			});
+	},
 	postAuthor: function(data) {
 		API
 			.post('/api/authors', data)
@@ -16,7 +82,7 @@ var ResourcesActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy dodawaniu autora.'
 				});
 			});
 	},
@@ -32,7 +98,7 @@ var ResourcesActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy dodawaniu egzemplarza.'
 				});
 			});
 	},
@@ -48,7 +114,7 @@ var ResourcesActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy dodawaniu książki.'
 				});
 			});
 	}

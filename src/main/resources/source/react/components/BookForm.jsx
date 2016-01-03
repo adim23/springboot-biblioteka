@@ -3,42 +3,68 @@ var ResourcesActionCreator = require('../actions/ResourcesActionCreator');
 var BookForm = React.createClass({
 	getInitialState: function() {
 		return {
-			author: '',
+			author: 0,
 			title: '',
-			image: ''
+			image: null
 		};
 	},
 	handleAuthorChange: function(event) {
 		this.setState({author: event.target.value});
 	},
-	handleTitleChange: function(event) {
-		this.setState({title: event.target.value});
-	},
 	handleImageChange: function(event) {
 		this.setState({image: event.target.value});
 	},
+	handleTitleChange: function(event) {
+		this.setState({title: event.target.value});
+	},
 	handlePost: function(){
-		ResourcesActionCreator.postBook({
-			author: {
-				id: this.state.author
-			},
-			title: this.state.title,
-			image: {
-				id: this.state.image
-			}
-		});
+		if (this.state.image){
+			ResourcesActionCreator.postBook({
+				author: {
+					id: this.state.author
+				},
+				title: this.state.title,
+				image: {
+					id: this.state.image
+				}
+			});
+		}
+		else {
+			ResourcesActionCreator.postBook({
+				author: {
+					id: this.state.author
+				},
+				title: this.state.title
+			});
+		}
 	},
 	render: function() {
+		var authors = this.props.authors.map(function(author) {
+			return (<option value={author.id}>{author.author}</option>);
+		});
+		var images = this.props.images.map(function(image) {
+			return (<option value={image.id}>{image.path}</option>);
+		});
+		images.unshift(
+			<option value={null}>Brak okładki</option>
+		);
 		return (
 			<div className='u-full-width form'>
 					<div className='form-row'>
-						<label className='two columns'>Tytuł: </label><input className='ten columns' type="text" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
+						<label className='two columns'>Autor: </label>
+						<select className="ten columns" onChange={this.handleAuthorChange}>
+							{authors}
+						</select>
 					</div>
 					<div className='form-row'>
-						<label className='two columns'>Autor: </label><input className='ten columns' type="text" name="author" value={this.state.author} onChange={this.handleAuthorChange}/>
+						<label className='two columns'>Tytuł: </label>
+						<input className='ten columns' type="text" name="title" value={this.state.title} onChange={this.handleTitleChange}/>
 					</div>
 					<div className='form-row'>
-						<label className='two columns'>Miniatura: </label><input className='ten columns' type="text" name="image" value={this.state.image} onChange={this.handleImageChange}/>
+						<label className='two columns'>Miniatura: </label>
+						<select className="ten columns" onChange={this.handleImageChange}>
+							{images}
+						</select>
 					</div>
 					<div className='form-row'>
 						<button className='button-primary' onClick={this.handlePost}>Dodaj</button>

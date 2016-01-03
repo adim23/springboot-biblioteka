@@ -1,7 +1,7 @@
 var BookThumbnail = React.createClass({
 	render: function() {
 		var image;
-		if (this.props.book.image.path == ''){
+		if (!this.props.book.image || this.props.book.image.path == ''){
 			image = (
 				<div className="placeholder">
 					<a href={"/book/" + this.props.book.id}>

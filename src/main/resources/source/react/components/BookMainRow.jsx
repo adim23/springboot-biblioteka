@@ -1,4 +1,4 @@
-var BookRow = React.createClass({
+var BookMainRow = React.createClass({
 	render: function() {
 		var image;
 		if (!this.props.book.image || this.props.book.image.path == ''){
@@ -15,7 +15,7 @@ var BookRow = React.createClass({
 		}
 		return (
 			<tr>
-				<td>{this.props.book.id}</td>
+				<td>{this.props.index}</td>
 				<td>
 					<div className="image">
 						{image}
@@ -32,4 +32,4 @@ var BookRow = React.createClass({
 	}
 });
 
-module.exports = BookRow;
+module.exports = BookMainRow;

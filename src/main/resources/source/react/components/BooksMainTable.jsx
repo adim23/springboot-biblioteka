@@ -1,16 +1,16 @@
-var BookRow = require('./BookRow.jsx');
+var BookMainRow = require('./BookMainRow.jsx');
 
-var BooksTable = React.createClass({
+var BooksMainTable = React.createClass({
 	render: function() {
 		var rows = this.props.books.map(function(book, index) {
-			return (<BookRow book={book}/>);
+			return (<BookMainRow index={index+1} book={book}/>);
 		});
 		if (rows.length){
 			return (
 				<table className='u-full-width'>
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th></th>
 							<th>Okładka</th>
 							<th>Tytuł</th>
 							<th>Autor</th>
@@ -30,4 +30,4 @@ var BooksTable = React.createClass({
 	}
 });
 
-module.exports = BooksTable;
+module.exports = BooksMainTable;

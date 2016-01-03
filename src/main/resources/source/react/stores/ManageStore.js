@@ -3,23 +3,40 @@ var Dispatcher = require('../core/Dispatcher'),
 		EventEmitter = require('events').EventEmitter,
 		assign = require('object-assign');
 
-var _people = [],
-		_loans = [],
-		_copies = [],
+var _resources = {
+			people: [],
+			loans: [],
+			copies: [],
+			authors: [],
+			images: [],
+			books: []
+		},
 		_show = "people",
 		_message = "",
 		_current = 0;
 
 function setPeople(people) {
-	_people = people;
+	_resources.people = people;
 };
 
 function setLoans(loans) {
-	_loans = loans;
+	_resources.loans = loans;
 };
 
 function setCopies(copies) {
-	_copies = copies;
+	_resources.copies = copies;
+};
+
+function setAuthors(authors) {
+	_resources.authors = authors;
+};
+
+function setBooks(books) {
+	_resources.books = books;
+};
+
+function setImages(images) {
+	_resources.images = images;
 };
 
 function setShow(show) {
@@ -46,13 +63,25 @@ var ManageStore = assign({}, EventEmitter.prototype, {
 		this.removeListener('change', callback);
 	},
 	getPeople: function() {
-		return _people;
+		return _resources.people;
 	},
 	getLoans: function() {
-		return _loans;
+		return _resources.loans;
 	},
 	getCopies: function() {
-		return _copies;
+		return _resources.copies;
+	},
+	getBooks: function() {
+		return _resources.books;
+	},
+	getAuthors: function() {
+		return _resources.authors;
+	},
+	getImages: function() {
+		return _resources.images;
+	},
+	getResources: function() {
+		return _resources;
 	},
 	getShow: function() {
 		return _show;
@@ -80,6 +109,23 @@ ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 			break;
 		case ActionConstants.RECEIVE_COPIES:
 			setCopies(action.copies);
+			setMessage('');
+			setCurrent(0);
+			break;
+		case ActionConstants.RECEIVE_BOOKS:
+			setBooks(action.books);
+			setMessage('');
+			setCurrent(0);
+			break;
+		case ActionConstants.RECEIVE_AUTHORS:
+			setAuthors(action.authors);
+			setMessage('');
+			setCurrent(0);
+			break;
+		case ActionConstants.RECEIVE_IMAGES:
+			console.log("Store: Got images:");
+			console.log(action.images);
+			setImages(action.images);
 			setMessage('');
 			setCurrent(0);
 			break;

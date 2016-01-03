@@ -1,4 +1,4 @@
-var LoansActionCreator = require('../actions/LoansActionCreator');
+var ManageActionCreator = require('../actions/ManageActionCreator');
 
 var LoansSearchBar = React.createClass({
 	getInitialState: function() {
@@ -6,6 +6,9 @@ var LoansSearchBar = React.createClass({
 			firstname: '',
 			secondname: ''
 		};
+	},
+	componentDidMount: function() {
+		ManageActionCreator.getLoans();
 	},
 	handleFirstnameChange: function(event) {
 		this.setState({firstname: event.target.value});
@@ -19,7 +22,7 @@ var LoansSearchBar = React.createClass({
 		}
 	},
 	handleSearch: function() {
-		LoansActionCreator.getLoansBy({
+		ManageActionCreator.getLoansBy({
 			firstname: this.state.firstname,
 			secondname: this.state.secondname
 		});

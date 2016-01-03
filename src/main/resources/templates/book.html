@@ -7,62 +7,72 @@
 		<link rel='stylesheet' type='text/css' href='/css/style.css'/>
 	</head>
 	<body>
-		<div class="navigation">
-    	<nav>
-				<div class="container">
-			    <ul>
-						<li><a href="/"><i class="fa fa-search"></i>
- Szukaj</a></li>
-						<li><a href="/account"><i class="fa fa-user"></i>
- Konto</a></li>
- <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
-Biblioteka</a></li>
- <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
-Zarządzaj</a></li>
-						<li><a href="/contact"><i class="fa fa-question"></i>
- Kontakt</a></li>
-		      </ul>
-				</div>
-		  </nav>
-		</div>
-		<div class="panel">
-			<div class="container">
-				<div th:if="${message}" th:text="${message}">
-				</div>
+		<div class="wrapper">
+			<div class="navigation">
+	    	<nav>
+					<div class="container">
+				    <ul>
+							<li><a href="/"><i class="fa fa-search"></i>
+	 Szukaj</a></li>
+							<li><a href="/account"><i class="fa fa-user"></i>
+	 Konto</a></li>
+	 <li th:if="${workerMode}"><a href="/manage"><i class="fa fa-book"></i>
+	Biblioteka</a></li>
+	 <li th:if="${adminMode}"><a href="/admin"><i class="fa fa-database"></i>
+	Zarządzaj</a></li>
+							<li><a href="/contact"><i class="fa fa-question"></i>
+	 Kontakt</a></li>
+			      </ul>
+					</div>
+			  </nav>
 			</div>
-			<div class="container">
-				<div class="row">
-					Książki - <a th:href="@{|/author/${book.author.id}|}" th:text="${book.author.author}"></a> - <a th:href="@{|/book/${book.id}|}" th:text="${book.title}"></a>
+			<div class="panel">
+				<div th:if="${message}" class="container">
+					<div th:text="${message}">
+					</div>
 				</div>
-				<div class="row">
-					<h3 th:text="${book.title}"></h3>
-					<div class='divider'></div>
-				</div>
-				<div class="row">
-					<div class="three columns">
-						<div th:switch="${book.image.path}" class="image">
-							<div class="placeholder" th:case="''">
-								<i class="fa fa-question"></i>
+				<div class="container">
+					<div class="row">
+						Książki - <a th:href="@{|/author/${book.author.id}|}" th:text="${book.author.author}"></a> - <a th:href="@{|/book/${book.id}|}" th:text="${book.title}"></a>
+					</div>
+					<div class="row">
+						<h3 th:text="${book.title}"></h3>
+						<div class='divider'></div>
+					</div>
+					<div class="row">
+						<div class="three columns">
+							<div th:if="${book.image}">
+								<div th:if="${book.image.path}" class="image">
+									<img th:src="@{|/img/${book.image.path}|}"></img>
+								</div>
 							</div>
-							<img th:case="*" th:src="@{|/img/${book.image.path}|}"></img>
+							<div th:unless="${book.image}" class="image">
+								<div class="placeholder">
+									<i class="fa fa-question"></i>
+								</div>
+							</div>
+						</div>
+						<div class="nine columns">
+							<label>Autor:</label>
+								<p th:text="${book.author.author}"></p>
+							<label>Liczba egzemplarzy:</label>
+								<p th:text="${#lists.size(book.copies)}"></p>
+
+							<label th:if="${workerMode}">Lista egzemplarzy:</label>
+							<ul th:if="${workerMode}">
+								<li th:each="copy : ${book.copies}">
+									<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
+								</li>
+							</ul>
 						</div>
 					</div>
-					<div class="nine columns">
-						<label>Autor:</label>
-							<p th:text="${book.author.author}"></p>
-						<label>Liczba egzemplarzy:</label>
-							<p th:text="${#lists.size(book.copies)}"></p>
-
-						<label th:if="${workerMode}">Lista egzemplarzy:</label>
-						<ul th:if="${workerMode}">
-							<li th:each="copy : ${book.copies}">
-								<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
-							</li>
-						</ul>
-					</div>
 				</div>
 			</div>
+			<div class="push"></div>
 		</div>
+		<footer>
+			Biblioteka 2016
+		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
 	</body>

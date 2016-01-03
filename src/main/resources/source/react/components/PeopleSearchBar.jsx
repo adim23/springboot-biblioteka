@@ -1,4 +1,4 @@
-var PeopleActionCreator = require('../actions/PeopleActionCreator');
+var ManageActionCreator = require('../actions/ManageActionCreator');
 
 var PeopleSearchBar = React.createClass({
 	getInitialState: function() {
@@ -6,6 +6,9 @@ var PeopleSearchBar = React.createClass({
 			firstname: '',
 			secondname: ''
 		};
+	},
+	componentDidMount: function() {
+		ManageActionCreator.getPeople();
 	},
 	handleFirstnameChange: function(event) {
 		this.setState({firstname: event.target.value});
@@ -19,7 +22,7 @@ var PeopleSearchBar = React.createClass({
 		}
 	},
 	handleSearch: function() {
-		PeopleActionCreator.getPeopleBy({
+		ManageActionCreator.getPeopleBy({
 			firstname: this.state.firstname,
 			secondname: this.state.secondname
 		});
