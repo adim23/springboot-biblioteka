@@ -99,34 +99,28 @@ ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_PEOPLE:
 			setPeople(action.people);
-			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_LOANS:
 			setLoans(action.loans);
-			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_COPIES:
 			setCopies(action.copies);
-			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_BOOKS:
 			setBooks(action.books);
-			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_AUTHORS:
 			setAuthors(action.authors);
-			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_IMAGES:
-			console.log("Store: Got images:");
-			console.log(action.images);
+			("Store: Got images:");
+			(action.images);
 			setImages(action.images);
-			setMessage('');
 			setCurrent(0);
 			break;
 		case ActionConstants.CHANGE_OPTION:
@@ -136,10 +130,15 @@ ManageStore.dispatchToken = Dispatcher.register(function(payload) {
 			break;
 		case ActionConstants.CHANGE_PAGE:
 			setCurrent(action.page);
-			setMessage('');
+			break;
+		case ActionConstants.HANDLE_DELETE:
+			setMessage('Pomyślnie usunięto zasoby.');
+			setCurrent(0);
 			break;
 		case ActionConstants.RECEIVE_ERROR:
-			setMessage('Wystąpił błąd.');
+			setMessage(action.error);
+			console.warning(action.error);
+			console.error(action.errorStack);
 			break;
 	}
 	ManageStore.emitChange();

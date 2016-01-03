@@ -3,7 +3,7 @@ var ResourcesActionCreator = require('../actions/ResourcesActionCreator');
 var BookForm = React.createClass({
 	getInitialState: function() {
 		return {
-			author: 0,
+			author: null,
 			title: '',
 			image: null
 		};
@@ -18,6 +18,9 @@ var BookForm = React.createClass({
 		this.setState({title: event.target.value});
 	},
 	handlePost: function(){
+		if (!this.state.author){
+			return;
+		}
 		if (this.state.image){
 			ResourcesActionCreator.postBook({
 				author: {

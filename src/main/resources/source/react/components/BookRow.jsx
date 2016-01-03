@@ -1,4 +1,15 @@
+var ResourcesActionCreator = require('../actions/ResourcesActionCreator'),
+		ManageActionCreator = require('../actions/ManageActionCreator');
+
 var BookRow = React.createClass({
+	handleDelete: function(){
+		var thenFn = function(){
+			ResourcesActionCreator.getBooks();
+		};
+		ResourcesActionCreator.deleteBook({
+			id: this.props.book.id
+		}).then(thenFn);
+	},
 	render: function() {
 		var image;
 		if (!this.props.book.image || this.props.book.image.path == ''){
@@ -26,6 +37,9 @@ var BookRow = React.createClass({
 				</td>
 				<td>
 					<a href={"/author/" + this.props.book.author.id}>{this.props.book.author.author}</a>
+				</td>
+				<td>
+					<button className='button-primary' onClick={this.handleDelete}>Usuń</button>
 				</td>
 			</tr>
 		);

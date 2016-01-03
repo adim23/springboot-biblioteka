@@ -5,12 +5,9 @@ var Dispatcher = require('../core/Dispatcher'),
 
 var ManageActionCreator = {
 	getImages: function() {
-		console.log("Calling getImages()");
-		API
+		return API
 			.get('/api/images')
 			.then(function(images) {
-				console.log("ActionCreator: Got images:");
-				console.log(images);
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_IMAGES,
 					images: images
@@ -24,7 +21,7 @@ var ManageActionCreator = {
 			});
 	},
 	getImagesBy: function(parameters) {
-		API
+		return API
 			.get('/api/images?path=' + parameters.path)
 			.then(function(images) {
 				Dispatcher.handleViewAction({
@@ -40,7 +37,7 @@ var ManageActionCreator = {
 			});
 	},
 	getAuthors: function() {
-		API
+		return API
 			.get('/api/authors')
 			.then(function(authors) {
 				Dispatcher.handleViewAction({
@@ -56,7 +53,7 @@ var ManageActionCreator = {
 			});
 	},
 	getAuthorsBy: function(parameters) {
-		API
+		return API
 			.get('/api/authors?author=' + parameters.author)
 			.then(function(authors) {
 				Dispatcher.handleViewAction({
@@ -72,7 +69,7 @@ var ManageActionCreator = {
 			});
 	},
 	getLoans: function() {
-		API
+		return API
 			.get('/api/loans')
 			.then(function(loans) {
 				Dispatcher.handleViewAction({
@@ -88,7 +85,7 @@ var ManageActionCreator = {
 			});
 	},
 	getLoansBy: function(parameters) {
-		API
+		return API
 			.get('/api/loans?firstname=' + parameters.firstname + '&secondname=' + parameters.secondname)
 			.then(function(loans) {
 				Dispatcher.handleViewAction({
@@ -104,23 +101,25 @@ var ManageActionCreator = {
 			});
 	},
 	getCopies: function() {
-		API
+		return API
 			.get('/api/copies')
 			.then(function(copies) {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_COPIES,
 					copies: copies
 				});
+				resolve(copies);
 			})
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
 					error: 'Wystąpił błąd.'
 				});
+				reject('Wystąpił błąd.');
 			});
 	},
 	getCopiesBy: function(parameters) {
-		API
+		return API
 			.get('/api/copies?title=' + parameters.title + '&author=' + parameters.author)
 			.then(function(copies) {
 				Dispatcher.handleViewAction({
@@ -136,7 +135,7 @@ var ManageActionCreator = {
 			});
 	},
 	getPeople: function() {
-		API
+		return API
 			.get('/api/people')
 			.then(function(people) {
 				Dispatcher.handleViewAction({
@@ -152,7 +151,7 @@ var ManageActionCreator = {
 			});
 	},
 	getPeopleBy: function(parameters) {
-		API
+		return API
 			.get('/api/people?firstname=' + parameters.firstname + '&secondname=' + parameters.secondname)
 			.then(function(people) {
 				Dispatcher.handleViewAction({

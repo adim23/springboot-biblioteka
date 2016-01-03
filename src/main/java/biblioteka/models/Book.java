@@ -13,6 +13,7 @@ import java.util.List;
 import biblioteka.models.Author;
 import biblioteka.models.Copy;
 import biblioteka.models.Image;
+import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,7 +29,7 @@ public class Book {
 	@JoinColumn(name="id_author")
 	private Author author;
 
-	@OneToMany(mappedBy="book")
+	@OneToMany(mappedBy="book", orphanRemoval=true)
 	private List<Copy> copies;
 
 	@ManyToOne
@@ -56,6 +57,12 @@ public class Book {
 
 	public Image getImage(){
 		return this.image;
+	}
+
+	@JsonIgnore
+	public List<Copy> getCopiesAvailable(){
+		return this.getCopies().stream()
+	    .filter(c -> !c.getLoaned()).collect(Collectors.toList());
 	}
 
 	@JsonIgnore

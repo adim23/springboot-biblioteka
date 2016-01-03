@@ -13,6 +13,8 @@ var CopiesTable = React.createClass({
 							<th>ID</th>
 							<th>Książka</th>
 							<th>Autor</th>
+							<th>Czytelnik</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>{rows}</tbody>

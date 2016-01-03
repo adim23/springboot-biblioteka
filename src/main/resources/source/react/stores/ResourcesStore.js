@@ -64,21 +64,19 @@ ResourcesStore.dispatchToken = Dispatcher.register(function(payload) {
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_AUTHORS:
 			setAuthors(action.authors);
-			setMessage('');
 			break;
 		case ActionConstants.RECEIVE_BOOKS:
 			setBooks(action.books);
-			setMessage('');
 			break;
 		case ActionConstants.RECEIVE_IMAGES:
 			setImages(action.images);
-			setMessage('');
 			break;
 		case ActionConstants.CHANGE_OPTION:
 			setType(action.type);
+			setMessage('');
 			break;
 		case ActionConstants.HANDLE_POST:
-			setMessage("Dodano pomyślnie zasób.");
+			setMessage("Pomyślnie dodano zasoby.");
 			break;
 		case ActionConstants.RECEIVE_ERROR:
 			setMessage(action.error);

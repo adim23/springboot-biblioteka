@@ -56,12 +56,17 @@
 							<label>Autor:</label>
 								<p th:text="${book.author.author}"></p>
 							<label>Liczba egzemplarzy:</label>
-								<p th:text="${#lists.size(book.copies)}"></p>
-
-							<label th:if="${workerMode}">Lista egzemplarzy:</label>
+								<p th:text="@{|${#lists.size(available)} / ${#lists.size(book.copies)}|}"></p>
+							<label th:if="${workerMode}">
+								<span th:if="${#lists.isEmpty(book.copies)}">Brak egzemplarzy.</span>
+								<span th:unless="${#lists.isEmpty(book.copies)}">Lista egzemplarzy:</span>
+							</label>
 							<ul th:if="${workerMode}">
 								<li th:each="copy : ${book.copies}">
 									<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
+									<span th:if="${copy.loaned}"> - wypożyczony przez
+										<a th:href="@{|/person/${copy.person.id}|}" th:text="@{|${copy.person.firstname} ${copy.person.secondname}|}"></a>
+									</span>
 								</li>
 							</ul>
 						</div>

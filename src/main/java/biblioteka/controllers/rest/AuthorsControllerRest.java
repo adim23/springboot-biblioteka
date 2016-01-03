@@ -33,6 +33,15 @@ public class AuthorsControllerRest {
 		return author;
 	}
 
+	@RequestMapping(value = "/api/authors/{id}", method = RequestMethod.DELETE)
+	public Author authorsDELETE(@PathVariable("id") long id) {
+		Author author = authorsRepository.findOne(id);
+		if (author != null){
+			authorsRepository.delete(id);
+		}
+		return author;
+	}
+
 	@RequestMapping(value = "/api/authors/{id}", method = RequestMethod.GET)
 	public Author authorsId(@PathVariable("id") long id) {
 		return authorsRepository.findOne(id);

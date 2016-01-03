@@ -27,8 +27,18 @@ public class CopiesControllerRest {
 
 	@RequestMapping(value = "/api/copies", method = RequestMethod.POST)
 	public Copy copiesPOST(@RequestBody Copy copy) {
+		copy.setLoaned(false);
 		copiesRepository.save(copy);
 		copiesRepository.flush();
+		return copy;
+	}
+
+	@RequestMapping(value = "/api/copies/{id}", method = RequestMethod.DELETE)
+	public Copy copiesDELETE(@PathVariable("id") long id) {
+		Copy copy = copiesRepository.findOne(id);
+		if (copy != null){
+			copiesRepository.delete(id);
+		}
 		return copy;
 	}
 

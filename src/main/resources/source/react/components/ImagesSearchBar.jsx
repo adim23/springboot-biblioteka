@@ -8,7 +8,6 @@ var ImagesSearchBar = React.createClass({
 	},
 	componentDidMount: function() {
 		ManageActionCreator.getImages();
-		console.log("Mounted.");
 	},
 	handlePathChange: function(event) {
 		this.setState({path: event.target.value});

@@ -5,7 +5,7 @@ var Dispatcher = require('../core/Dispatcher'),
 
 var ResourcesActionCreator = {
 	getAuthors: function() {
-		API
+		return API
 			.get('/api/authors/')
 			.then(function(authors) {
 				Dispatcher.handleViewAction({
@@ -22,7 +22,7 @@ var ResourcesActionCreator = {
 			});
 	},
 	getImages: function() {
-		API
+		return API
 			.get('/api/images/')
 			.then(function(images) {
 				Dispatcher.handleViewAction({
@@ -39,7 +39,7 @@ var ResourcesActionCreator = {
 			});
 	},
 	getBooks: function() {
-		API
+		return API
 			.get('/api/books')
 			.then(function(books) {
 				Dispatcher.handleViewAction({
@@ -55,7 +55,7 @@ var ResourcesActionCreator = {
 			});
 	},
 	getBooksByAuthorID: function(parameters) {
-		API
+		return API
 			.get('/api/authors/' + parameters.authorID + '/books')
 			.then(function(books) {
 				Dispatcher.handleViewAction({
@@ -71,7 +71,7 @@ var ResourcesActionCreator = {
 			});
 	},
 	postAuthor: function(data) {
-		API
+		return API
 			.post('/api/authors', data)
 			.then(function(receive) {
 				Dispatcher.handleViewAction({
@@ -87,7 +87,7 @@ var ResourcesActionCreator = {
 			});
 	},
 	postCopy: function(data) {
-		API
+		return API
 			.post('/api/copies', data)
 			.then(function(receive) {
 				Dispatcher.handleViewAction({
@@ -103,7 +103,7 @@ var ResourcesActionCreator = {
 			});
 	},
 	postBook: function(data) {
-		API
+		return API
 			.post('/api/books', data)
 			.then(function(receive) {
 				Dispatcher.handleViewAction({
@@ -115,6 +115,54 @@ var ResourcesActionCreator = {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
 					error: 'Wystąpił błąd przy dodawaniu książki.'
+				});
+			});
+	},
+	deleteAuthor: function(parameters) {
+		return API
+			.delete('/api/authors/' + parameters.id)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_DELETE,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy usuwaniu autora.'
+				});
+			});
+	},
+	deleteBook: function(parameters) {
+		return API
+			.delete('/api/books/' + parameters.id)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_DELETE,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy usuwaniu książki.'
+				});
+			});
+	},
+	deleteCopy: function(parameters) {
+		return API
+			.delete('/api/copies/' + parameters.id)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_DELETE,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy usuwaniu egzemplarza.'
 				});
 			});
 	}

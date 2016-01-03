@@ -41,6 +41,8 @@
 					<div class="row">
 						<h3 th:text="${copy.book.title}"></h3>
 						<div class='divider'></div>
+						<label th:if="${copy.person}">Wypożyczona przez:</label>
+							<a th:if="${copy.person}" th:href="@{|/person/${copy.person.id}|}" th:text="@{|${copy.person.firstname} ${copy.person.secondname}|}"></a>
 						<label th:if="${#lists.isEmpty(copy.loans)}">Ilość wypożyczeń:</label>
 							<p th:if="${#lists.isEmpty(copy.loans)}" th:text="${#lists.size(copy.loans)}"></p>
 						<label th:if="${#lists.isEmpty(copy.loans)}" th:text="@{|Brak wypożyczeń.|}"></label>
@@ -53,6 +55,11 @@
 								<i th:unless="${loan.returned}" class="fa fa-question"></i>
 							</li>
 						</ul>
+						<form class='six columns u-full-width form' th:action="@{|/api/copies/${copy.id}|}" method="delete">
+								<div class='form-row'>
+									<input class='button-primary' type="submit" value="Usuń egzemplarz"/>
+								</div>
+						</form>
 					</div>
 					<div th:if="${message}" th:text="${message}">
 					</div>

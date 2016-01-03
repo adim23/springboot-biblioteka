@@ -1,10 +1,10 @@
-$primary-text: #212121;
-$secondary-text: #727272;
-$divider: #b6b6b6;
-$accent: #073642;
-$primary: #002B36;
+$primary-text: #fafafa;
+$secondary-text: #EEEEEE;
+$divider: #424242;
+$accent: #40C4FF;
+$primary: #3F51B5;
 $text-on-primary: #ffffff;
-$body: #fafafa;
+$body: #212121;
 
 $shadow-low: 0px 2px 8px 0px rgba($primary, 0.3);
 $shadow-med: 0px 4px 12px 0px rgba($primary, 0.2);
@@ -27,21 +27,55 @@ footer, .push {
 	transition: box-shadow 0.2s ease-in-out;
 }
 
+input,
+button,
+textarea,
+select,
+option {
+	transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+	border-radius: 0 !important;
+}
+
 input[type="button"],
 input[type="submit"],
+input[type="text"],
+input[type="password"],
 button,
-.button,
-.image,
-.panel .container {
-	box-shadow: $shadow-low;
+textarea,
+select {
+	border-color: $secondary-text;
+	background-color: lighten($body, 5%);
+	color: $primary-text;
 }
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+	border-color: $primary;
+	background-color: lighten($body, 10%);
+	color: $text-on-primary;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	border-color: $accent;
+	background-color: lighten($body, 10%);
+	color: $text-on-primary;
+}
+
 
 input[type="button"]:hover,
 input[type="submit"]:hover,
 button:hover,
-.button:hover
-.image:hover {
-	box-shadow: $shadow-med;
+textarea:hover,
+select:hover,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	border-color: $text-on-primary;
+	background-color: $text-on-primary;
+	color: $body;
 }
 
 a {
@@ -72,8 +106,8 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-	background-color: darken($primary, 5%);
-	border-color: darken($primary, 5%);
+	background-color: darken($primary, 10%);
+	border-color: darken($primary, 10%);
 }
 
 input[type="email"]:focus,
@@ -89,7 +123,7 @@ select:focus {
 }
 
 body {
-	background: transparent radial-gradient(60% 900px at center 800px , $accent 0%, $primary 100%) repeat scroll 0% 0%;
+	background: transparent radial-gradient(60% 900px at center 800px , darken($accent, 25%) 0%, darken($primary, 10%) 100%) repeat scroll 0% 0%;
 	background-attachment: fixed;
 	color: $primary-text;
 }
@@ -100,8 +134,9 @@ body {
 	width: 100%;
 	display: table;
 	.container {
-		background-color: rgba($body, 0.9);
+		background-color: $body;
 		padding: 20px;
+		margin: 40px auto;
 	}
 }
 
@@ -192,10 +227,15 @@ nav {
 	margin: 0.2rem 0px;
 }
 
-table .image {
-	max-width: 100px;
-	.placeholder {
-		font-size: 1em;
+table {
+	tr {
+		border-bottom: 2px solid $divider;
+	}
+	.image {
+		max-width: 100px;
+		.placeholder {
+			font-size: 1em;
+		}
 	}
 }
 

@@ -28,6 +28,7 @@ public class BooksController {
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
 	public String bookView(@PathVariable("id") long id, Model model, HttpServletRequest request) {
 		Book book = booksRepository.findOne(id);
+		model.addAttribute("available",book.getCopiesAvailable());
 		model.addAttribute("book", book);
 		roleBasedModel.parseModel(request, model);
 		return "book";

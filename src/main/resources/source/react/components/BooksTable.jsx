@@ -14,6 +14,7 @@ var BooksTable = React.createClass({
 							<th>Okładka</th>
 							<th>Tytuł</th>
 							<th>Autor</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>{rows}</tbody>

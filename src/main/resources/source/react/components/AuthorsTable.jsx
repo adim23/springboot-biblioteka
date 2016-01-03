@@ -12,6 +12,7 @@ var AuthorsTable = React.createClass({
 						<tr>
 							<th>ID</th>
 							<th>Autor</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>{rows}</tbody>

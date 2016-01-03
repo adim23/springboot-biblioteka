@@ -3,8 +3,8 @@ var ResourcesActionCreator = require('../actions/ResourcesActionCreator');
 var CopyForm = React.createClass({
 	getInitialState: function() {
 		return {
-			author: 0,
-			book: '',
+			author: null,
+			book: null,
 		};
 	},
 	handleAuthorChange: function(event) {
@@ -17,9 +17,13 @@ var CopyForm = React.createClass({
 		this.setState({book: event.target.value});
 	},
 	handlePost: function(){
+		if (!this.state.author || !this.state.book){
+			return;
+		}
 		ResourcesActionCreator.postCopy({
 			book: {
-				id: this.state.book
+				id: this.state.book,
+				loaned: false
 			}
 		});
 	},

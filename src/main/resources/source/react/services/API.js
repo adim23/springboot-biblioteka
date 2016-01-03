@@ -33,6 +33,24 @@ var API = {
 					}
 				});
 		});
+	},
+	delete: function(url) {
+		return new Promise(function(resolve, reject) {
+			request
+				.del(url)
+				.end(function(err, res) {
+					if (res.status === 404) {
+						reject();
+					} else {
+						try {
+							resolve(JSON.parse(res.text));
+						}
+						catch (err){
+							reject();
+						}
+					}
+				});
+		});
 	}
 };
 

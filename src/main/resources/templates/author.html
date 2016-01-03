@@ -38,7 +38,8 @@
 					<div class="row">
 						<h3 th:text="${author.author}"></h3>
 						<div class='divider'></div>
-						<label>Lista książek:</label>
+						<label th:if="${#lists.isEmpty(author.books)}">Brak książek.</label>
+						<label th:unless="${#lists.isEmpty(author.books)}">Lista książek:</label>
 						<ul>
 							<li th:each="book : ${author.books}">
 								<a th:href="@{|/book/${book.id}|}" th:text="${book.title}"></a>

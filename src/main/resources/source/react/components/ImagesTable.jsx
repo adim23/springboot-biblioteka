@@ -2,15 +2,9 @@ var ImageRow = require('./ImageRow.jsx');
 
 var ImagesTable = React.createClass({
 	render: function() {
-		console.log("Table images:");
-		console.log(this.props.images);
 		var rows = this.props.images.map(function(image) {
-			console.log("Image:")
-			console.log(image);
 			return (<ImageRow image={image}/>);
 		});
-		console.log("Rows: ");
-		console.log(rows);
 		if (rows.length){
 			return (
 				<table className='u-full-width'>

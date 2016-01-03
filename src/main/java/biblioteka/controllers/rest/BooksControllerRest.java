@@ -28,8 +28,20 @@ public class BooksControllerRest {
 
 	@RequestMapping(value = "/api/books", method = RequestMethod.POST)
 	public Book booksPOST(@RequestBody Book book) {
+		if (book.getAuthor() == null){
+			return null;
+		}
 		booksRepository.save(book);
 		booksRepository.flush();
+		return book;
+	}
+
+	@RequestMapping(value = "/api/books/{id}", method = RequestMethod.DELETE)
+	public Book booksDELETE(@PathVariable("id") long id) {
+		Book book = booksRepository.findOne(id);
+		if (book != null){
+			booksRepository.delete(id);
+		}
 		return book;
 	}
 

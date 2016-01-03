@@ -10,6 +10,9 @@ var AuthorForm = React.createClass({
 		this.setState({author: event.target.value});
 	},
 	handlePost: function(){
+		if (this.state.author.length == 0){
+			return;
+		}
 		ResourcesActionCreator.postAuthor({
 			author: this.state.author
 		});

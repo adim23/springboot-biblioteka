@@ -17,6 +17,11 @@ id_account integer not null,
 role text not null
 );
 
+CREATE TABLE images(
+id serial primary key,
+path text
+);
+
 CREATE TABLE books(
 id serial primary key,
 title text not null,
@@ -24,14 +29,11 @@ id_author integer not null,
 id_image integer
 );
 
-CREATE TABLE images(
-id serial primary key,
-path text
-);
-
 CREATE TABLE copies(
 id serial primary key,
-id_book integer not null
+id_book integer not null,
+loaned boolean default FALSE,
+id_person integer
 );
 
 CREATE TABLE loans(
@@ -173,4 +175,7 @@ INSERT INTO copies(id_book) VALUES (24);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 5, '2015-11-20 15:05:06', TRUE);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 17, '2015-11-20 15:05:20', TRUE);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 24, '2015-11-21 14:30:47', TRUE);
+
+UPDATE copies SET id_person = 3 WHERE id = 41;
+UPDATE copies SET loaned = TRUE WHERE id = 41;
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 41, '2015-12-23 17:51:02', FALSE);

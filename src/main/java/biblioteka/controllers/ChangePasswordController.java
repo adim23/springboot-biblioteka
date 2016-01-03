@@ -43,7 +43,6 @@ public class ChangePasswordController {
 			model.addAttribute("message", "Czarna dziura?");
 			return "account";
 		}
-		System.out.println("Stare hasło: " + oldpassword + "\nNowe hasło: " + account.securityGetPassword());
 		if (oldpassword.equals(account.securityGetPassword())){
 			if (newpassword.length() == 0){
 				model.addAttribute("message", "Nieprawidłowe nowe hasło.");

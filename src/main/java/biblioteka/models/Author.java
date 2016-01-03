@@ -23,7 +23,7 @@ public class Author {
 	private long id;
 	private String author;
 
-	@OneToMany(mappedBy="author")
+	@OneToMany(mappedBy="author", orphanRemoval=true)
 	private List<Book> books;
 
 	protected Author() {}

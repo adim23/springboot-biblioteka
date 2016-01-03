@@ -5,7 +5,7 @@ var Dispatcher = require('../core/Dispatcher'),
 
 var BooksActionCreator = {
 	getBooks: function() {
-		API
+		return API
 			.get('/api/books')
 			.then(function(books) {
 				Dispatcher.handleViewAction({
@@ -21,7 +21,7 @@ var BooksActionCreator = {
 			});
 	},
 	getBooksBy: function(parameters) {
-		API
+		return API
 			.get('/api/books?title=' + parameters.title + '&author=' + parameters.author)
 			.then(function(books) {
 				Dispatcher.handleViewAction({

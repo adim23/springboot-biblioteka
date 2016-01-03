@@ -48,8 +48,8 @@ var ManageApp = React.createClass({
 			page: ManageStore.getCurrent(),
 			message: ManageStore.getMessage()
 		});
-		console.log("App: Images: ");
-		console.log(this.state.resources.images);
+		("App: Images: ");
+		(this.state.resources.images);
 	},
 	getSlicedItems: function(items) {
 		return items.slice(
