@@ -55,11 +55,6 @@
 								<i th:unless="${loan.returned}" class="fa fa-question"></i>
 							</li>
 						</ul>
-						<form class='six columns u-full-width form' th:action="@{|/api/copies/${copy.id}|}" method="delete">
-								<div class='form-row'>
-									<input class='button-primary' type="submit" value="Usuń egzemplarz"/>
-								</div>
-						</form>
 					</div>
 					<div th:if="${message}" th:text="${message}">
 					</div>

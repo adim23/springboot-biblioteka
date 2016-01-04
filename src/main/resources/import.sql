@@ -41,7 +41,7 @@ id serial primary key,
 id_person integer not null,
 id_copy integer not null,
 date_loaned timestamp not null,
-returned boolean not null
+returned boolean default FALSE
 );
 
 CREATE TABLE authors(
@@ -52,10 +52,12 @@ author text not null
 INSERT INTO accounts(username, password) VALUES ('administrator', 'administrator');
 INSERT INTO accounts(username, password) VALUES ('biblioteka', 'biblioteka');
 INSERT INTO accounts(username, password) VALUES ('jankowalski', 'jankowalski');
+INSERT INTO accounts(username, password) VALUES ('adamnowak', 'adamnowak');
 
 INSERT INTO people(id_account, firstname, secondname) VALUES (1, 'Administator', 'Biblioteki');
 INSERT INTO people(id_account, firstname, secondname) VALUES (2, 'Pracownik', 'Biblioteki');
 INSERT INTO people(id_account, firstname, secondname) VALUES (3, 'Jan', 'Kowalski');
+INSERT INTO people(id_account, firstname, secondname) VALUES (4, 'Adam', 'Nowak');
 
 INSERT INTO roles(id_account, role) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO roles(id_account, role) VALUES (1, 'ROLE_WORKER');
@@ -63,6 +65,7 @@ INSERT INTO roles(id_account, role) VALUES (1, 'ROLE_USER');
 INSERT INTO roles(id_account, role) VALUES (2, 'ROLE_WORKER');
 INSERT INTO roles(id_account, role) VALUES (2, 'ROLE_USER');
 INSERT INTO roles(id_account, role) VALUES (3, 'ROLE_USER');
+INSERT INTO roles(id_account, role) VALUES (4, 'ROLE_USER');
 
 INSERT INTO authors(author) VALUES ('Bolesław Prus');
 INSERT INTO authors(author) VALUES ('Henryk Sienkiewicz');
@@ -179,3 +182,13 @@ INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 24, '201
 UPDATE copies SET id_person = 3 WHERE id = 41;
 UPDATE copies SET loaned = TRUE WHERE id = 41;
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 41, '2015-12-23 17:51:02', FALSE);
+
+UPDATE copies SET id_person = 4 WHERE id = 1;
+UPDATE copies SET loaned = TRUE WHERE id = 1;
+UPDATE copies SET id_person = 4 WHERE id = 2;
+UPDATE copies SET loaned = TRUE WHERE id = 2;
+UPDATE copies SET id_person = 4 WHERE id = 5;
+UPDATE copies SET loaned = TRUE WHERE id = 5;
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (4, 1, '2015-11-27 15:05:06', FALSE);
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (4, 2, '2015-12-28 15:05:20', FALSE);
+INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (4, 5, '2015-12-28 14:30:47', FALSE);

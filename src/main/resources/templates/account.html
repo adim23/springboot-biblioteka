@@ -40,23 +40,40 @@
 								<input class='button-primary' type="submit" value="Wyloguj"/>
 						</form>
 						<div class="divider"></div>
-							<div class="six columns">
-							<h5>Zmiana hasła</h5>
-							<form class='u-full-width form' th:action="@{/changepassword}" method="post">
-									<div class='form-row'>
-										<label class='four columns'>Stare hasło: </label><input class='eight columns' type="password" name="oldpassword"/>
-									</div>
-									<div class='form-row'>
-										<label class='four columns'>Nowe hasło: </label><input class='eight columns' type="password" name="newpassword"/>
-									</div>
-									<div class='form-row'>
-										<input class='button-primary' type="submit" value="Zmień"/>
-									</div>
-							</form>
-					</div>
+							<div class="row">
+								<div class="six columns">
+									<label>Liczba wypożyczeń:</label>
+										<p th:text="${#lists.size(user.loans)}"></p>
+									<label>
+										<span th:if="${#lists.isEmpty(user.loans)}">Brak wypożyczeń.</span>
+										<span th:unless="${#lists.isEmpty(user.loans)}">Historia wypożyczeń:</span>
+									</label>
+									<ul>
+										<li th:each="loan : ${user.loans}">
+											<a th:href="@{|/book/${loan.copy.book.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')} - ${loan.copy.book.title}|}"></a> -
+											<i th:if="${loan.returned}" class="fa fa-check"></i>
+											<i th:unless="${loan.returned}" class="fa fa-question"></i>
+										</li>
+									</ul>
+								</div>
+								<div class="six columns">
+									<h5>Zmiana hasła</h5>
+									<form class='u-full-width form' th:action="@{/changepassword}" method="post">
+											<div class='form-row'>
+												<label class='four columns'>Stare hasło: </label><input class='eight columns' type="password" name="oldpassword"/>
+											</div>
+											<div class='form-row'>
+												<label class='four columns'>Nowe hasło: </label><input class='eight columns' type="password" name="newpassword"/>
+											</div>
+											<div class='form-row'>
+												<input class='button-primary' type="submit" value="Zmień"/>
+											</div>
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
 			<div class="push"></div>
 		</div>
 		<footer>

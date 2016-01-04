@@ -38,7 +38,12 @@
 					<div class="row">
 						<h3 th:text="@{|${person.firstname} ${person.secondname}|}"></h3>
 						<div class='divider'></div>
-						<label>Historia wypożyczeń:</label>
+						<label>Liczba wypożyczeń:</label>
+							<p th:text="${#lists.size(person.loans)}"></p>
+						<label>
+							<span th:if="${#lists.isEmpty(person.loans)}">Brak wypożyczeń.</span>
+							<span th:unless="${#lists.isEmpty(person.loans)}">Historia wypożyczeń:</span>
+						</label>
 						<ul>
 							<li th:each="loan : ${person.loans}">
 								<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
