@@ -123,7 +123,7 @@ select:focus {
 }
 
 body {
-	background: transparent radial-gradient(60% 900px at center 800px , darken($accent, 10%) 0%, darken($primary, 10%) 100%) repeat scroll 0% 0%;
+	background: darken($accent, 25%);
 	background-attachment: fixed;
 	color: $primary-text;
 }

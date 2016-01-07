@@ -28,7 +28,7 @@ public class FileUploadController {
   @RequestMapping(value="/upload", method=RequestMethod.POST)
   public String handleFileUpload(HttpServletRequest request, Model model, @RequestParam("name") String name, @RequestParam("file") MultipartFile file){
     roleBasedModel.parseModel(request, model);
-    String filename = "src/main/resources/static/img/" + name;
+    String filename = "images/" + name;
     if (!file.isEmpty()) {
       try {
         byte[] bytes = file.getBytes();

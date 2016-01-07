@@ -5,84 +5,90 @@ var gulp	= require('gulp'),
 		concat	= require('gulp-concat'),
 		browserify	= require('browserify'),
 		reactify	= require('reactify'),
+		es = require('event-stream'),
 		source = require('vinyl-source-stream'),
 		buffer = require('vinyl-buffer');
 
-gulp.task('books-app-min', function() {
-	var bundler = browserify('./src/main/resources/source/react/books-app.jsx');
-	bundler.transform(reactify);
-	var stream = bundler.bundle();
-	return stream
-		.pipe(source('books-app.js'))
-		.pipe(buffer())
-		.pipe(uglify())
-		.pipe(gulp.dest('./src/main/resources/static/js/app'));
-});
-gulp.task('books-app', function() {
-	var bundler = browserify('./src/main/resources/source/react/books-app.jsx');
-	bundler.transform(reactify);
-	var stream = bundler.bundle();
-	return stream
-		.pipe(source('books-app.js'))
-		.pipe(gulp.dest('./src/main/resources/static/js/app'));
+gulp.task('react', function() {
+	var files = [
+		{
+			src: './client/src/react/books-app.jsx',
+			dist: './client/dist/js/app/books-app.js'
+		},
+		{
+			src: './client/src/react/manage-app.jsx',
+			dist: '../client/dist/js/app/manage-app.js'
+		},
+		{
+			src: './client/src/react/resources-app.jsx',
+			dist: './client/dist/js/app/resources-app.js'
+		}
+	];
+
+	var tasks = files.map(function(entry) {
+		return browserify(entry.src)
+			.transform(reactify)
+			.bundle()
+			.pipe(source(entry.dist))
+			.pipe(buffer())
+			.pipe(uglify())
+			.pipe(gulp.dest('.'));
+		});
+
+	return es.merge.apply(null, tasks);
 });
 
-gulp.task('manage-app-min', function() {
-	var bundler = browserify('./src/main/resources/source/react/manage-app.jsx');
-	bundler.transform(reactify);
-	var stream = bundler.bundle();
-	return stream
-		.pipe(source('manage-app.js'))
-		.pipe(buffer())
-		.pipe(uglify())
-		.pipe(gulp.dest('./src/main/resources/static/js/app'));
-});
-gulp.task('manage-app', function() {
-	var bundler = browserify('./src/main/resources/source/react/manage-app.jsx');
-	bundler.transform(reactify);
-	var stream = bundler.bundle();
-	return stream
-		.pipe(source('manage-app.js'))
-		.pipe(gulp.dest('./src/main/resources/static/js/app'));
-});
+gulp.task('react-min', function() {
+	var files = [
+		{
+			src: './client/src/react/books-app.jsx',
+			dist: './client/dist/js/app/books-app.js'
+		},
+		{
+			src: './client/src/react/manage-app.jsx',
+			dist: '../client/dist/js/app/manage-app.js'
+		},
+		{
+			src: './client/src/react/resources-app.jsx',
+			dist: './client/dist/js/app/resources-app.js'
+		}
+	];
 
-gulp.task('resources-app-min', function() {
-	var bundler = browserify('./src/main/resources/source/react/resources-app.jsx');
-	bundler.transform(reactify);
-	var stream = bundler.bundle();
-	return stream
-		.pipe(source('resources-app.js'))
-		.pipe(buffer())
-		.pipe(uglify())
-		.pipe(gulp.dest('./src/main/resources/static/js/app'));
-});
-gulp.task('resources-app', function() {
-	var bundler = browserify('./src/main/resources/source/react/resources-app.jsx');
-	bundler.transform(reactify);
-	var stream = bundler.bundle();
-	return stream
-		.pipe(source('resources-app.js'))
-		.pipe(gulp.dest('./src/main/resources/static/js/app'));
-});
+	var tasks = files.map(function(entry) {
+		return browserify(entry.src)
+			.transform(reactify)
+			.bundle()
+			.pipe(source(entry.dist))
+			.pipe(gulp.dest('.'));
+		});
 
-
-gulp.task('react', ['manage-app', 'books-app', 'resources-app']);
-gulp.task('react-min', ['manage-app-min', 'books-app-min', 'resources-app-min']);
+	return es.merge.apply(null, tasks);
+});
 
 gulp.task('sass-min', function() {
-	return gulp.src('./src/main/resources/source/sass/*.scss')
+	return gulp.src('./client/src/sass/*.scss')
 		.pipe(sass())
 		.pipe(concat('style.css'))
 		.pipe(minify())
-		.pipe(gulp.dest('./src/main/resources/static/css'))
+		.pipe(gulp.dest('./client/dist/css'))
 });
 gulp.task('sass', function() {
-	return gulp.src('./src/main/resources/source/sass/*.scss')
+	return gulp.src('./client/src/sass/*.scss')
 		.pipe(sass())
 		.pipe(concat('style.css'))
-		.pipe(gulp.dest('./src/main/resources/static/css'))
+		.pipe(gulp.dest('./client/dist/css'))
 });
 
+gulp.task('move', function() {
+  gulp.src([
+		'./client/dist/**'
+	], { base: './client/dist/' })
+  .pipe(gulp.dest('src/main/resources/static/'));
+});
 
-gulp.task('default', ['react', 'sass']);
-gulp.task('minify', ['react-min', 'sass-min']);
+gulp.task('default', ['react', 'sass'], function() {
+	gulp.start('move');
+});
+gulp.task('minify', ['react-min', 'sass-min'], function() {
+	gulp.start('move');
+});
