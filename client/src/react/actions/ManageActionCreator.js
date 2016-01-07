@@ -16,7 +16,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych miniatur.'
 				});
 			});
 	},
@@ -32,7 +32,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych miniatur.'
 				});
 			});
 	},
@@ -48,7 +48,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych autorów.'
 				});
 			});
 	},
@@ -64,7 +64,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych autorów.'
 				});
 			});
 	},
@@ -80,7 +80,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych wypożyczeń.'
 				});
 			});
 	},
@@ -100,7 +100,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych wypożyczeń.'
 				});
 			});
 	},
@@ -112,14 +112,12 @@ var ManageActionCreator = {
 					actionType: ActionConstants.RECEIVE_COPIES,
 					copies: copies
 				});
-				resolve(copies);
 			})
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych egzemplarzy.'
 				});
-				reject('Wystąpił błąd.');
 			});
 	},
 	getCopiesBy: function(parameters) {
@@ -138,7 +136,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych egzemplarzy.'
 				});
 			});
 	},
@@ -154,7 +152,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych czytelników.'
 				});
 			});
 	},
@@ -170,7 +168,7 @@ var ManageActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych czytelników.'
 				});
 			});
 	}

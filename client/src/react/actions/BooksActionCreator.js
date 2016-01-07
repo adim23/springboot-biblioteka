@@ -16,7 +16,7 @@ var BooksActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych książek.'
 				});
 			});
 	},
@@ -32,7 +32,7 @@ var BooksActionCreator = {
 			.catch(function() {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
-					error: 'Wystąpił błąd.'
+					error: 'Wystąpił błąd przy odbieraniu danych książek.'
 				});
 			});
 	}

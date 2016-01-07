@@ -1,8 +1,8 @@
 $primary-text: #fafafa;
 $secondary-text: #EEEEEE;
 $divider: #424242;
-$accent: #40C4FF;
-$primary: #3F51B5;
+$accent: #40c4ff;
+$primary: #0d47a1;
 $text-on-primary: #ffffff;
 $body: #212121;
 
@@ -123,7 +123,7 @@ select:focus {
 }
 
 body {
-	background: mix(darken($accent, 25%), $primary);
+	background: darken($primary, 15%);
 	background-attachment: fixed;
 	color: $primary-text;
 }
