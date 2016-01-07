@@ -17,7 +17,7 @@ gulp.task('react', function() {
 		},
 		{
 			src: './client/src/react/manage-app.jsx',
-			dist: '../client/dist/js/app/manage-app.js'
+			dist: './client/dist/js/app/manage-app.js'
 		},
 		{
 			src: './client/src/react/resources-app.jsx',
@@ -46,7 +46,7 @@ gulp.task('react-min', function() {
 		},
 		{
 			src: './client/src/react/manage-app.jsx',
-			dist: '../client/dist/js/app/manage-app.js'
+			dist: './client/dist/js/app/manage-app.js'
 		},
 		{
 			src: './client/src/react/resources-app.jsx',
