@@ -11,17 +11,6 @@ var CopyRow = React.createClass({
 		}).then(thenFn);
 	},
 	render: function() {
-		var person;
-		if (!this.props.copy.person){
-			person = (
-				<span></span>
-			);
-		}
-		else {
-			person = (
-				<a href={"/person/" + this.props.copy.person.id}>{this.props.copy.person.firstname + " " + this.props.copy.person.secondname}</a>
-			);
-		}
 		return (
 			<tr>
 				<td>
@@ -32,9 +21,6 @@ var CopyRow = React.createClass({
 				</td>
 				<td>
 					<a href={"/author/" + this.props.copy.book.author.id}>{this.props.copy.book.author.author}</a>
-				</td>
-				<td>
-					{person}
 				</td>
 				<td>
 					<button className='button-primary' onClick={this.handleDelete}>Usuń</button>

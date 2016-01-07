@@ -34,6 +34,25 @@ var API = {
 				});
 		});
 	},
+	put: function(url, data) {
+		return new Promise(function(resolve, reject) {
+			request
+				.put(url)
+				.send(data)
+				.end(function(err, res) {
+					if (res.status === 404) {
+						reject();
+					} else {
+						try {
+							resolve(JSON.parse(res.text));
+						}
+						catch (err){
+							reject();
+						}
+					}
+				});
+		});
+	},
 	delete: function(url) {
 		return new Promise(function(resolve, reject) {
 			request

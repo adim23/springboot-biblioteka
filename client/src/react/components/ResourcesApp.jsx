@@ -3,6 +3,7 @@ var ResourcesStore = require('../stores/ResourcesStore'),
 		ResourcesActionCreator = require('../actions/ResourcesActionCreator'),
 		AuthorForm = require('./AuthorForm.jsx'),
 		BookForm = require('./BookForm.jsx'),
+		LoanForm = require('./LoanForm.jsx'),
 		CopyForm = require('./CopyForm.jsx');
 
 var ResourcesApp = React.createClass({
@@ -11,7 +12,9 @@ var ResourcesApp = React.createClass({
 			resources: {
 				authors: [],
 				images: [],
-				books: []
+				books: [],
+				copies: [],
+				people: []
 			},
 			type: 'author',
 			message: ''
@@ -19,11 +22,6 @@ var ResourcesApp = React.createClass({
 	},
 	componentWillMount: function() {
 		ResourcesStore.addChangeListener(this.onChange);
-	},
-	componentDidMount: function() {
-		ResourcesActionCreator.getAuthors();
-		ResourcesActionCreator.getImages();
-		ResourcesActionCreator.getBooks();
 	},
 	componentWillUnmount: function() {
 		ResourcesStore.removeChangeListener(this.onChange);
@@ -53,6 +51,12 @@ var ResourcesApp = React.createClass({
 			case 'copy': {
 					form = (
 						<CopyForm authors={this.state.resources.authors} books={this.state.resources.books}/>
+					);
+					break;
+				}
+			case 'loan': {
+					form = (
+						<LoanForm authors={this.state.resources.authors} books={this.state.resources.books} people={this.state.resources.people} copies={this.state.resources.copies}/>
 					);
 					break;
 				}

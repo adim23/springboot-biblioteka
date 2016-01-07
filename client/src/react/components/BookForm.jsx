@@ -8,6 +8,10 @@ var BookForm = React.createClass({
 			image: null
 		};
 	},
+	componentDidMount: function() {
+		ResourcesActionCreator.getAuthors();
+		ResourcesActionCreator.getImages();
+	},
 	handleAuthorChange: function(event) {
 		this.setState({author: event.target.value});
 	},
@@ -21,6 +25,9 @@ var BookForm = React.createClass({
 		if (!this.state.author){
 			return;
 		}
+		var thenFn = function(){
+			ResourcesActionCreator.getBooks();
+		};
 		if (this.state.image){
 			ResourcesActionCreator.postBook({
 				author: {
@@ -30,7 +37,7 @@ var BookForm = React.createClass({
 				image: {
 					id: this.state.image
 				}
-			});
+			}).then(thenFn);
 		}
 		else {
 			ResourcesActionCreator.postBook({
@@ -38,13 +45,16 @@ var BookForm = React.createClass({
 					id: this.state.author
 				},
 				title: this.state.title
-			});
+			}).then(thenFn);
 		}
 	},
 	render: function() {
 		var authors = this.props.authors.map(function(author) {
 			return (<option value={author.id}>{author.author}</option>);
 		});
+		authors.unshift(
+			<option value={null}>-</option>
+		);
 		var images = this.props.images.map(function(image) {
 			return (<option value={image.id}>{image.path}</option>);
 		});

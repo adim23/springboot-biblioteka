@@ -1,8 +1,19 @@
+var ResourcesActionCreator = require('../actions/ResourcesActionCreator'),
+		ManageActionCreator = require('../actions/ManageActionCreator');
+
 var LoanRow = React.createClass({
+	handleReturn: function(){
+		var thenFn = function(){
+			ManageActionCreator.getLoans();
+		};
+		ResourcesActionCreator.returnLoan({
+			id: this.props.loan.id
+		}).then(thenFn);
+	},
 	render: function() {
 		var dateLoaned = new Date(this.props.loan.loaned);
-		var loaned = dateLoaned.getDay() + "/" +
-			dateLoaned.getMonth() + "/" +
+		var loaned = dateLoaned.getDate() + "/" +
+			(dateLoaned.getMonth()+1) + "/" +
 			dateLoaned.getFullYear();
 		return (
 			<tr>
@@ -22,6 +33,11 @@ var LoanRow = React.createClass({
 					{this.props.loan.returned ?
 						<span>Zwrócony <i className="fa fa-check"></i></span>
 					: <span>Wypożyczony <i className="fa fa-question"></i></span>}
+				</td>
+				<td>
+					{this.props.loan.returned ?
+						<span></span>
+					: <button className='button-primary' onClick={this.handleReturn}>Zwróć</button>}
 				</td>
 			</tr>
 		);

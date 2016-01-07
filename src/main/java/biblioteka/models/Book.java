@@ -62,7 +62,7 @@ public class Book {
 	@JsonIgnore
 	public List<Copy> getCopiesAvailable(){
 		return this.getCopies().stream()
-	    .filter(c -> !c.getLoaned()).collect(Collectors.toList());
+	    .filter(c -> c.getLoan() == null).collect(Collectors.toList());
 	}
 
 	@JsonIgnore

@@ -32,8 +32,7 @@ id_image integer
 CREATE TABLE copies(
 id serial primary key,
 id_book integer not null,
-loaned boolean default FALSE,
-id_person integer
+id_loan integer
 );
 
 CREATE TABLE loans(
@@ -179,16 +178,12 @@ INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 5, '2015
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 17, '2015-11-20 15:05:20', TRUE);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 24, '2015-11-21 14:30:47', TRUE);
 
-UPDATE copies SET id_person = 3 WHERE id = 41;
-UPDATE copies SET loaned = TRUE WHERE id = 41;
+UPDATE copies SET id_loan = 4 WHERE id = 41;
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 41, '2015-12-23 17:51:02', FALSE);
 
-UPDATE copies SET id_person = 4 WHERE id = 1;
-UPDATE copies SET loaned = TRUE WHERE id = 1;
-UPDATE copies SET id_person = 4 WHERE id = 2;
-UPDATE copies SET loaned = TRUE WHERE id = 2;
-UPDATE copies SET id_person = 4 WHERE id = 5;
-UPDATE copies SET loaned = TRUE WHERE id = 5;
+UPDATE copies SET id_loan = 5 WHERE id = 1;
+UPDATE copies SET id_loan = 6 WHERE id = 2;
+UPDATE copies SET id_loan = 7 WHERE id = 5;
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (4, 1, '2015-11-27 15:05:06', FALSE);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (4, 2, '2015-12-28 15:05:20', FALSE);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (4, 5, '2015-12-28 14:30:47', FALSE);

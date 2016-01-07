@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import biblioteka.models.Image;
+import biblioteka.repositories.ImagesRepository;
 
 @Controller
 public class FileUploadController {
+
+  @Autowired
+	protected ImagesRepository imagesRepository;
 
   @Autowired
 	private RoleBasedModel roleBasedModel;
@@ -32,24 +37,27 @@ public class FileUploadController {
     if (!file.isEmpty()) {
       try {
         byte[] bytes = file.getBytes();
-        BufferedOutputStream stream = new BufferedOutputStream(
-          new FileOutputStream(
-            new File(
-              filename
-            )
-          )
-        );
+        File newFile = new File(filename);
+        if (newFile.exists()){
+          model.addAttribute("message", "Plik o nazwie " + name + " już istnieje.");
+          return "admin";
+        }
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
         stream.write(bytes);
         stream.close();
-        model.addAttribute("message", "You successfully uploaded " + name + "!");
+
+        Image image = new Image(name);
+        imagesRepository.save(image);
+        imagesRepository.flush();
+        model.addAttribute("message", "Dodałeś plik " + name + "!");
         return "admin";
       } catch (Exception e) {
-        model.addAttribute("message", "You failed to upload " + name + " => " + e.getMessage());
+        model.addAttribute("message", "Nie udało ci się dodać pliku " + name + " => " + e.getMessage());
         return "admin";
       }
     }
     else {
-      model.addAttribute("message", "You failed to upload " + name + " because the file was empty.");
+      model.addAttribute("message", "Nie udało ci się dodać pliku " + name + " ponieważ plik był pusty.");
       return "admin";
     }
   }

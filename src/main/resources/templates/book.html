@@ -64,8 +64,8 @@
 							<ul th:if="${workerMode}">
 								<li th:each="copy : ${book.copies}">
 									<a th:href="@{|/copy/${copy.id}|}" th:text="@{|Egzemplarz id. ${copy.id}|}"></a>
-									<span th:if="${copy.loaned}"> - wypożyczony przez
-										<a th:href="@{|/person/${copy.person.id}|}" th:text="@{|${copy.person.firstname} ${copy.person.secondname}|}"></a>
+									<span th:if="${copy.loan}"> - wypożyczony przez
+										<a th:href="@{|/person/${copy.loan.person.id}|}" th:text="@{|${copy.loan.person.firstname} ${copy.loan.person.secondname}|}"></a>
 									</span>
 								</li>
 							</ul>

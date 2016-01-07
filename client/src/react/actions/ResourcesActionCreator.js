@@ -38,6 +38,22 @@ var ResourcesActionCreator = {
 				});
 			});
 	},
+	getPeople: function() {
+		return API
+			.get('/api/people')
+			.then(function(people) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_PEOPLE,
+					people: people
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu listy książek.'
+				});
+			});
+	},
 	getBooks: function() {
 		return API
 			.get('/api/books')
@@ -67,6 +83,26 @@ var ResourcesActionCreator = {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
 					error: 'Wystąpił błąd przy pobieraniu listy książek.'
+				});
+			});
+	},
+	getCopiesByBookID: function(parameters) {
+		return API
+			.get('/api/books/' + parameters.bookID + '/copies' +
+				((parameters.type != 'all') ? (
+					'?available=' + (parameters.type != 'available')
+				): '')
+			)
+			.then(function(copies) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_COPIES,
+					copies: copies
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu listy egzemplarzy.'
 				});
 			});
 	},
@@ -118,6 +154,22 @@ var ResourcesActionCreator = {
 				});
 			});
 	},
+	postLoan: function(data) {
+		return API
+			.post('/api/loans', data)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_POST,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy wypożyczaniu.'
+				});
+			});
+	},
 	deleteAuthor: function(parameters) {
 		return API
 			.delete('/api/authors/' + parameters.id)
@@ -163,6 +215,24 @@ var ResourcesActionCreator = {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_ERROR,
 					error: 'Wystąpił błąd przy usuwaniu egzemplarza.'
+				});
+			});
+	},
+	returnLoan: function(parameters) {
+		return API
+			.put('/api/loans/' + parameters.id, {
+				returned: true,
+			})
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_CHANGE,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy zwrocie egzemplarza.'
 				});
 			});
 	}

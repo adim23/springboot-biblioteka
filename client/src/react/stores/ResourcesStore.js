@@ -7,6 +7,8 @@ var _type = 'author',
 		_resources = {
 			authors: [],
 			books: [],
+			copies: [],
+			people: [],
 			images: []
 		},
 		_message = '';
@@ -24,12 +26,19 @@ function setBooks(books) {
 function setImages(images) {
 	_resources.images = images;
 };
+function setCopies(copies) {
+	_resources.copies = copies;
+};
+function setPeople(people) {
+	_resources.people = people;
+};
+
 
 function setMessage(message) {
 	_message = message;
 };
 
-var ResourcesStore = assign({}, EventEmitter.prototype, {
+var ResourcesOptions = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
 		this.emit('change')
 	},
@@ -48,6 +57,12 @@ var ResourcesStore = assign({}, EventEmitter.prototype, {
 	getImages: function() {
 		return _resources.images;
 	},
+	getPeople: function() {
+		return _resources.people;
+	},
+	getCopies: function() {
+		return _resources.copies;
+	},
 	getResources: function() {
 		return _resources;
 	},
@@ -59,7 +74,7 @@ var ResourcesStore = assign({}, EventEmitter.prototype, {
 	},
 });
 
-ResourcesStore.dispatchToken = Dispatcher.register(function(payload) {
+ResourcesOptions.dispatchToken = Dispatcher.register(function(payload) {
 	var action = payload.action;
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_AUTHORS:
@@ -70,6 +85,12 @@ ResourcesStore.dispatchToken = Dispatcher.register(function(payload) {
 			break;
 		case ActionConstants.RECEIVE_IMAGES:
 			setImages(action.images);
+			break;
+		case ActionConstants.RECEIVE_COPIES:
+			setCopies(action.copies);
+			break;
+		case ActionConstants.RECEIVE_PEOPLE:
+			setPeople(action.people);
 			break;
 		case ActionConstants.CHANGE_OPTION:
 			setType(action.type);
@@ -84,8 +105,8 @@ ResourcesStore.dispatchToken = Dispatcher.register(function(payload) {
 			console.error(action.errorStack);
 			break;
 	}
-	ResourcesStore.emitChange();
+	ResourcesOptions.emitChange();
 	return true;
 });
 
-module.exports = ResourcesStore;
+module.exports = ResourcesOptions;

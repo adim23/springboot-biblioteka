@@ -21,13 +21,14 @@ public class CopiesControllerRest {
 	protected BooksRepository booksRepository;
 
 	@RequestMapping(value = "/api/copies", method = RequestMethod.GET)
-	public Iterable<Copy> copies(@RequestParam(value="title", defaultValue="") String title, @RequestParam(value="author", defaultValue="") String author) {
-		return copiesRepository.search(title, author);
+	public Iterable<Copy> copies(@RequestParam(value="title", defaultValue="") String title, @RequestParam(value="author", defaultValue="") String author, @RequestParam(value="available", required=false) Boolean available) {
+		if (available == null)	return copiesRepository.search(title, author);
+		if (available)	return copiesRepository.searchAvailable(title, author);
+		return copiesRepository.searchNotAvailable(title, author);
 	}
 
 	@RequestMapping(value = "/api/copies", method = RequestMethod.POST)
 	public Copy copiesPOST(@RequestBody Copy copy) {
-		copy.setLoaned(false);
 		copiesRepository.save(copy);
 		copiesRepository.flush();
 		return copy;

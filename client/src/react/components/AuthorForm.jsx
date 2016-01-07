@@ -13,9 +13,12 @@ var AuthorForm = React.createClass({
 		if (this.state.author.length == 0){
 			return;
 		}
+		var thenFn = function(){
+			ResourcesActionCreator.getAuthors();
+		};
 		ResourcesActionCreator.postAuthor({
 			author: this.state.author
-		});
+		}).then(thenFn);
 	},
 	render: function() {
 		return (

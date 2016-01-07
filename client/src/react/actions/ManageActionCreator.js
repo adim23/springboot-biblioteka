@@ -86,7 +86,11 @@ var ManageActionCreator = {
 	},
 	getLoansBy: function(parameters) {
 		return API
-			.get('/api/loans?firstname=' + parameters.firstname + '&secondname=' + parameters.secondname)
+			.get('/api/loans?firstname=' + parameters.firstname + '&secondname=' + parameters.secondname +
+				((parameters.type != 'all') ? (
+					'&loaned=' + (parameters.type == 'loaned')
+				): '')
+			)
 			.then(function(loans) {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_LOANS,
@@ -120,7 +124,11 @@ var ManageActionCreator = {
 	},
 	getCopiesBy: function(parameters) {
 		return API
-			.get('/api/copies?title=' + parameters.title + '&author=' + parameters.author)
+			.get('/api/copies?title=' + parameters.title + '&author=' + parameters.author +
+				((parameters.type != 'all') ? (
+					'&available=' + (parameters.type == 'available')
+				): '')
+			)
 			.then(function(copies) {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.RECEIVE_COPIES,

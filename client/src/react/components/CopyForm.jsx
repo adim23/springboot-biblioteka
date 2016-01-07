@@ -7,6 +7,10 @@ var CopyForm = React.createClass({
 			book: null,
 		};
 	},
+	componentDidMount: function() {
+		ResourcesActionCreator.getAuthors();
+		ResourcesActionCreator.getBooks();
+	},
 	handleAuthorChange: function(event) {
 		this.setState({author: event.target.value});
 		ResourcesActionCreator.getBooksByAuthorID({
@@ -17,13 +21,12 @@ var CopyForm = React.createClass({
 		this.setState({book: event.target.value});
 	},
 	handlePost: function(){
-		if (!this.state.author || !this.state.book){
+		if (!this.state.book){
 			return;
 		}
 		ResourcesActionCreator.postCopy({
 			book: {
-				id: this.state.book,
-				loaned: false
+				id: this.state.book
 			}
 		});
 	},
@@ -31,9 +34,15 @@ var CopyForm = React.createClass({
 		var authors = this.props.authors.map(function(author) {
 			return (<option value={author.id}>{author.author}</option>);
 		});
+		authors.unshift(
+			<option value={null}>-</option>
+		);
 		var books = this.props.books.map(function(book) {
 			return (<option value={book.id}>{book.title}</option>);
 		});
+		books.unshift(
+			<option value={null}>-</option>
+		);
 		return (
 			<div className='u-full-width form'>
 				<div className='form-row'>

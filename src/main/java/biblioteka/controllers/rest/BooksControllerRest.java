@@ -10,11 +10,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import biblioteka.models.Book;
 import biblioteka.models.Author;
+import biblioteka.models.Copy;
 import biblioteka.repositories.BooksRepository;
 import biblioteka.repositories.AuthorsRepository;
+import biblioteka.repositories.CopiesRepository;
 
 @RestController
 public class BooksControllerRest {
+
+	@Autowired
+	protected CopiesRepository copiesRepository;
+
 	@Autowired
 	protected BooksRepository booksRepository;
 
@@ -49,6 +55,13 @@ public class BooksControllerRest {
 	@RequestMapping(value = "/api/books/{id}")
 	public Book booksId(@PathVariable("id") long id) {
 		return booksRepository.findOne(id);
+	}
+
+	@RequestMapping(value = "/api/books/{id}/copies", method = RequestMethod.GET)
+	public Iterable<Copy> booksCopies(@PathVariable("id") long id, @RequestParam(value="available", required=false) Boolean available) {
+		if (available == null)	return booksRepository.findOne(id).getCopies();
+		if (available)	return copiesRepository.findByBookAndLoanIsNull(booksRepository.findOne(id));
+		return copiesRepository.findByBookAndLoanNotNull(booksRepository.findOne(id));
 	}
 
 	public Iterable<Book> booksById(@RequestParam("id") long id) {

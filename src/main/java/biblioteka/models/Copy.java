@@ -30,16 +30,14 @@ public class Copy {
 	@OneToMany(mappedBy="copy", orphanRemoval=true)
 	private List<Loan> loans;
 
-	private boolean loaned;
-
 	@ManyToOne
-	@JoinColumn(name="id_person")
-	private Person person;
+	@JoinColumn(name="id_loan")
+	private Loan loan;
 
 	protected Copy() {}
-	public Copy(Book book, boolean loaned) {
+	public Copy(Book book, Loan loaned) {
 		this.book = book;
-		this.loaned = loaned;
+		this.loan = loan;
 	}
 
 	public long getId(){
@@ -50,12 +48,9 @@ public class Copy {
 		return this.book;
 	}
 
-	public boolean getLoaned(){
-		return this.loaned;
-	}
-
-	public Person getPerson(){
-		return this.person;
+	@JsonIgnore
+	public Loan getLoan(){
+		return this.loan;
 	}
 
 	@JsonIgnore
@@ -71,12 +66,8 @@ public class Copy {
 		this.id = id;
 	}
 
-	public void setLoaned(boolean loaned){
-		this.loaned = loaned;
-	}
-
-	public void setPerson(Person person){
-		this.person = person;
+	public void setLoan(Loan loan){
+		this.loan = loan;
 	}
 
 	public void setBook(Book book){

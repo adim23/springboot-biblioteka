@@ -76,7 +76,7 @@ public class Loan {
 		this.person = person;
 	}
 
-	public void setloaned(Calendar loaned){
+	public void setLoaned(Calendar loaned){
 		this.loaned = loaned;
 	}
 

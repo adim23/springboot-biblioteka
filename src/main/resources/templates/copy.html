@@ -41,8 +41,10 @@
 					<div class="row">
 						<h3 th:text="${copy.book.title}"></h3>
 						<div class='divider'></div>
-						<label th:if="${copy.person}">Wypożyczona przez:</label>
-							<a th:if="${copy.person}" th:href="@{|/person/${copy.person.id}|}" th:text="@{|${copy.person.firstname} ${copy.person.secondname}|}"></a>
+						<label th:if="${copy.loan}">Aktualne wypożyczenie:</label>
+							<div th:if="${copy.loan}" >Wypożyczenie: <a th:href="@{|/loan/${copy.loan.id}|}" th:text="@{|id. ${copy.loan.id}|}"></a></div>
+							<div th:if="${copy.loan}" >Czytelnik: <a th:if="${copy.loan.person}" th:href="@{|/person/${copy.loan.person.id}|}" th:text="@{|${copy.loan.person.firstname} ${copy.loan.person.secondname}|}"></a></div>
+							<p th:if="${copy.loan}" ></p>
 						<label th:if="${#lists.isEmpty(copy.loans)}">Ilość wypożyczeń:</label>
 							<p th:if="${#lists.isEmpty(copy.loans)}" th:text="${#lists.size(copy.loans)}"></p>
 						<label th:if="${#lists.isEmpty(copy.loans)}" th:text="@{|Brak wypożyczeń.|}"></label>
