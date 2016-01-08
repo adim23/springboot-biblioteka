@@ -13,6 +13,7 @@ import biblioteka.repositories.LoansRepository;
 import biblioteka.models.Copy;
 import biblioteka.repositories.CopiesRepository;
 import java.util.Calendar;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 public class LoansControllerRest {
@@ -20,6 +21,8 @@ public class LoansControllerRest {
 	protected LoansRepository loansRepository;
 	@Autowired
 	protected CopiesRepository copiesRepository;
+
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/loans")
 	public Iterable<Loan> loans(@RequestParam(value="firstname", defaultValue="") String firstname, @RequestParam(value="secondname", defaultValue="") String secondname, @RequestParam(value="loaned", required=false) Boolean loaned) {
 		if (loaned == null)	return loansRepository.search(firstname, secondname);
@@ -27,6 +30,7 @@ public class LoansControllerRest {
 		return loansRepository.searchReturned(firstname, secondname);
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/loans", method = RequestMethod.POST)
 	public Loan loansPOST(@RequestBody Loan loan) {
 		Copy copy = copiesRepository.findOne(loan.getCopy().getId());
@@ -49,6 +53,7 @@ public class LoansControllerRest {
 		return loan;
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/loans/{id}", method = RequestMethod.PUT)
 	public Loan loansPUT(@PathVariable("id") long id, @RequestBody Loan loan) {
 		Loan oldLoan = loansRepository.findOne(id);
@@ -66,6 +71,7 @@ public class LoansControllerRest {
 		return loan;
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/loans/{id}")
 	public Loan loansId(@PathVariable("id") long id) {
 		return loansRepository.findOne(id);

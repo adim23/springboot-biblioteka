@@ -38,6 +38,8 @@
 					<div class="row">
 						<h3 th:text="${book.title}"></h3>
 						<div class='divider'></div>
+						<div th:if="${workerMode}" id="editApp">
+						</div>
 					</div>
 					<div class="row">
 						<div class="three columns">
@@ -80,5 +82,6 @@
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
+		<script th:if="${workerMode}" src="/js/app/edit-app.js"></script>
 	</body>
 </html>

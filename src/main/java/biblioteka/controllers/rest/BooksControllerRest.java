@@ -14,6 +14,9 @@ import biblioteka.models.Copy;
 import biblioteka.repositories.BooksRepository;
 import biblioteka.repositories.AuthorsRepository;
 import biblioteka.repositories.CopiesRepository;
+import biblioteka.models.Image;
+import biblioteka.repositories.ImagesRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 public class BooksControllerRest {
@@ -27,11 +30,15 @@ public class BooksControllerRest {
 	@Autowired
 	protected AuthorsRepository authorsRepository;
 
+	@Autowired
+	protected ImagesRepository imagesRepository;
+
 	@RequestMapping(value = "/api/books")
 	public Iterable<Book> books(@RequestParam(value="title", defaultValue="") String title, @RequestParam(value="author", defaultValue="") String author) {
 		return booksRepository.search(title, author);
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/books", method = RequestMethod.POST)
 	public Book booksPOST(@RequestBody Book book) {
 		if (book.getAuthor() == null){
@@ -42,6 +49,33 @@ public class BooksControllerRest {
 		return book;
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@RequestMapping(value = "/api/books/{id}", method = RequestMethod.PUT)
+	public Book booksPUT(@PathVariable("id") long id, @RequestBody Book book) {
+		Book oldBook = booksRepository.findOne(id);
+		if (book.getAuthor() != null){
+			if (authorsRepository.findOne(book.getAuthor().getId()) != null){
+				oldBook.setAuthor(book.getAuthor());
+			}
+		}
+		if (book.getTitle() != null){
+			oldBook.setTitle(book.getTitle());
+		}
+		if (book.getImage() != null){
+			if (imagesRepository.findOne(book.getImage().getId()) != null){
+				oldBook.setImage(book.getImage());
+			}
+		}
+		else {
+			oldBook.setImage(null);
+		}
+		booksRepository.save(oldBook);
+		booksRepository.flush();
+
+		return book;
+	}
+
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/books/{id}", method = RequestMethod.DELETE)
 	public Book booksDELETE(@PathVariable("id") long id) {
 		Book book = booksRepository.findOne(id);
@@ -51,12 +85,12 @@ public class BooksControllerRest {
 		return book;
 	}
 
-
 	@RequestMapping(value = "/api/books/{id}")
 	public Book booksId(@PathVariable("id") long id) {
 		return booksRepository.findOne(id);
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/books/{id}/copies", method = RequestMethod.GET)
 	public Iterable<Copy> booksCopies(@PathVariable("id") long id, @RequestParam(value="available", required=false) Boolean available) {
 		if (available == null)	return booksRepository.findOne(id).getCopies();

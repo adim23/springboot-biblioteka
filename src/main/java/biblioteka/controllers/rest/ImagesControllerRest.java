@@ -13,17 +13,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import biblioteka.models.Image;
 import biblioteka.repositories.ImagesRepository;
+import biblioteka.models.Book;
+import biblioteka.repositories.BooksRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
+import java.util.List;
 
 @RestController
 public class ImagesControllerRest {
 	@Autowired
 	protected ImagesRepository imagesRepository;
 
+	@Autowired
+	protected BooksRepository booksRepository;
+
 	@RequestMapping(value = "/api/images")
 	public Iterable<Image> images(@RequestParam(value="path", defaultValue="") String path) {
 		return imagesRepository.findByPathContainingIgnoreCase(path);
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/images", method = RequestMethod.POST)
 	public Image imagesPOST(@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
     String filename = "images/" + name;
@@ -52,6 +60,23 @@ public class ImagesControllerRest {
     else {
     	return null;
     }
+	}
+
+	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@RequestMapping(value = "/api/images/{id}", method = RequestMethod.DELETE)
+	public Image imagesDELETE(@PathVariable("id") long id) {
+		Image image = imagesRepository.findOne(id);
+		if (image != null){
+			String filename = "images/" + image.getPath();
+			List<Book> books = booksRepository.findByImage(image);
+			books.forEach((book) -> book.setImage(null));
+			booksRepository.save(books);
+			booksRepository.flush();
+			imagesRepository.delete(id);
+			File file = new File(filename);
+			file.delete();
+		}
+		return image;
 	}
 
 	@RequestMapping(value = "/api/images/{id}")

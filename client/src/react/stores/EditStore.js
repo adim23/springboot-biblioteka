@@ -3,13 +3,13 @@ var Dispatcher = require('../core/Dispatcher'),
 		EventEmitter = require('events').EventEmitter,
 		assign = require('object-assign');
 
-var _type = 'author',
+var _type = '',
+		_edit = false,
 		_resources = {
 			authors: [],
-			books: [],
-			copies: [],
-			people: [],
-			images: []
+			images: [],
+			author: null,
+			book: null
 		},
 		_message = '';
 
@@ -17,28 +17,29 @@ function setType(type) {
 	_type = type;
 };
 
+function setEdit(edit) {
+	_edit = edit;
+};
+
 function setAuthors(authors) {
 	_resources.authors = authors;
-};
-function setBooks(books) {
-	_resources.books = books;
 };
 function setImages(images) {
 	_resources.images = images;
 };
-function setCopies(copies) {
-	_resources.copies = copies;
-};
-function setPeople(people) {
-	_resources.people = people;
-};
 
+function setAuthor(author) {
+	_resources.author = author;
+};
+function setBook(book) {
+	_resources.book = book;
+};
 
 function setMessage(message) {
 	_message = message;
 };
 
-var ResourcesStore = assign({}, EventEmitter.prototype, {
+var EditStore = assign({}, EventEmitter.prototype, {
 	emitChange: function() {
 		this.emit('change')
 	},
@@ -51,17 +52,17 @@ var ResourcesStore = assign({}, EventEmitter.prototype, {
 	getAuthors: function() {
 		return _resources.authors;
 	},
-	getBooks: function() {
-		return _resources.books;
-	},
 	getImages: function() {
 		return _resources.images;
 	},
-	getPeople: function() {
-		return _resources.people;
+	getAuthor: function() {
+		return _resources.author;
 	},
-	getCopies: function() {
-		return _resources.copies;
+	getBook: function() {
+		return _resources.book;
+	},
+	getEdit: function() {
+		return _edit;
 	},
 	getResources: function() {
 		return _resources;
@@ -74,33 +75,29 @@ var ResourcesStore = assign({}, EventEmitter.prototype, {
 	},
 });
 
-ResourcesStore.dispatchToken = Dispatcher.register(function(payload) {
+EditStore.dispatchToken = Dispatcher.register(function(payload) {
 	var action = payload.action;
 	switch (action.actionType) {
 		case ActionConstants.RECEIVE_AUTHORS:
 			setAuthors(action.authors);
 			break;
-		case ActionConstants.RECEIVE_BOOKS:
-			setBooks(action.books);
-			break;
 		case ActionConstants.RECEIVE_IMAGES:
 			setImages(action.images);
 			break;
-		case ActionConstants.RECEIVE_COPIES:
-			setCopies(action.copies);
+		case ActionConstants.RECEIVE_AUTHOR:
+			setAuthor(action.author);
 			break;
-		case ActionConstants.RECEIVE_PEOPLE:
-			setPeople(action.people);
-			break;
-		case ActionConstants.CHANGE_OPTION:
-			setType(action.type);
-			setMessage('');
-			break;
-		case ActionConstants.HANDLE_POST:
-			setMessage("Pomyślnie dodano zasoby.");
+		case ActionConstants.RECEIVE_BOOK:
+			setBook(action.book);
 			break;
 		case ActionConstants.HANDLE_PUT:
 			setMessage("Pomyślnie zmieniono zasoby.");
+			break;
+		case ActionConstants.EDIT_TYPE:
+			setType(action.type);
+			break;
+		case ActionConstants.TOGGLE_EDIT:
+			setEdit(true);
 			break;
 		case ActionConstants.RECEIVE_ERROR:
 			setMessage(action.error);
@@ -108,8 +105,8 @@ ResourcesStore.dispatchToken = Dispatcher.register(function(payload) {
 			console.error(action.errorStack);
 			break;
 	}
-	ResourcesStore.emitChange();
+	EditStore.emitChange();
 	return true;
 });
 
-module.exports = ResourcesStore;
+module.exports = EditStore;

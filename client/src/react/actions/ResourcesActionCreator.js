@@ -220,6 +220,22 @@ var ResourcesActionCreator = {
 				});
 			});
 	},
+	deleteImage: function(parameters) {
+		return API
+			.delete('/api/images/' + parameters.id)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_DELETE,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy usuwaniu miniatury.'
+				});
+			});
+	},
 	deleteCopy: function(parameters) {
 		return API
 			.delete('/api/copies/' + parameters.id)
@@ -243,7 +259,7 @@ var ResourcesActionCreator = {
 			})
 			.then(function(receive) {
 				Dispatcher.handleViewAction({
-					actionType: ActionConstants.HANDLE_CHANGE,
+					actionType: ActionConstants.HANDLE_PUT,
 					receive: receive
 				});
 			})

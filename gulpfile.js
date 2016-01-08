@@ -22,6 +22,10 @@ gulp.task('react', function() {
 		{
 			src: './client/src/react/resources-app.jsx',
 			dist: './client/dist/js/app/resources-app.js'
+		},
+		{
+			src: './client/src/react/edit-app.jsx',
+			dist: './client/dist/js/app/edit-app.js'
 		}
 	];
 
@@ -51,6 +55,10 @@ gulp.task('react-min', function() {
 		{
 			src: './client/src/react/resources-app.jsx',
 			dist: './client/dist/js/app/resources-app.js'
+		},
+		{
+			src: './client/src/react/edit-app.jsx',
+			dist: './client/dist/js/app/edit-app.js'
 		}
 	];
 

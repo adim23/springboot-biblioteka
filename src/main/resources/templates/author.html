@@ -38,6 +38,8 @@
 					<div class="row">
 						<h3 th:text="${author.author}"></h3>
 						<div class='divider'></div>
+						<div th:if="${workerMode}" id="editApp">
+						</div>
 						<label th:if="${#lists.isEmpty(author.books)}">Brak książek.</label>
 						<label th:unless="${#lists.isEmpty(author.books)}">Lista książek:</label>
 						<ul>
@@ -55,5 +57,6 @@
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
+		<script th:if="${workerMode}" src="/js/app/edit-app.js"></script>
 	</body>
 </html>

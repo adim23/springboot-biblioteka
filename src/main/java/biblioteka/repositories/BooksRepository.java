@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import biblioteka.models.Book;
 import biblioteka.models.Author;
+import biblioteka.models.Image;
+import java.util.List;
 
 public interface BooksRepository extends JpaRepository<Book, Long> {
 	Iterable<Book> findById(long id);
@@ -17,6 +19,7 @@ public interface BooksRepository extends JpaRepository<Book, Long> {
 
 	Iterable<Book> findByTitleContaining(@Param("title") String title);
 	Iterable<Book> findByAuthorContaining(@Param("author") String author);
+	List<Book> findByImage(@Param("image") Image image);
 
 	Iterable<Book> findByTitle(@Param("title") String title);
 

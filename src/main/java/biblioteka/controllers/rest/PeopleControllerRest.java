@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import biblioteka.models.Person;
 import biblioteka.repositories.PeopleRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 public class PeopleControllerRest {
 	@Autowired
 	protected PeopleRepository peopleRepository;
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/people")
 	public Iterable<Person> people(@RequestParam(value="firstname", defaultValue="") String firstname, @RequestParam(value="secondname", defaultValue="") String secondname) {
 		return peopleRepository.search(firstname, secondname);
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/people/{id}")
 	public Person peopleId(@PathVariable("id") long id) {
 		return peopleRepository.findOne(id);

@@ -12,6 +12,7 @@ import biblioteka.models.Book;
 import biblioteka.models.Author;
 import biblioteka.repositories.BooksRepository;
 import biblioteka.repositories.AuthorsRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 public class AuthorsControllerRest {
@@ -26,6 +27,7 @@ public class AuthorsControllerRest {
 		return authorsRepository.findByAuthorContainingIgnoreCase(author);
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/authors", method = RequestMethod.POST)
 	public Author authorsPOST(@RequestBody Author author) {
 		authorsRepository.save(author);
@@ -33,6 +35,20 @@ public class AuthorsControllerRest {
 		return author;
 	}
 
+	@PreAuthorize("hasRole('ROLE_WORKER')")
+	@RequestMapping(value = "/api/authors/{id}", method = RequestMethod.PUT)
+	public Author authorsPUT(@PathVariable("id") long id, @RequestBody Author author) {
+		Author oldAuthor = authorsRepository.findOne(id);
+		if (author.getAuthor().length() != 0){
+			oldAuthor.setAuthor(author.getAuthor());
+		}
+		authorsRepository.save(oldAuthor);
+		authorsRepository.flush();
+
+		return author;
+	}
+
+	@PreAuthorize("hasRole('ROLE_WORKER')")
 	@RequestMapping(value = "/api/authors/{id}", method = RequestMethod.DELETE)
 	public Author authorsDELETE(@PathVariable("id") long id) {
 		Author author = authorsRepository.findOne(id);
