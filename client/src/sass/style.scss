@@ -123,7 +123,7 @@ select:focus {
 }
 
 body {
-	background: darken($primary, 15%);
+	background: darken(mix($primary, $accent), 15%);
 	background-attachment: fixed;
 	color: $primary-text;
 }

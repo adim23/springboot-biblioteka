@@ -1,4 +1,5 @@
 var BooksMainTable = require('./BooksMainTable.jsx'),
+		BooksList = require('./BooksList.jsx'),
 		BooksThumbnails = require('./BooksThumbnails.jsx'),
 		BooksSearchBar = require('./BooksSearchBar.jsx'),
 		BooksStore = require('../stores/BooksStore'),
@@ -51,6 +52,17 @@ var BooksApp = React.createClass({
 
 		switch (this.state.view){
 			case 'list': {
+					return (
+						<div className='u-full-width'>
+							{message}
+							<BooksOptions />
+							<BooksSearchBar />
+							<BooksList books={this.getSlicedItems(this.state.books)} />
+							<Pagination pages={this.getPages(this.state.books)} current={this.state.page} />
+						</div>
+					);
+				}
+			case 'both': {
 					return (
 						<div className='u-full-width'>
 							{message}

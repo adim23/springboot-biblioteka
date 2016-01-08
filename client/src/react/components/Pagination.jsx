@@ -9,11 +9,11 @@ var Pagination = React.createClass({
 			return function(element, index){
 				if (index == that.props.current) {
 					return (
-						<input type="button" className="one columns button-primary" onClick={that.handleClick} value={index+1}></input>
+						<input type="button" className="two columns button-primary" onClick={that.handleClick} value={index+1}></input>
 					);
 				}
 				return (
-					<input type="button" className="one columns" onClick={that.handleClick} value={index+1}></input>
+					<input type="button" className="two columns" onClick={that.handleClick} value={index+1}></input>
 				);
 			};
 		})(this);
@@ -21,8 +21,8 @@ var Pagination = React.createClass({
 			.apply(this, new Array(this.props.pages))
 			.map(buttonsFn)
 			.map(function(button, index, buttons) {
-				if (index % 12 == 0){
-					var row = buttons.slice(index, index + 12);
+				if (index % 6 == 0){
+					var row = buttons.slice(index, index + 6);
 					return (
 						<div className="row">
 							{row}

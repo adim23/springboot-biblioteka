@@ -73,6 +73,8 @@ INSERT INTO authors(author) VALUES ('Andrzej Sapkowski');
 INSERT INTO authors(author) VALUES ('Dmitry Glukhovsky');
 INSERT INTO authors(author) VALUES ('Howard Phillips Lovecraft');
 INSERT INTO authors(author) VALUES ('Johann Wolfgang von Goethe');
+INSERT INTO authors(author) VALUES ('Andrzej Pilipiuk');
+INSERT INTO authors(author) VALUES ('Stephen King');
 
 INSERT INTO images(path) VALUES ('faraon.jpg');
 INSERT INTO images(path) VALUES ('lalka.jpg');
@@ -99,6 +101,21 @@ INSERT INTO images(path) VALUES ('future.jpg');
 INSERT INTO images(path) VALUES ('zew_cthulhu.jpg');
 INSERT INTO images(path) VALUES ('cierpienia_mlodego_wertera.jpg');
 INSERT INTO images(path) VALUES ('sezon_burz.jpg');
+INSERT INTO images(path) VALUES ('droga_do_nidaros.jpg');
+INSERT INTO images(path) VALUES ('srebrna_lania_z_visby.jpg');
+INSERT INTO images(path) VALUES ('drewniana_twierdza.jpg');
+INSERT INTO images(path) VALUES ('pan_wilkow.jpg');
+INSERT INTO images(path) VALUES ('triumf_lisa_reinicke.jpg');
+INSERT INTO images(path) VALUES ('sfera_armiralna.jpg');
+INSERT INTO images(path) VALUES ('sowie_zwierciadlo.jpg');
+INSERT INTO images(path) VALUES ('metro_2035.jpg');
+INSERT INTO images(path) VALUES ('przypadek-charlesa-dextera-warda.jpg');
+INSERT INTO images(path) VALUES ('kopiec.jpg');
+INSERT INTO images(path) VALUES ('w-poszukiwaniu-nieznanego-kadath.jpg');
+INSERT INTO images(path) VALUES ('przebudzenie.jpg');
+INSERT INTO images(path) VALUES ('regulatorzy.jpg');
+INSERT INTO images(path) VALUES ('desperacja.jpg');
+INSERT INTO images(path) VALUES ('cztery-po-polnocy.jpg');
 
 INSERT INTO books(title, id_author, id_image) VALUES ('Faraon', 1, 1);
 INSERT INTO books(title, id_author, id_image) VALUES ('Lalka', 1, 2);
@@ -126,11 +143,28 @@ INSERT INTO books(title, id_author, id_image) VALUES ('Sezon Burz', 4, 25);
 
 INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2033', 5, 20);
 INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2034', 5, 21);
+INSERT INTO books(title, id_author, id_image) VALUES ('Metro 2035', 5, 33);
 INSERT INTO books(title, id_author, id_image) VALUES ('FUTU.RE', 5, 22);
 
 INSERT INTO books(title, id_author, id_image) VALUES ('Zew Cthulhu', 6, 23);
+INSERT INTO books(title, id_author, id_image) VALUES ('Przypadek Charlesa Dextera Warda', 6, 34);
+INSERT INTO books(title, id_author, id_image) VALUES ('Kopiec', 6, 35);
+INSERT INTO books(title, id_author, id_image) VALUES ('W poszukiwaniu nieznanego Kadath', 6, 36);
 
 INSERT INTO books(title, id_author, id_image) VALUES ('Cierpienia młodego Wertera', 7, 24);
+
+INSERT INTO books(title, id_author, id_image) VALUES ('Droga do Nidaros', 8, 26);
+INSERT INTO books(title, id_author, id_image) VALUES ('Srebrna Łania z Visby', 8, 27);
+INSERT INTO books(title, id_author, id_image) VALUES ('Drewniana Twierdza', 8, 28);
+INSERT INTO books(title, id_author, id_image) VALUES ('Pan Wilków', 8, 29);
+INSERT INTO books(title, id_author, id_image) VALUES ('Triumf Lisa Reinicke', 8, 30);
+INSERT INTO books(title, id_author, id_image) VALUES ('Sfera Armiralna', 8, 31);
+INSERT INTO books(title, id_author, id_image) VALUES ('Sowie Zwierciadło', 8, 32);
+
+INSERT INTO books(title, id_author, id_image) VALUES ('Przebudzenie', 9, 37);
+INSERT INTO books(title, id_author, id_image) VALUES ('Regulatorzy', 9, 38);
+INSERT INTO books(title, id_author, id_image) VALUES ('Desperacja', 9, 39);
+INSERT INTO books(title, id_author, id_image) VALUES ('Cztery po północy', 9, 40);
 
 INSERT INTO copies(id_book) VALUES (1);
 INSERT INTO copies(id_book) VALUES (1);
@@ -173,6 +207,12 @@ INSERT INTO copies(id_book) VALUES (21);
 INSERT INTO copies(id_book) VALUES (22);
 INSERT INTO copies(id_book) VALUES (23);
 INSERT INTO copies(id_book) VALUES (24);
+INSERT INTO copies(id_book) VALUES (25);
+INSERT INTO copies(id_book) VALUES (25);
+INSERT INTO copies(id_book) VALUES (26);
+INSERT INTO copies(id_book) VALUES (26);
+INSERT INTO copies(id_book) VALUES (26);
+INSERT INTO copies(id_book) VALUES (28);
 
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 5, '2015-11-20 15:05:06', TRUE);
 INSERT INTO loans(id_person, id_copy, date_loaned, returned) VALUES (3, 17, '2015-11-20 15:05:20', TRUE);

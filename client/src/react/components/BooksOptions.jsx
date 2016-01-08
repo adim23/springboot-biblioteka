@@ -19,6 +19,7 @@ var BooksOptions = React.createClass({
           </label>
 					<select className="ten columns" onChange={this.handleChange}>
 						<option value="list">Lista</option>
+						<option value="both">Lista i miniatury</option>
 						<option value="thumbnails">Miniatury</option>
 					</select>
 				</div>

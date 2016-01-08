@@ -40,6 +40,8 @@
 						<div class='divider'></div>
 						<div th:if="${workerMode}" id="editApp">
 						</div>
+					</div>
+					<div class="row">
 						<label th:if="${#lists.isEmpty(author.books)}">Brak książek.</label>
 						<label th:unless="${#lists.isEmpty(author.books)}">Lista książek:</label>
 						<ul>
