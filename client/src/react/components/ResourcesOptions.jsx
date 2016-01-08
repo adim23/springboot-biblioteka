@@ -22,6 +22,7 @@ var ResourcesOptions = React.createClass({
 						<option value="book">Książka</option>
 						<option value="copy">Egzemplarz</option>
 						<option value="loan">Wypożyczenie</option>
+						<option value="image">Miniatura</option>
 					</select>
 				</div>
 			</div>

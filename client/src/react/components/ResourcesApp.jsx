@@ -4,6 +4,7 @@ var ResourcesStore = require('../stores/ResourcesStore'),
 		AuthorForm = require('./AuthorForm.jsx'),
 		BookForm = require('./BookForm.jsx'),
 		LoanForm = require('./LoanForm.jsx'),
+		ImageForm = require('./ImageForm.jsx'),
 		CopyForm = require('./CopyForm.jsx');
 
 var ResourcesApp = React.createClass({
@@ -57,6 +58,12 @@ var ResourcesApp = React.createClass({
 			case 'loan': {
 					form = (
 						<LoanForm authors={this.state.resources.authors} books={this.state.resources.books} people={this.state.resources.people} copies={this.state.resources.copies}/>
+					);
+					break;
+				}
+			case 'image': {
+					form = (
+						<ImageForm />
 					);
 					break;
 				}

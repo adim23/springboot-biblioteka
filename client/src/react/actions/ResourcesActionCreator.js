@@ -138,6 +138,24 @@ var ResourcesActionCreator = {
 				});
 			});
 	},
+	postImage: function(data) {
+		console.log("postImage");
+		console.log(data);
+		return API
+			.post('/api/images', data)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_POST,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy dodawaniu miniatury.'
+				});
+			});
+	},
 	postBook: function(data) {
 		return API
 			.post('/api/books', data)
