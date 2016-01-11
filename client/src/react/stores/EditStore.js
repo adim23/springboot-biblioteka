@@ -9,7 +9,8 @@ var _type = '',
 			authors: [],
 			images: [],
 			author: null,
-			book: null
+			book: null,
+			person: null
 		},
 		_message = '';
 
@@ -33,6 +34,9 @@ function setAuthor(author) {
 };
 function setBook(book) {
 	_resources.book = book;
+};
+function setPerson(person) {
+	_resources.person = person;
 };
 
 function setMessage(message) {
@@ -60,6 +64,9 @@ var EditStore = assign({}, EventEmitter.prototype, {
 	},
 	getBook: function() {
 		return _resources.book;
+	},
+	getPerson: function() {
+		return _resources.person;
 	},
 	getEdit: function() {
 		return _edit;
@@ -89,6 +96,9 @@ EditStore.dispatchToken = Dispatcher.register(function(payload) {
 			break;
 		case ActionConstants.RECEIVE_BOOK:
 			setBook(action.book);
+			break;
+		case ActionConstants.RECEIVE_PERSON:
+			setPerson(action.person);
 			break;
 		case ActionConstants.HANDLE_PUT:
 			setMessage("Pomyślnie zmieniono zasoby.");

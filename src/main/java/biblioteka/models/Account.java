@@ -21,7 +21,7 @@ public class Account {
     private String username;
     private String password;
 
-		@OneToMany(mappedBy="account")
+		@OneToMany(mappedBy="account", orphanRemoval=true)
 		private List<Role> roles;
 
 		protected Account(){}

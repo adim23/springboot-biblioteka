@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import biblioteka.models.Role;
 import biblioteka.models.Account;
+import java.util.List;
 
 public interface RolesRepository extends JpaRepository<Role, Long> {
-	Iterable<Role> findById(long id);
-	Iterable<Role> findByAccount(Account account);
+	List<Role> findById(long id);
+	List<Role> findByAccount(Account account);
 }

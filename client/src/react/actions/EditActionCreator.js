@@ -20,6 +20,9 @@ var EditActionCreator = {
 			case 'book':
 				EditActionCreator.getBookByID({id: id}).then(thenFn);
 				break;
+			case 'person':
+				EditActionCreator.getPersonByID({id: id}).then(thenFn);
+				break;
 		}
 	},
 	toggleEdit: function(view) {
@@ -78,6 +81,23 @@ var EditActionCreator = {
 				});
 			});
 	},
+	getPersonByID: function(parameters) {
+		return API
+			.get('/api/people/' + parameters.id)
+			.then(function(person) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_PERSON,
+					person: person
+				});
+			})
+			.catch(function(error) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy pobieraniu danych osoby.',
+					errorStack: error
+				});
+			});
+	},
 	getImages: function() {
 		return API
 			.get('/api/images/')
@@ -98,6 +118,22 @@ var EditActionCreator = {
 	editAuthor: function(parameters) {
 		return API
 			.put('/api/authors/' + parameters.id, parameters)
+			.then(function(receive) {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.HANDLE_PUT,
+					receive: receive
+				});
+			})
+			.catch(function() {
+				Dispatcher.handleViewAction({
+					actionType: ActionConstants.RECEIVE_ERROR,
+					error: 'Wystąpił błąd przy edytowaniu zasobu.'
+				});
+			});
+	},
+	editPerson: function(parameters) {
+		return API
+			.put('/api/people/' + parameters.id, parameters)
 			.then(function(receive) {
 				Dispatcher.handleViewAction({
 					actionType: ActionConstants.HANDLE_PUT,

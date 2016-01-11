@@ -1,6 +1,7 @@
 var EditStore = require('../stores/EditStore'),
 		EditActionCreator = require('../actions/EditActionCreator'),
 		AuthorEdit = require('./AuthorEdit.jsx'),
+		PersonEdit = require('./PersonEdit.jsx'),
 		BookEdit = require('./BookEdit.jsx');
 
 var EditApp = React.createClass({
@@ -10,7 +11,8 @@ var EditApp = React.createClass({
 				authors: [],
 				images: [],
 				author: null,
-				book: null
+				book: null,
+				person: null
 			},
 			edit: false,
 			type: '',
@@ -56,6 +58,12 @@ var EditApp = React.createClass({
 			case 'book': {
 					form = (
 						<BookEdit book={this.state.resources.book} authors={this.state.resources.authors} images={this.state.resources.images}/>
+					);
+					break;
+				}
+			case 'person': {
+					form = (
+						<PersonEdit person={this.state.resources.person}/>
 					);
 					break;
 				}

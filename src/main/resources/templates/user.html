@@ -33,40 +33,19 @@
 				</div>
 				<div class="container">
 					<div class="row">
-						Czytelnicy - <a th:href="@{|/person/${person.id}|}" th:text="@{|${person.firstname} ${person.secondname}|}"></a>
+						Konta - <a th:href="@{|/user/${account.id}|}" th:text="${account.username}"></a>
 					</div>
 					<div class="row">
-						<h3 th:text="@{|${person.firstname} ${person.secondname}|}"></h3>
+						<h3 th:text="${account.username}"></h3>
 						<div class='divider'></div>
-						<div th:if="${adminMode}" id="editApp">
-						</div>
 					</div>
 					<div class="row">
-						<label th:if="${adminMode}">Konto:</label>
-							<p th:if="${adminMode}">
-								<a th:href="@{|/user/${person.account.id}|}" th:text="${person.account.username}"></a>
-							</p>
-						<label th:if="${adminMode}">
+						<label>
 							<span>Role:</span>
 						</label>
-						<ul th:if="${adminMode}">
-							<li th:each="role : ${person.account.roles}">
-								<span th:text="${role.role}"></span>
-							</li>
-						</ul>
-						<label>Liczba wypożyczeń:</label>
-							<p th:text="${#lists.size(person.loans)}"></p>
-						<label>
-							<span th:if="${#lists.isEmpty(person.loans)}">Brak wypożyczeń.</span>
-							<span th:unless="${#lists.isEmpty(person.loans)}">Historia wypożyczeń:</span>
-						</label>
 						<ul>
-							<li th:each="loan : ${person.loans}">
-								<a th:href="@{|/loan/${loan.id}|}" th:text="@{|${#calendars.format(loan.loaned, 'dd/MM/yyyy')}|}"></a> -
-								<a th:href="@{|/book/${loan.copy.book.id}|}" th:text="${loan.copy.book.title}"></a> -
-								<a th:href="@{|/copy/${loan.copy.id}|}" th:text="@{|Egzemplarz id. ${loan.copy.id}|}"></a>
-								<i th:if="${loan.returned}" class="fa fa-check"></i>
-								<i th:unless="${loan.returned}" class="fa fa-question"></i>
+							<li th:each="role : ${account.roles}">
+								<span th:text="${role.role}"></span>
 							</li>
 						</ul>
 					</div>
@@ -79,6 +58,5 @@
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.min.js"></script>
-		<script th:if="${adminMode}" src="/js/app/edit-app.js"></script>
 	</body>
 </html>
