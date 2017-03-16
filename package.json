@@ -26,15 +26,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chevalet/springboot-biblioteka.git"
+    "url": "git+https://github.com/mrnfor/springboot-biblioteka.git"
   },
   "keywords": [
     "springboot"
   ],
-  "author": "chevalet",
+  "author": "mrnfor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chevalet/springboot-biblioteka/issues"
+    "url": "https://github.com/mrnfor/springboot-biblioteka/issues"
   },
-  "homepage": "https://github.com/chevalet/springboot-biblioteka#readme"
+  "homepage": "https://github.com/mrnfor/springboot-biblioteka#readme"
 }
